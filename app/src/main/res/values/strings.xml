@@ -2,4 +2,7 @@
     <string name="app_name">MADA</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- 주간 예산 설정 -->
+    <string name="week_budget_title">주간예산 설정하기</string>
 </resources>

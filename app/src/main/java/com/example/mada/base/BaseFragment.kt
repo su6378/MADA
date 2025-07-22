@@ -82,6 +82,12 @@ abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
         controller.navigate(direction)
     }
 
+    protected fun backNavigate() {
+        val controller = findNavController(binding.root)
+
+        controller.popBackStack()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

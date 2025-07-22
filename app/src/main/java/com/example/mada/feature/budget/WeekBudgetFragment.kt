@@ -1,4 +1,4 @@
-package com.example.mada.feature.home
+package com.example.mada.feature.budget
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -6,17 +6,17 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.mada.R
 import com.example.mada.base.BaseFragment
-import com.example.mada.databinding.FragmentHomeBinding
+import com.example.mada.databinding.FragmentWeekBudgetBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 private const val TAG = "DX"
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
+class WeekBudgetFragment : BaseFragment<FragmentWeekBudgetBinding, WeekBudgetViewModel>() {
     override val layoutResourceId: Int
-        get() = R.layout.fragment_home
-    override val viewModel: HomeViewModel by viewModels()
+        get() = R.layout.fragment_week_budget
+    override val viewModel: WeekBudgetViewModel by viewModels()
 
     override fun initView() {
         with(binding) {
@@ -25,7 +25,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     override fun initDataBinding() {
-        binding.vm = viewModel
+        binding.apply {
+            vm = viewModel
+
+            weekBudgetToolbar.setNavigationOnClickListener {
+                backNavigate()
+            }
+        }
     }
 
     override fun initObserving() {
@@ -34,8 +40,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 launch {
                     viewModel.action.collect { action ->
                         when (action) {
-                            is HomeAction.ShowToast -> showToast(action.content)
-                            is HomeAction.NavigateWeekBudgetView -> navigate(HomeFragmentDirections.actionHomeFragmentToWeekBudgetFragment())
+                            is WeekBudgetAction.ShowToast -> showToast(action.content)
                         }
                     }
                 }

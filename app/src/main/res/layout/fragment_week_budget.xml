@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.mada.feature.budget.WeekBudgetViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".feature.budget.WeekBudgetFragment">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/week_budget_toolbar"
+            android:layout_width="match_parent"
+            app:titleTextAppearance="@style/ToolbarTitleText"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/week_budget_title"
+            app:titleCentered="true"
+            app:titleTextColor="@color/black" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
