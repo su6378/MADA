@@ -1,5 +1,8 @@
 package com.example.mada.feature.budget
 
+import android.content.res.ColorStateList
+import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -28,8 +31,39 @@ class WeekBudgetFragment : BaseFragment<FragmentWeekBudgetBinding, WeekBudgetVie
         binding.apply {
             vm = viewModel
 
-            weekBudgetToolbar.setNavigationOnClickListener {
+            toolbarWeekBudget.setNavigationOnClickListener {
                 backNavigate()
+            }
+
+            toggleCalendar.setOnCheckedChangeListener { toggle, isChecked -> // 캘린더 연동
+
+                if (isChecked) {
+                    tvWeekBudgetComment.text = resources.getString(R.string.week_budget_comment2)
+                    tvWeekBudgetComment.setTextColor(ContextCompat.getColor(requireContext(),R.color.orange))
+                    tvWeekBudgetFridayComment.visibility = View.VISIBLE
+                    cvWeekBudgetFriday.visibility = View.VISIBLE
+                    tvWeekBudgetFridayBudget.setTextColor(ContextCompat.getColor(requireContext(),R.color.orange))
+                    tvWeekBudgetSaturdayComment.visibility = View.VISIBLE
+                    cvWeekBudgetSaturday.visibility = View.VISIBLE
+                    tvWeekBudgetSaturdayBudget.setTextColor(ContextCompat.getColor(requireContext(),R.color.orange))
+                    tvWeekBudgetSundayComment.visibility = View.VISIBLE
+                    cvWeekBudgetSunday.visibility = View.VISIBLE
+                    tvWeekBudgetSundayBudget.setTextColor(ContextCompat.getColor(requireContext(),R.color.orange))
+
+                }else {
+                    tvWeekBudgetComment.text = resources.getString(R.string.week_budget_comment)
+                    tvWeekBudgetComment.setTextColor(ContextCompat.getColor(requireContext(),R.color.nh_green))
+                    tvWeekBudgetFridayComment.visibility = View.GONE
+                    tvWeekBudgetFridayBudget.setTextColor(ContextCompat.getColor(requireContext(),R.color.nh_green))
+                    cvWeekBudgetFriday.visibility = View.INVISIBLE
+                    tvWeekBudgetSaturdayComment.visibility = View.GONE
+                    cvWeekBudgetSaturday.visibility = View.INVISIBLE
+                    tvWeekBudgetSaturdayBudget.setTextColor(ContextCompat.getColor(requireContext(),R.color.nh_green))
+                    tvWeekBudgetSundayComment.visibility = View.GONE
+                    cvWeekBudgetSunday.visibility = View.INVISIBLE
+                    tvWeekBudgetSundayBudget.setTextColor(ContextCompat.getColor(requireContext(),R.color.nh_green))
+                }
+
             }
         }
     }

@@ -16,16 +16,482 @@
         tools:context=".feature.budget.WeekBudgetFragment">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/week_budget_toolbar"
+            android:id="@+id/toolbar_week_budget"
             android:layout_width="match_parent"
-            app:titleTextAppearance="@style/ToolbarTitleText"
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_back"
             app:title="@string/week_budget_title"
             app:titleCentered="true"
+            app:titleTextAppearance="@style/ToolbarTitleText"
             app:titleTextColor="@color/black" />
 
+        <ScrollView
+            android:id="@+id/sv_week_budget"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_week_budget">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_week_budget_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="@string/week_budget_week"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_week_budget_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/week_budget_day"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_week_budget_week"
+                    app:layout_constraintStart_toEndOf="@id/tv_week_budget_week"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1" />
+
+                <TextView
+                    android:id="@+id/tv_week_budget_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/week_budget_amount"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_week_budget_week" />
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/black"
+                    app:layout_constraintTop_toBottomOf="@id/tv_week_budget_amount" />
+
+                <TextView
+                    android:id="@+id/tv_week_budget_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/week_budget_comment"
+                    android:textColor="@color/nh_green"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line" />
+
+                <TextView
+                    android:id="@+id/tv_week_budget_calendar_toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/week_budget_calendar_toggle"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/toggle_calendar"
+                    app:layout_constraintTop_toBottomOf="@id/tv_week_budget_comment" />
+
+                <Switch
+                    android:id="@+id/toggle_calendar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track_selector"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_week_budget_calendar_toggle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_week_budget_calendar_toggle"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                <TextView
+                    android:id="@+id/tv_week_budget_monday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="34dp"
+                    android:layout_marginTop="36dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/week_budget_calendar_monday"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/toggle_calendar" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tv_week_budget_monday_budget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginEnd="34dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/week_budget_calendar_monday_budget"
+                    android:textColor="@color/nh_green"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/toggle_calendar" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="22dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/semi_light_gray"
+                    app:layout_constraintTop_toBottomOf="@id/tv_week_budget_monday_budget" />
+
+                <TextView
+                    android:id="@+id/tv_week_budget_tuesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="34dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/week_budget_calendar_tuesday"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line2" />
+
+                <TextView
+                    android:id="@+id/tv_week_budget_tuesday_budget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="34dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/week_budget_calendar_tuesday_budget"
+                    android:textColor="@color/nh_green"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line2" />
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="22dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/semi_light_gray"
+                    app:layout_constraintTop_toBottomOf="@id/tv_week_budget_tuesday_budget" />
+
+                <TextView
+                    android:id="@+id/tv_week_budget_wednesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="34dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/week_budget_calendar_wednesday"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line3" />
+
+                <TextView
+                    android:id="@+id/tv_week_budget_wednesday_budget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="34dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/week_budget_calendar_wednesday_budget"
+                    android:textColor="@color/nh_green"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line3" />
+
+                <View
+                    android:id="@+id/line4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="22dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/semi_light_gray"
+                    app:layout_constraintTop_toBottomOf="@id/tv_week_budget_wednesday_budget" />
+
+                <TextView
+                    android:id="@+id/tv_week_budget_thursday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="34dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/week_budget_calendar_thursday"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line4" />
+
+                <TextView
+                    android:id="@+id/tv_week_budget_thursday_budget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="34dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/week_budget_calendar_thursday_budget"
+                    android:textColor="@color/nh_green"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line4" />
+
+                <View
+                    android:id="@+id/line5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="22dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/semi_light_gray"
+                    app:layout_constraintTop_toBottomOf="@id/tv_week_budget_thursday_budget" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_week_budget_friday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/line5">
+
+                    <TextView
+                        android:id="@+id/tv_week_budget_friday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="16dp"
+                        android:layout_marginStart="34dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="@string/week_budget_calendar_friday"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/cv_week_budget_friday"
+                        android:layout_width="4dp"
+                        android:layout_height="4dp"
+                        android:layout_marginStart="4dp"
+                        android:backgroundTint="@color/orange"
+                        android:clickable="false"
+                        android:visibility="gone"
+                        app:cornerRadius="6dp"
+                        app:layout_constraintStart_toEndOf="@id/tv_week_budget_friday"
+                        app:layout_constraintTop_toTopOf="@id/tv_week_budget_friday" />
+
+                    <TextView
+                        android:id="@+id/tv_week_budget_friday_budget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="34dp"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="@string/week_budget_calendar_friday_budget"
+                        android:textColor="@color/nh_green"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_week_budget_friday_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginEnd="34dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="@string/week_budget_calendar_friday_comment"
+                        android:textColor="@color/semi_gray"
+                        android:textSize="12sp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_week_budget_friday_budget" />
+
+                    <View
+                        android:id="@+id/line6"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="22dp"
+                        android:background="@color/semi_light_gray"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_week_budget_saturday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/cl_week_budget_friday">
+
+                    <TextView
+                        android:id="@+id/tv_week_budget_saturday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="16dp"
+                        android:layout_marginStart="34dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="@string/week_budget_calendar_saturday"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/cv_week_budget_saturday"
+                        android:layout_width="4dp"
+                        android:layout_height="4dp"
+                        android:layout_marginStart="4dp"
+                        android:backgroundTint="@color/orange"
+                        android:clickable="false"
+                        android:visibility="gone"
+                        app:cornerRadius="6dp"
+                        app:layout_constraintStart_toEndOf="@id/tv_week_budget_saturday"
+                        app:layout_constraintTop_toTopOf="@id/tv_week_budget_saturday" />
+
+                    <TextView
+                        android:id="@+id/tv_week_budget_saturday_budget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="34dp"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="@string/week_budget_calendar_saturday_budget"
+                        android:textColor="@color/nh_green"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_week_budget_saturday_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="34dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="@string/week_budget_calendar_saturday_comment"
+                        android:textColor="@color/semi_gray"
+                        android:textSize="12sp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_week_budget_saturday_budget" />
+
+                    <View
+                        android:id="@+id/line7"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="22dp"
+                        android:background="@color/semi_light_gray"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_week_budget_sunday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/cl_week_budget_saturday">
+
+                    <TextView
+                        android:id="@+id/tv_week_budget_sunday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="16dp"
+                        android:layout_marginStart="34dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="@string/week_budget_calendar_sunday"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/cv_week_budget_sunday"
+                        android:layout_width="4dp"
+                        android:layout_height="4dp"
+                        android:layout_marginStart="4dp"
+                        android:backgroundTint="@color/orange"
+                        android:clickable="false"
+                        android:visibility="gone"
+                        app:cornerRadius="6dp"
+                        app:layout_constraintStart_toEndOf="@id/tv_week_budget_sunday"
+                        app:layout_constraintTop_toTopOf="@id/tv_week_budget_sunday" />
+
+                    <TextView
+                        android:id="@+id/tv_week_budget_sunday_budget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="34dp"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="@string/week_budget_calendar_sunday_budget"
+                        android:textColor="@color/nh_green"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_week_budget_sunday_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="34dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="@string/week_budget_calendar_sunday_comment"
+                        android:textColor="@color/semi_gray"
+                        android:textSize="12sp"
+                        android:visibility="gone"
+                        app:flow_verticalBias="0.5"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_week_budget_sunday_budget" />
+
+                    <View
+                        android:id="@+id/line8"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="22dp"
+                        android:background="@color/semi_light_gray"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/cl_week_budget_sunday" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:paddingVertical="18dp"
+            android:text="@string/setting"
+            android:textSize="20sp"
+            app:cornerRadius="12dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

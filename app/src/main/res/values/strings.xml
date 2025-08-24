@@ -4,5 +4,33 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- 주간 예산 설정 -->
-    <string name="week_budget_title">주간예산 설정하기</string>
+    <string name="week_budget_title">예산 설정</string>
+    <string name="week_budget_week">9월 3주차</string>
+    <string name="week_budget_day">9.15(월) ~ 9.21(일)</string>
+    <string name="week_budget_amount">총 263,000원</string>
+    <string name="week_budget_comment">지난주 사용 금액을 기반으로 이번주 예산을 설정했어요!</string>
+    <string name="week_budget_comment2">캘린더 일정을 기반으로 이번주 예산을 설정했어요!</string>
+    <string name="week_budget_calendar_toggle">캘린더 연동</string>
+    <string name="week_budget_calendar_monday">월</string>
+    <string name="week_budget_calendar_tuesday">화</string>
+    <string name="week_budget_calendar_wednesday">수</string>
+    <string name="week_budget_calendar_thursday">목</string>
+    <string name="week_budget_calendar_friday">금</string>
+    <string name="week_budget_calendar_saturday">토</string>
+    <string name="week_budget_calendar_sunday">일</string>
+    <string name="week_budget_calendar_monday_budget">20,000원</string>
+    <string name="week_budget_calendar_tuesday_budget">8,000원</string>
+    <string name="week_budget_calendar_wednesday_budget">12,000원</string>
+    <string name="week_budget_calendar_thursday_budget">8,000원</string>
+    <string name="week_budget_calendar_friday_budget">38,000원</string>
+    <string name="week_budget_calendar_saturday_budget">22,000원</string>
+    <string name="week_budget_calendar_sunday_budget">42,000원</string>
+    <string name="week_budget_calendar_friday_comment">식사 + 교통비가 예상되는 일정이에요</string>
+    <string name="week_budget_calendar_saturday_comment">카페 + 교통비가 예상되는 일정이에요</string>
+    <string name="week_budget_calendar_sunday_comment">쇼핑 지출이 예상되는 일정이에요</string>
+
+
+    <!-- 버튼 -->
+    <string name="setting">설정하기</string>
+
 </resources>
