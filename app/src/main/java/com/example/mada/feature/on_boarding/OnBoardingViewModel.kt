@@ -1,4 +1,4 @@
-package com.example.mada.feature.allone
+package com.example.mada.feature.on_boarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,16 +15,16 @@ import javax.inject.Inject
 private const val TAG = "DX"
 
 @HiltViewModel
-class AllOneViewModel @Inject constructor(
+class OnBoardingViewModel @Inject constructor(
 ) : ViewModel() {
-    private val _action: MutableSharedFlow<AllOneAction> = MutableSharedFlow()
-    val action: SharedFlow<AllOneAction> get() = _action.asSharedFlow()
+    private val _action: MutableSharedFlow<OnBoardingAction> = MutableSharedFlow()
+    val action: SharedFlow<OnBoardingAction> get() = _action.asSharedFlow()
 
     private val _result: MutableSharedFlow<Result> = MutableSharedFlow()
     val result: SharedFlow<Result> get() = _result.asSharedFlow()
 
-    private val _state: MutableStateFlow<AllOneState> = MutableStateFlow(AllOneState())
-    val state: StateFlow<AllOneState> get() = _state.asStateFlow()
+    private val _state: MutableStateFlow<OnBoardingState> = MutableStateFlow(OnBoardingState())
+    val state: StateFlow<OnBoardingState> get() = _state.asStateFlow()
 
     // 요청
     fun request() {
@@ -41,18 +41,18 @@ class AllOneViewModel @Inject constructor(
         }
     }
 
-    fun navigateOnBoardingFragment() = viewModelScope.launch {
-        _action.emit(AllOneAction.NavigateOnBoardingView)
+    fun navigateHomeFragment() = viewModelScope.launch {
+        _action.emit(OnBoardingAction.NavigateHomeView)
     }
 }
 
-data class AllOneState(
+data class OnBoardingState(
     val dataSomething: String = "",
 )
 
-sealed interface AllOneAction {
-    class ShowToast(val content: String) : AllOneAction
-    data object NavigateOnBoardingView : AllOneAction
+sealed interface OnBoardingAction {
+    class ShowToast(val content: String) : OnBoardingAction
+    data object NavigateHomeView : OnBoardingAction
 }
 
 sealed interface Result {

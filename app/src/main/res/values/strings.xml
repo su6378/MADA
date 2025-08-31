@@ -17,6 +17,9 @@
     <string name="money_diary_saturday">20</string>
     <string name="money_diary_sunday">21</string>
 
+    <!-- 온보딩 -->
+    <string name="on_boarding_title">모았다올 가입하기</string>
+
     <!-- 주간 예산 설정 -->
     <string name="week_budget_title">예산 설정</string>
     <string name="week_budget_week">9월 3주차</string>
@@ -57,5 +60,6 @@
 
     <!-- 버튼 -->
     <string name="setting">설정하기</string>
+    <string name="next">다음</string>
 
 </resources>

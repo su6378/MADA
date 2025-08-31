@@ -1,13 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
     app:startDestination="@id/allOneFragment">
 
     <fragment
+        android:id="@+id/allOneFragment"
+        android:name="com.example.mada.feature.allone.AllOneFragment"
+        android:label="AllOneFragment"
+        tools:layout="@layout/fragment_all_one">
+        <action
+            android:id="@+id/action_allOneFragment_to_onBoardingFragment"
+            app:destination="@id/onBoardingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onBoardingFragment"
+        android:name="com.example.mada.feature.on_boarding.OnBoardingFragment"
+        android:label="OnBoardingFragment"
+        tools:layout="@layout/fragment_on_boarding">
+        <action
+            android:id="@+id/action_onBoardingFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.mada.feature.home.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_weekBudgetFragment"
             app:destination="@id/weekBudgetFragment" />
@@ -15,6 +36,7 @@
             android:id="@+id/action_homeFragment_to_moneyLeftFragment"
             app:destination="@id/moneyLeftFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/weekBudgetFragment"
         android:name="com.example.mada.feature.budget.WeekBudgetFragment"
@@ -23,8 +45,5 @@
         android:id="@+id/moneyLeftFragment"
         android:name="com.example.mada.feature.money_left.MoneyLeftFragment"
         android:label="MoneyLeftFragment" />
-    <fragment
-        android:id="@+id/allOneFragment"
-        android:name="com.example.mada.feature.allone.AllOneFragment"
-        android:label="AllOneFragment" />
+
 </navigation>

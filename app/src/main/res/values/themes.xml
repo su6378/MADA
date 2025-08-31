@@ -20,6 +20,7 @@
 
     <style name="ToolbarTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
     </style>
 
     <style name="Theme.MADA" parent="Base.Theme.MADA" />

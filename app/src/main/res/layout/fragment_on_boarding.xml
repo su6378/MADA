@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.example.mada.feature.on_boarding.OnBoardingViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".feature.on_boarding.OnBoardingFragment">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_on_boarding"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/on_boarding_title"
+            app:titleCentered="true"
+            android:background="@color/white"
+            app:titleTextAppearance="@style/ToolbarTitleText"
+            app:titleTextColor="@color/black" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:paddingVertical="14dp"
+            android:text="@string/next"
+            android:textSize="20sp"
+            app:cornerRadius="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:onClick="@{() -> vm.navigateHomeFragment()}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
