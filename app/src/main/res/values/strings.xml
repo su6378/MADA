@@ -3,6 +3,20 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- 올원뱅크 진입 화면 -->
+    <string name="all_one_mada">모았다올</string>
+    <string name="all_one_mada_title">저축 열심히 하자!</string>
+    <string name="all_one_mada_no_challenge">시작된 챌린지가 없어요</string>
+    <string name="all_one_mada_no_account">아직 연결된 통장이 없어요</string>
+    <string name="all_one_mada_challenge_home">챌린지홈</string>
+
+    <!--홈 화면 -->
+    <string name="money_diary">머니 다이어리</string>
+    <string name="money_diary_month">9월</string>
+    <string name="money_diary_balloon">21주째 집 짓는 중</string>
+    <string name="money_diary_saturday">20</string>
+    <string name="money_diary_sunday">21</string>
+
     <!-- 주간 예산 설정 -->
     <string name="week_budget_title">예산 설정</string>
     <string name="week_budget_week">9월 3주차</string>
@@ -28,6 +42,17 @@
     <string name="week_budget_calendar_friday_comment">식사 + 교통비가 예상되는 일정이에요</string>
     <string name="week_budget_calendar_saturday_comment">카페 + 교통비가 예상되는 일정이에요</string>
     <string name="week_budget_calendar_sunday_comment">쇼핑 지출이 예상되는 일정이에요</string>
+
+    <!-- 저축 바인더 -->
+    <!-- 이번주 남는 돈 -->
+    <string name="money_left">이번주 남는 돈</string>
+    <string name="money_left_monday">월</string>
+    <string name="money_left_tuesday">화</string>
+    <string name="money_left_wednesday">수</string>
+    <string name="money_left_thursday">목</string>
+    <string name="money_left_friday">금</string>
+    <string name="money_left_saturday">토</string>
+    <string name="money_left_sunday">일</string>
 
 
     <!-- 버튼 -->
