@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/allOneFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -11,9 +11,20 @@
         <action
             android:id="@+id/action_homeFragment_to_weekBudgetFragment"
             app:destination="@id/weekBudgetFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_moneyLeftFragment"
+            app:destination="@id/moneyLeftFragment" />
     </fragment>
     <fragment
         android:id="@+id/weekBudgetFragment"
         android:name="com.example.mada.feature.budget.WeekBudgetFragment"
         android:label="WeekBudgetFragment" />
+    <fragment
+        android:id="@+id/moneyLeftFragment"
+        android:name="com.example.mada.feature.money_left.MoneyLeftFragment"
+        android:label="MoneyLeftFragment" />
+    <fragment
+        android:id="@+id/allOneFragment"
+        android:name="com.example.mada.feature.allone.AllOneFragment"
+        android:label="AllOneFragment" />
 </navigation>

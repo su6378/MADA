@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.mada.feature.allone.AllOneViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".feature.allone.AllOneFragment">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/header_all_one"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:scaleType="fitStart"
+            android:src="@drawable/header_allone"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/sv_all_one"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_all_one">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bright_gray">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/header_all_one_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/bg_all_one_account"
+                    app:layout_constraintHeight_max="300dp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginTop="190dp"
+                    android:layout_marginEnd="220dp"
+                    android:background="@color/white"
+                    app:layout_constraintTop_toTopOf="@id/header_all_one_account" />
+
+                <TextView
+                    android:id="@+id/tv_all_one_mada_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/all_one_mada"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/header_all_one_account" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_all_one_mada"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="14dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_all_one_mada_title"
+                    app:onClick="@{() -> vm.navigateOnBoardingFragment()}"
+                    app:strokeWidth="0dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_all_one_mada"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/ic_hammer"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_all_one_mada"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/pretendard_semibold"
+                            android:text="@string/all_one_mada_no_challenge"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@id/iv_all_one_mada"
+                            app:layout_constraintStart_toEndOf="@id/iv_all_one_mada"
+                            app:layout_constraintTop_toTopOf="@id/iv_all_one_mada" />
+
+                        <TextView
+                            android:id="@+id/tv_all_one_mada_challenge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:text="@string/all_one_mada_no_account"
+                            android:textColor="@color/semi_dark_gray"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/iv_all_one_mada" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="20dp"
+                            app:cardBackgroundColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_all_one_mada_challenge"
+                            app:strokeColor="#EAEAEA"
+                            app:strokeWidth="1dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="10dp"
+                                android:layout_marginVertical="4dp"
+                                android:fontFamily="@font/pretendard_medium"
+                                android:text="@string/all_one_mada_challenge_home"
+                                android:textAlignment="center"
+                                android:textSize="12sp" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_all_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/bg_all_one"
+                    app:layout_constraintHeight_max="500dp"
+                    app:layout_constraintTop_toBottomOf="@id/cv_all_one_mada" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_all_one_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/bg_all_one_2"
+                    app:layout_constraintHeight_max="440dp"
+                    app:layout_constraintTop_toBottomOf="@id/iv_all_one" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_all_one_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/bg_all_one_3"
+                    app:layout_constraintHeight_max="400dp"
+                    app:layout_constraintTop_toBottomOf="@id/iv_all_one_2" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_all_one_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/bg_all_one_4"
+                    app:layout_constraintHeight_max="700dp"
+                    app:layout_constraintTop_toBottomOf="@id/iv_all_one_3" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_all_one_bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:scaleType="fitEnd"
+            android:src="@drawable/bg_all_one_bottom_navigation"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_all_one_fab"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:scaleType="fitEnd"
+            android:src="@drawable/button_all_one_asset"
+            app:layout_constraintBottom_toTopOf="@id/iv_all_one_bottom_navigation" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

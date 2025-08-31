@@ -2,10 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bright_gray">#F2F2F2</color>
     <color name="light_gray">#E6E8EA</color>
     <color name="semi_light_gray">#E4E4E4</color>
     <color name="semi_gray">#999999</color>
     <color name="gray">#666666</color>
+    <color name="semi_dark_gray">#676767</color>
     <color name="orange">#FF9500</color>
+    <color name="emerald">#77F888</color>
+    <color name="light_green">#B3D33F</color>
     <color name="nh_green">#37B559</color>
 </resources>
