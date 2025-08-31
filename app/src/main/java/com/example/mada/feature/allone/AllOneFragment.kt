@@ -39,8 +39,18 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                         ivAllOneFab.visibility = View.INVISIBLE
                         ivAllOneBottomNavigation.visibility = View.INVISIBLE
 
-                        ivAllOneFab.startAnimation(AnimationUtils.loadAnimation(requireContext(),R.anim.translate_down))
-                        ivAllOneBottomNavigation.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.translate_down))
+                        ivAllOneFab.startAnimation(
+                            AnimationUtils.loadAnimation(
+                                requireContext(),
+                                R.anim.translate_down
+                            )
+                        )
+                        ivAllOneBottomNavigation.startAnimation(
+                            AnimationUtils.loadAnimation(
+                                requireContext(),
+                                R.anim.translate_down
+                            )
+                        )
                     }
 
                     isScroll = true
@@ -52,8 +62,18 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                         ivAllOneFab.visibility = View.VISIBLE
                         ivAllOneBottomNavigation.visibility = View.VISIBLE
 
-                        ivAllOneFab.startAnimation(AnimationUtils.loadAnimation(requireContext(),R.anim.translate_up))
-                        ivAllOneBottomNavigation.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.translate_up))
+                        ivAllOneFab.startAnimation(
+                            AnimationUtils.loadAnimation(
+                                requireContext(),
+                                R.anim.translate_up
+                            )
+                        )
+                        ivAllOneBottomNavigation.startAnimation(
+                            AnimationUtils.loadAnimation(
+                                requireContext(),
+                                R.anim.translate_up
+                            )
+                        )
 
                         isScroll = false
                     }
@@ -71,7 +91,7 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                         when (action) {
                             is AllOneAction.ShowToast -> showToast(action.content)
                             is AllOneAction.NavigateOnBoardingView -> {
-//                                navigate(AllOneFragmentDirections.actionAllOneFragmentToWeekBudgetFragment())
+                                navigate(AllOneFragmentDirections.actionAllOneFragmentToOnBoardingFragment())
                             }
                         }
                     }
@@ -96,6 +116,22 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                     viewModel.state.collect { state ->
 
 
+                    }
+                }
+
+                launch {
+                    viewModel.account.collect { account ->
+                        if (account) {
+                            binding.apply {
+                                tvAllOneMada.text = resources.getString(R.string.all_one_mada_challenge)
+                                tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_account)
+                            }
+                        } else {
+                            binding.apply {
+                                tvAllOneMada.text = resources.getString(R.string.all_one_mada_no_challenge)
+                                tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_no_account)
+                            }
+                        }
                     }
                 }
             }

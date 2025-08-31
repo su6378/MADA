@@ -2,6 +2,7 @@ package com.example.mada.feature.allone
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mada.repository.DataStoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,6 +10,9 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,6 +20,7 @@ private const val TAG = "DX"
 
 @HiltViewModel
 class AllOneViewModel @Inject constructor(
+    private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
     private val _action: MutableSharedFlow<AllOneAction> = MutableSharedFlow()
     val action: SharedFlow<AllOneAction> get() = _action.asSharedFlow()
@@ -26,17 +31,22 @@ class AllOneViewModel @Inject constructor(
     private val _state: MutableStateFlow<AllOneState> = MutableStateFlow(AllOneState())
     val state: StateFlow<AllOneState> get() = _state.asStateFlow()
 
+    private val _account: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val account: StateFlow<Boolean> get() = _account.asStateFlow()
+
+    init {
+        getAccount()
+    }
+
     // 요청
-    fun request() {
+    private fun getAccount() {
         viewModelScope.launch {
-            _result.emit(Result.Loading)
-
-            runCatching {
-
-            }.onSuccess { // 응답 성공
-
-            }.onFailure { // 응답 실패
-
+            dataStoreRepository.getAccount().onStart {
+                _result.emit(Result.Loading)
+            }.catch {
+                _result.emit(Result.Finish)
+            }.collectLatest { result ->
+                _account.emit(result)
             }
         }
     }

@@ -1,13 +1,14 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MADA</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- 올원뱅크 진입 화면 -->
     <string name="all_one_mada">모았다올</string>
-    <string name="all_one_mada_title">저축 열심히 하자!</string>
     <string name="all_one_mada_no_challenge">시작된 챌린지가 없어요</string>
+    <string name="all_one_mada_challenge">저축 열심히 하자!</string>
     <string name="all_one_mada_no_account">아직 연결된 통장이 없어요</string>
+    <string name="all_one_mada_account" tools:ignore="TypographyDashes">302–1831–8080-51</string>
     <string name="all_one_mada_challenge_home">챌린지홈</string>
 
     <!--홈 화면 -->
