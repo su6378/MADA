@@ -1,5 +1,7 @@
 package com.example.mada.base
 
+import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +9,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation.findNavController
-import com.example.mada.dialog.AlertDialogFragment
-import com.example.mada.dialog.LoadingDialogFragment
+import com.example.mada.MainActivity
+import com.example.mada.loading.LoadingTest
 
 abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
 
@@ -25,9 +31,7 @@ abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
     private var _binding: T? = null
     val binding get() = requireNotNull(_binding)
 
-    private val loadingDialog by lazy { LoadingDialogFragment() }
-
-    private val alertDialog by lazy { AlertDialogFragment() }
+//    private val loadingDialog by lazy { LoadingTest() }
 
     /**
      * View에 필요한 객체(adpater..)를 설정
@@ -60,28 +64,23 @@ abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
         initObserving()
     }
 
-    protected fun showLoadingDialog() {
-        if (!loadingDialog.isAdded) {
-            loadingDialog.show(childFragmentManager, LoadingDialogFragment::class.java.simpleName)
+    // alert 다이얼로그 생성
+    protected fun showAlertDialog(
+        dialog: Dialog,
+        lifecycleOwner: LifecycleOwner?,
+        cancelable: Boolean = true,
+        dismissHandler: (() -> Unit)? = null,
+    ) {
+        val targetEvent = if (cancelable) Lifecycle.Event.ON_STOP else Lifecycle.Event.ON_DESTROY
+        val observer = LifecycleEventObserver { _: LifecycleOwner, event: Lifecycle.Event ->
+            if (event == targetEvent && dialog.isShowing) {
+                dialog.dismiss()
+                dismissHandler?.invoke()
+            }
         }
-    }
-
-    protected fun dismissLoadingDialog() {
-        if (loadingDialog.isAdded) {
-            loadingDialog.dismissAllowingStateLoss()
-        }
-    }
-
-    protected fun showAlertDialog() {
-        if (!alertDialog.isAdded) {
-            alertDialog.show(childFragmentManager, AlertDialogFragment::class.java.simpleName)
-        }
-    }
-
-    protected fun dismissAlertDialog() {
-        if (alertDialog.isAdded) {
-            alertDialog.dismissAllowingStateLoss()
-        }
+        dialog.show()
+        lifecycleOwner?.lifecycle?.addObserver(observer)
+        dialog.setOnDismissListener { lifecycleOwner?.lifecycle?.removeObserver(observer) }
     }
 
     protected fun showToast(message: String, duration: Int = Toast.LENGTH_LONG) {
