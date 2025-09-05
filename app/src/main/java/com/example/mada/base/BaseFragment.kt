@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation.findNavController
+import com.example.mada.dialog.AlertDialogFragment
 import com.example.mada.dialog.LoadingDialogFragment
 
 abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
@@ -25,6 +26,8 @@ abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
     val binding get() = requireNotNull(_binding)
 
     private val loadingDialog by lazy { LoadingDialogFragment() }
+
+    private val alertDialog by lazy { AlertDialogFragment() }
 
     /**
      * View에 필요한 객체(adpater..)를 설정
@@ -66,6 +69,18 @@ abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
     protected fun dismissLoadingDialog() {
         if (loadingDialog.isAdded) {
             loadingDialog.dismissAllowingStateLoss()
+        }
+    }
+
+    protected fun showAlertDialog() {
+        if (!alertDialog.isAdded) {
+            alertDialog.show(childFragmentManager, AlertDialogFragment::class.java.simpleName)
+        }
+    }
+
+    protected fun dismissAlertDialog() {
+        if (alertDialog.isAdded) {
+            alertDialog.dismissAllowingStateLoss()
         }
     }
 

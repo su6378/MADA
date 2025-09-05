@@ -48,6 +48,10 @@
     <string name="week_budget_calendar_sunday_comment">쇼핑 지출이 예상되는 일정이에요</string>
 
     <!-- 저축 바인더 -->
+    <!-- 이번주 저축 가능한 금액-->
+    <string name="week_saving">이번주 저축가능 금액</string>
+    <string name="week_saving_navigate">저축하러 가기</string>
+    <string name="week_saving_week_money">이번주 저금할 돈</string>
     <!-- 이번주 남는 돈 -->
     <string name="money_left">이번주 남는 돈</string>
     <string name="money_left_monday">월</string>
@@ -62,5 +66,6 @@
     <!-- 버튼 -->
     <string name="setting">설정하기</string>
     <string name="next">다음</string>
-
+    <string name="ok">확인</string>
+    <string name="cancel">취소</string>
 </resources>
