@@ -21,6 +21,7 @@ kapt = "1.7.10"
 lottie = "5.2.0"
 datastore = "1.0.0"
 typewriter = "v1.3"
+rainbow = "1.0.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,14 +49,17 @@ hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt"
 hilt-android-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
 # Lottie
-lottie-android = {module ="com.airbnb.android:lottie", version.ref ="lottie"}
+lottie-android = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 
 # DataStore
 datastore-preference = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 datastore-core = { module = "androidx.datastore:datastore-core", version.ref = "datastore" }
 
 # Typist
-typewriter-android = {module = "com.github.NitishGadangi:TypeWriter-TextView", version.ref = "typewriter"}
+typewriter-android = { module = "com.github.NitishGadangi:TypeWriter-TextView", version.ref = "typewriter" }
+
+# Rainbow
+rainbow-android = { module = "com.github.skydoves:rainbow", version.ref = "rainbow"}
 
 [bundles]
 androidx-navigation = ["androidx-navigation-fragment", "androidx-navigation-ui"]
@@ -65,5 +69,5 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidx-navigation-safeArgs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-kapt = { id ="org.jetbrains.kotlin.kapt", version.ref = "kapt"}
+kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kapt" }
 
