@@ -134,15 +134,10 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                             }
                         } else {
                             binding.apply {
-//                                tvAllOneMada.text = resources.getString(R.string.all_one_mada_no_challenge)
-//                                tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_no_account)
-//                                ivAllOneMadaAccount.visibility = View.GONE
-//                                tvAllOneMadaAccountMoney.visibility = View.GONE
-                                tvAllOneMada.text = resources.getString(R.string.all_one_mada_challenge)
-                                tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_account_possible_money)
-                                ivAllOneMadaAccount.visibility = View.VISIBLE
-                                tvAllOneMadaAccountMoney.visibility = View.VISIBLE
-                                tvAllOneMadaAccountMoney.text = 20000.toWon()
+                                tvAllOneMada.text = resources.getString(R.string.all_one_mada_no_challenge)
+                                tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_no_account)
+                                ivAllOneMadaAccount.visibility = View.GONE
+                                tvAllOneMadaAccountMoney.visibility = View.GONE
                             }
                         }
                     }
