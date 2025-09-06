@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.transition.Visibility
 import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentAllOneBinding
@@ -57,7 +58,7 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                 }
 
                 // 스크롤 위로
-                if (scrollY + 5 < oldScrollY) {
+                if (scrollY + 1 < oldScrollY) {
                     if (!v.canScrollVertically(-1)) { // 최상단 감지
                         ivAllOneFab.visibility = View.VISIBLE
                         ivAllOneBottomNavigation.visibility = View.VISIBLE
@@ -91,7 +92,7 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                         when (action) {
                             is AllOneAction.ShowToast -> showToast(action.content)
                             is AllOneAction.NavigateOnBoardingView -> {
-                                navigate(AllOneFragmentDirections.actionAllOneFragmentToOnBoardingFragment())
+                                navigate(AllOneFragmentDirections.actionAllOneFragmentToHomeFragment())
                             }
                         }
                     }
@@ -125,11 +126,13 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                             binding.apply {
                                 tvAllOneMada.text = resources.getString(R.string.all_one_mada_challenge)
                                 tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_account)
+                                ivAllOneMadaAccount.visibility = View.VISIBLE
                             }
                         } else {
                             binding.apply {
                                 tvAllOneMada.text = resources.getString(R.string.all_one_mada_no_challenge)
                                 tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_no_account)
+                                ivAllOneMadaAccount.visibility = View.GONE
                             }
                         }
                     }
