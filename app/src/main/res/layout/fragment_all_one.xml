@@ -71,9 +71,9 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_all_one_mada_account"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:paddingVertical="10dp"
-                    android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
                     android:src="@drawable/bg_all_one_mada_account"
                     app:layout_constraintTop_toBottomOf="@id/iv_all_one_account" />
@@ -112,7 +112,7 @@
                             android:layout_height="24dp"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="20dp"
-                            android:src="@drawable/ic_hammer"
+                            android:src="@drawable/ic_diary"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -135,11 +135,22 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="20dp"
                             android:fontFamily="@font/pretendard_regular"
-                            android:text="@string/all_one_mada_no_account"
                             android:textColor="@color/semi_dark_gray"
                             android:textSize="13sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/iv_all_one_mada" />
+
+                        <TextView
+                            android:id="@+id/tv_all_one_mada_account_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="20dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:textSize="18sp"
+                            android:text="20000"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_all_one_mada_account" />
 
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="wrap_content"
@@ -150,7 +161,7 @@
                             app:cardBackgroundColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tv_all_one_mada_account"
+                            app:layout_constraintTop_toBottomOf="@id/tv_all_one_mada_account_money"
                             app:strokeColor="#EAEAEA"
                             app:strokeWidth="1dp">
 
@@ -160,7 +171,7 @@
                                 android:layout_marginHorizontal="10dp"
                                 android:layout_marginVertical="4dp"
                                 android:fontFamily="@font/pretendard_medium"
-                                android:text="@string/all_one_mada_challenge_home"
+                                android:text="@string/all_one_mada_diary_home"
                                 android:textAlignment="center"
                                 android:textSize="12sp" />
 
