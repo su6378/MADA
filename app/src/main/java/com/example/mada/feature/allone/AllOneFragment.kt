@@ -93,9 +93,8 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                     viewModel.action.collect { action ->
                         when (action) {
                             is AllOneAction.ShowToast -> showToast(action.content)
-                            is AllOneAction.NavigateOnBoardingView -> {
-                                navigate(AllOneFragmentDirections.actionAllOneFragmentToHomeFragment())
-                            }
+                            is AllOneAction.NavigateOnBoardingView -> navigate(AllOneFragmentDirections.actionAllOneFragmentToOnBoardingFragment())
+                            is AllOneAction.NavigateHomeView -> navigate(AllOneFragmentDirections.actionAllOneFragmentToHomeFragment())
                         }
                     }
                 }

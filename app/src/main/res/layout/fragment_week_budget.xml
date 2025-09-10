@@ -138,13 +138,16 @@
                     app:layout_constraintTop_toBottomOf="@id/toggle_calendar" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tv_week_budget_monday_budget"
+                    android:id="@+id/et_week_budget_monday_budget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
                     android:layout_marginEnd="34dp"
+                    android:background="@null"
                     android:fontFamily="@font/pretendard_semibold"
-                    android:text="@string/week_budget_calendar_monday_budget"
+                    android:hint="금액을 입력해주세요."
+                    android:inputType="number"
+                    android:maxLength="10"
                     android:textColor="@color/nh_green"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -157,7 +160,7 @@
                     android:layout_marginHorizontal="22dp"
                     android:layout_marginTop="12dp"
                     android:background="@color/semi_light_gray"
-                    app:layout_constraintTop_toBottomOf="@id/tv_week_budget_monday_budget" />
+                    app:layout_constraintTop_toBottomOf="@id/et_week_budget_monday_budget" />
 
                 <TextView
                     android:id="@+id/tv_week_budget_tuesday"
@@ -310,14 +313,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:layout_marginBottom="10dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginEnd="34dp"
+                        android:layout_marginBottom="10dp"
                         android:fontFamily="@font/pretendard_medium"
                         android:text="@string/week_budget_calendar_friday_comment"
                         android:textColor="@color/semi_gray"
                         android:textSize="12sp"
                         android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_week_budget_friday_budget" />
 

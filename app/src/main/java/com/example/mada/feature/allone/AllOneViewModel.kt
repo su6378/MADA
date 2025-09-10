@@ -71,8 +71,9 @@ class AllOneViewModel @Inject constructor(
         }
     }
 
-    fun navigateOnBoardingFragment() = viewModelScope.launch {
-        _action.emit(AllOneAction.NavigateOnBoardingView)
+    fun navigateNextFragment() = viewModelScope.launch {
+        if (_account.value) _action.emit(AllOneAction.NavigateHomeView)
+        else _action.emit(AllOneAction.NavigateOnBoardingView)
     }
 }
 
@@ -83,6 +84,7 @@ data class AllOneState(
 sealed interface AllOneAction {
     class ShowToast(val content: String) : AllOneAction
     data object NavigateOnBoardingView : AllOneAction
+    data object NavigateHomeView : AllOneAction
 }
 
 sealed interface Result {
