@@ -9,6 +9,7 @@
     <string name="all_one_mada_challenge">머니 다이어리</string>
     <string name="all_one_mada_no_account">아직 연결된 통장이 없어요</string>
     <string name="all_one_mada_account_possible_money">오늘 쓸 수 있는 돈</string>
+    <string name="all_one_mada_account_over_money">예산을 초과했어요 🥲</string>
     <string name="all_one_mada_diary_home">다이어리 홈</string>
 
     <!--홈 화면 -->

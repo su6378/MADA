@@ -127,10 +127,10 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                         if (account) {
                             binding.apply {
                                 tvAllOneMada.text = resources.getString(R.string.all_one_mada_challenge)
-                                tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_account_possible_money)
                                 ivAllOneMadaAccount.visibility = View.VISIBLE
                                 tvAllOneMadaAccountMoney.visibility = View.VISIBLE
-                                tvAllOneMadaAccountMoney.text = 20000.toWon()
+                                if (viewModel.money.value < 0) tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_account_over_money)
+                                else tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_account_possible_money)
                             }
                         } else {
                             binding.apply {
@@ -140,6 +140,13 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                                 tvAllOneMadaAccountMoney.visibility = View.GONE
                             }
                         }
+                    }
+                }
+
+
+                launch {
+                    viewModel.money.collect { money ->
+                        binding.tvAllOneMadaAccountMoney.text = money.toWon()
                     }
                 }
             }

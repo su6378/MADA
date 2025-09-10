@@ -3,6 +3,8 @@ package com.example.mada.feature.allone
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mada.repository.DataStoreRepository
+import com.example.mada.util.BudgetUtil
+import com.example.mada.util.DateUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -34,11 +36,15 @@ class AllOneViewModel @Inject constructor(
     private val _account: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val account: StateFlow<Boolean> get() = _account.asStateFlow()
 
+    private val _money: MutableStateFlow<Int> = MutableStateFlow(0)
+    val money: StateFlow<Int> get() = _money.asStateFlow()
+
     init {
         getAccount()
+        getMoney()
     }
 
-    // 요청
+    // 계좌 요청
     private fun getAccount() {
         viewModelScope.launch {
             dataStoreRepository.getAccount().onStart {
@@ -47,6 +53,20 @@ class AllOneViewModel @Inject constructor(
                 _result.emit(Result.Finish)
             }.collectLatest { result ->
                 _account.emit(result)
+            }
+        }
+    }
+
+    private fun getMoney() {
+        viewModelScope.launch {
+            dataStoreRepository.getBudget().onStart {
+                _result.emit(Result.Loading)
+            }.catch {
+                _result.emit(Result.Finish)
+            }.collectLatest { result ->
+                val today = DateUtil.getToday()
+
+                _money.emit(result[today] - BudgetUtil.expenditure[today])
             }
         }
     }
