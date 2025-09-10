@@ -20,7 +20,7 @@
             android:id="@+id/header_all_one"
             android:layout_width="match_parent"
             android:layout_height="57dp"
-            android:scaleType="fitStart"
+            android:scaleType="fitCenter"
             android:src="@drawable/bg_all_one_header"
             app:layout_constraintTop_toTopOf="parent" />
 
