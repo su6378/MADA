@@ -12,4 +12,16 @@ class DataStoreRepository @Inject constructor(
     suspend fun setAccount(account: Boolean) = dataStore.setAccount(account)
 
     suspend fun getAccount() = dataStore.getAccount()
+
+    suspend fun setBudget(
+        monday: Int,
+        tuesday: Int,
+        wednesday: Int,
+        thursday: Int,
+        friday: Int,
+        saturday: Int,
+        sunday: Int
+    ) = dataStore.setBudget(monday, tuesday, wednesday, thursday, friday, saturday, sunday)
+
+    suspend fun getBudget() = dataStore.getBudget()
 }
