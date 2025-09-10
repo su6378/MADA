@@ -25,7 +25,6 @@ class AlertDialog(
         setContentView(binding.root)
         window?.run {
             setBackgroundDrawable(InsetDrawable(ColorDrawable(Color.TRANSPARENT), 50))
-            attributes.width = ViewGroup.LayoutParams.MATCH_PARENT
             attributes.height = ViewGroup.LayoutParams.WRAP_CONTENT
             setCanceledOnTouchOutside(false)
             setCancelable(false)

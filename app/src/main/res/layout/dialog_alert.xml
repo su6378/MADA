@@ -11,70 +11,84 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/white"
         android:layout_marginHorizontal="60dp"
-        app:cardCornerRadius="0dp"
+        android:background="@color/white"
+        android:elevation="10dp"
+        app:cardCornerRadius="12dp"
         app:strokeWidth="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="@color/white"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:background="@color/white">
 
             <TextView
                 android:id="@+id/tv_dialog_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="40dp"
                 android:fontFamily="@font/pretendard_semibold"
-                android:gravity="center"
-                android:paddingVertical="10dp"
+                android:text="팝업창 테스트"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_dialog_cancel"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/ic_cancel"
-                android:fontFamily="@font/pretendard_medium"
-                android:src="@drawable/ic_cancel"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@id/tv_dialog_title"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_dialog_title" />
-
-            <View
-                android:id="@+id/line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/light_gray"
-                app:layout_constraintTop_toBottomOf="@id/tv_dialog_title" />
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_dialog_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_medium"
-                android:textColor="@color/semi_gray"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line" />
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="팝업창 내용"
+                app:layout_constraintBottom_toBottomOf="@id/btn_dialog_cancel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_dialog_title"
+                app:layout_constraintVertical_bias="0" />
 
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_dialog_ok"
-                android:layout_width="match_parent"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_dialog_cancel"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:background="@color/nh_green"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/white"
                 android:fontFamily="@font/pretendard_medium"
-                android:paddingVertical="10dp"
+                android:paddingVertical="12dp"
+                android:src="@drawable/ic_cancel"
+                android:text="@string/cancel"
+                android:textColor="@color/black"
+                app:cornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/btn_dialog_ok"
+                app:layout_constraintEnd_toStartOf="@id/btn_dialog_ok"
+                app:layout_constraintStart_toStartOf="parent"
+                app:strokeColor="#D3D3D3"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_dialog_ok"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/pretendard_medium"
+                android:paddingVertical="12dp"
                 android:text="@string/ok"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                android:textColor="@color/nh_green"
+                app:cornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_dialog_cancel"
+                app:strokeColor="@color/nh_green"
+                app:strokeWidth="1dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
