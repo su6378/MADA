@@ -1,10 +1,12 @@
 package com.example.mada.feature.allone
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mada.repository.DataStoreRepository
 import com.example.mada.util.BudgetUtil
 import com.example.mada.util.DateUtil
+import com.example.mada.util.TextUtil.toWon
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +17,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -33,12 +36,6 @@ class AllOneViewModel @Inject constructor(
     private val _state: MutableStateFlow<AllOneState> = MutableStateFlow(AllOneState())
     val state: StateFlow<AllOneState> get() = _state.asStateFlow()
 
-    private val _account: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val account: StateFlow<Boolean> get() = _account.asStateFlow()
-
-    private val _money: MutableStateFlow<Int> = MutableStateFlow(0)
-    val money: StateFlow<Int> get() = _money.asStateFlow()
-
     init {
         getAccount()
         getMoney()
@@ -52,7 +49,7 @@ class AllOneViewModel @Inject constructor(
             }.catch {
                 _result.emit(Result.Finish)
             }.collectLatest { result ->
-                _account.emit(result)
+                if (result) _state.update { it.copy(isSigned = true) }
             }
         }
     }
@@ -66,19 +63,25 @@ class AllOneViewModel @Inject constructor(
             }.collectLatest { result ->
                 val today = DateUtil.getToday()
 
-                _money.emit(result[today] - BudgetUtil.expenditure[today])
+                if (result.sum() > 0) _state.update { it.copy(isBudgetExist = true) }
+
+                _state.update { it.copy(money = result[today] - BudgetUtil.expenditure[today]) }
+
+                Log.d(TAG, "getMoney: " + _state.value)
             }
         }
     }
 
     fun navigateNextFragment() = viewModelScope.launch {
-        if (_account.value) _action.emit(AllOneAction.NavigateHomeView)
+        if (_state.value.isSigned) _action.emit(AllOneAction.NavigateHomeView)
         else _action.emit(AllOneAction.NavigateOnBoardingView)
     }
 }
 
 data class AllOneState(
-    val dataSomething: String = "",
+    var isSigned: Boolean = false, // 계좌 개설 여부
+    var isBudgetExist: Boolean = false, // 예산 설정 여부
+    var money: Int = 0 // 오늘 쓸 수 있는 돈
 )
 
 sealed interface AllOneAction {

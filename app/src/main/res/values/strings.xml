@@ -10,6 +10,7 @@
     <string name="all_one_mada_no_account">아직 연결된 통장이 없어요</string>
     <string name="all_one_mada_account_possible_money">오늘 쓸 수 있는 돈</string>
     <string name="all_one_mada_account_over_money">예산을 초과했어요 🥲</string>
+    <string name="all_one_mada_need_budget">예산을 설정해 주세요 😃</string>
     <string name="all_one_mada_diary_home">다이어리 홈</string>
 
     <!--홈 화면 -->
@@ -20,7 +21,7 @@
     <string name="money_diary_sunday">21</string>
 
     <!-- 온보딩 -->
-    <string name="on_boarding_title">모았다올 가입하기</string>
+    <string name="on_boarding_make_my_diary">내 다이어리 만들기</string>
 
     <!-- 주간 예산 설정 -->
     <string name="week_budget_title">예산 설정</string>

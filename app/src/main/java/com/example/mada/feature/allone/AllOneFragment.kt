@@ -116,20 +116,22 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
 
                 launch {
                     viewModel.state.collect { state ->
-
-
-                    }
-                }
-
-                launch {
-                    viewModel.account.collect { account ->
-                        if (account) {
+                        if (state.isSigned) { // 머니 다이어리 서비스를 가입한 경우
                             binding.apply {
                                 tvAllOneMada.text = resources.getString(R.string.all_one_mada_challenge)
                                 ivAllOneMadaAccount.visibility = View.VISIBLE
                                 tvAllOneMadaAccountMoney.visibility = View.VISIBLE
-                                if (viewModel.money.value < 0) tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_account_over_money)
-                                else tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_account_possible_money)
+
+                                if (state.isBudgetExist) { // 예산 설정을 한 경우
+                                    if (state.money < 0) tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_account_over_money)
+                                    else tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_account_possible_money)
+
+                                    tvAllOneMadaAccountMoney.visibility = View.VISIBLE
+                                    binding.tvAllOneMadaAccountMoney.text = state.money.toWon()
+                                }else {
+                                    tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_need_budget)
+                                    tvAllOneMadaAccountMoney.visibility = View.GONE
+                                }
                             }
                         } else {
                             binding.apply {
@@ -139,13 +141,7 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                                 tvAllOneMadaAccountMoney.visibility = View.GONE
                             }
                         }
-                    }
-                }
 
-
-                launch {
-                    viewModel.money.collect { money ->
-                        binding.tvAllOneMadaAccountMoney.text = money.toWon()
                     }
                 }
             }
