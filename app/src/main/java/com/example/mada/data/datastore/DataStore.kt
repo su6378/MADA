@@ -17,7 +17,7 @@ class DataStore(
 ) {
     private val Context.dataStore by preferencesDataStore("MADA")
     private val accountPreference = booleanPreferencesKey("ACCOUNT")
-    private val budgetPreference = intPreferencesKey("BUDGET")
+    private val cardPreference = booleanPreferencesKey("CARD")
     private val mondayPreference = intPreferencesKey("MONDAY")
     private val tuesdayPreference = intPreferencesKey("TUESDAY")
     private val wednesdayPreference = intPreferencesKey("WEDNESDAY")
@@ -44,6 +44,27 @@ class DataStore(
             }
             .map { prefs ->
                 prefs[accountPreference] ?: false
+            }
+    }
+
+    suspend fun setCard(card: Boolean) {
+        context.dataStore.edit { preference ->
+            preference[cardPreference] = card
+        }
+    }
+
+    suspend fun getCard(): Flow<Boolean> {
+        return context.dataStore.data
+            .catch { exception ->
+                if (exception is IOException) {
+                    exception.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw exception
+                }
+            }
+            .map { prefs ->
+                prefs[cardPreference] ?: false
             }
     }
 
