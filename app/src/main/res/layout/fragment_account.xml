@@ -43,7 +43,7 @@
             android:textSize="20sp"
             app:cornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:onClick="@{() -> vm.navigateCardFragment()}" />
+            app:onClick="@{() -> vm.createAccount()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

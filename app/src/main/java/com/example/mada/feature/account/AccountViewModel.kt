@@ -2,6 +2,8 @@ package com.example.mada.feature.account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mada.card.CardAction
+import com.example.mada.repository.DataStoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,6 +18,7 @@ private const val TAG = "DX"
 
 @HiltViewModel
 class AccountViewModel @Inject constructor(
+    private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
     private val _action: MutableSharedFlow<AccountAction> = MutableSharedFlow()
     val action: SharedFlow<AccountAction> get() = _action.asSharedFlow()
@@ -27,22 +30,18 @@ class AccountViewModel @Inject constructor(
     val state: StateFlow<AccountState> get() = _state.asStateFlow()
 
     // 요청
-    fun request() {
+    fun createAccount() {
         viewModelScope.launch {
-            _result.emit(Result.Loading)
-
             runCatching {
-
+                _result.emit(Result.Loading)
+                dataStoreRepository.setAccount(true)
             }.onSuccess { // 응답 성공
-
+                _result.emit(Result.Finish)
+                _action.emit(AccountAction.NavigateCardView)
             }.onFailure { // 응답 실패
-
+                _result.emit(Result.Finish)
             }
         }
-    }
-
-    fun navigateCardFragment() = viewModelScope.launch {
-        _action.emit(AccountAction.NavigateCardView)
     }
 }
 
