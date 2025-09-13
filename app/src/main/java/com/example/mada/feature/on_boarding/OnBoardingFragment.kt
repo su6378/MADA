@@ -40,9 +40,8 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding, OnBoardingVie
                     viewModel.action.collect { action ->
                         when (action) {
                             is OnBoardingAction.ShowToast -> showToast(action.content)
-                            is OnBoardingAction.NavigateHomeView -> {
-                                navigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToHomeFragment())
-                            }
+                            is OnBoardingAction.NavigateHomeView -> navigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToHomeFragment())
+                            is OnBoardingAction.NavigateAccountView -> navigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToAccountFragment())
                         }
                     }
                 }

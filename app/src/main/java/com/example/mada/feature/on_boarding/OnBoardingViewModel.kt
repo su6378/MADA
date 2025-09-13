@@ -41,6 +41,10 @@ class OnBoardingViewModel @Inject constructor(
         }
     }
 
+    fun navigateAccountFragment() = viewModelScope.launch {
+        _action.emit(OnBoardingAction.NavigateAccountView)
+    }
+
     fun navigateHomeFragment() = viewModelScope.launch {
         _action.emit(OnBoardingAction.NavigateHomeView)
     }
@@ -53,6 +57,7 @@ data class OnBoardingState(
 sealed interface OnBoardingAction {
     class ShowToast(val content: String) : OnBoardingAction
     data object NavigateHomeView : OnBoardingAction
+    data object NavigateAccountView : OnBoardingAction
 }
 
 sealed interface Result {

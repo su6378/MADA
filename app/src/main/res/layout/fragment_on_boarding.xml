@@ -86,7 +86,7 @@
                 android:textSize="20sp"
                 app:cornerRadius="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:onClick="@{() -> vm.navigateHomeFragment()}" />
+                app:onClick="@{() -> vm.navigateAccountFragment()}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
