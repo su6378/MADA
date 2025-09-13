@@ -1,5 +1,6 @@
 package com.example.mada.feature.allone
 
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
@@ -93,7 +94,11 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                     viewModel.action.collect { action ->
                         when (action) {
                             is AllOneAction.ShowToast -> showToast(action.content)
-                            is AllOneAction.NavigateOnBoardingView -> navigate(AllOneFragmentDirections.actionAllOneFragmentToOnBoardingFragment())
+                            is AllOneAction.NavigateOnBoardingView -> navigate(
+                                AllOneFragmentDirections.actionAllOneFragmentToOnBoardingFragment()
+                            )
+
+                            is AllOneAction.NavigationCardView -> navigate(AllOneFragmentDirections.actionAllOneFragmentToCardFragment())
                             is AllOneAction.NavigateHomeView -> navigate(AllOneFragmentDirections.actionAllOneFragmentToHomeFragment())
                         }
                     }
@@ -118,25 +123,33 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                     viewModel.state.collect { state ->
                         if (state.isSigned) { // 머니 다이어리 서비스를 가입한 경우
                             binding.apply {
-                                tvAllOneMada.text = resources.getString(R.string.all_one_mada_challenge)
+                                tvAllOneMada.text =
+                                    resources.getString(R.string.all_one_mada_challenge)
                                 ivAllOneMadaAccount.visibility = View.VISIBLE
-                                tvAllOneMadaAccountMoney.visibility = View.VISIBLE
 
-                                if (state.isBudgetExist) { // 예산 설정을 한 경우
-                                    if (state.money < 0) tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_account_over_money)
-                                    else tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_account_possible_money)
+                                if (state.isCreated) { // 카드 개설을 한 경우
+                                    if (state.isBudgetExist) { // 예산 설정을 한 경우
+                                        if (state.money < 0) tvAllOneMadaAccount.text =
+                                            resources.getString(R.string.all_one_mada_account_over_money)
+                                        else tvAllOneMadaAccount.text =
+                                            resources.getString(R.string.all_one_mada_account_possible_money)
 
-                                    tvAllOneMadaAccountMoney.visibility = View.VISIBLE
-                                    binding.tvAllOneMadaAccountMoney.text = state.money.toWon()
-                                }else {
-                                    tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_need_budget)
-                                    tvAllOneMadaAccountMoney.visibility = View.GONE
-                                }
+                                        tvAllOneMadaAccountMoney.visibility = View.VISIBLE
+                                        binding.tvAllOneMadaAccountMoney.text = state.money.toWon()
+                                    } else {
+                                        tvAllOneMadaAccount.text =
+                                            resources.getString(R.string.all_one_mada_need_budget)
+                                        tvAllOneMadaAccountMoney.visibility = View.GONE
+                                    }
+                                } else tvAllOneMadaAccount.text =
+                                    resources.getString(R.string.all_one_mada_need_card)
                             }
                         } else {
                             binding.apply {
-                                tvAllOneMada.text = resources.getString(R.string.all_one_mada_no_challenge)
-                                tvAllOneMadaAccount.text = resources.getString(R.string.all_one_mada_no_account)
+                                tvAllOneMada.text =
+                                    resources.getString(R.string.all_one_mada_no_challenge)
+                                tvAllOneMadaAccount.text =
+                                    resources.getString(R.string.all_one_mada_no_account)
                                 ivAllOneMadaAccount.visibility = View.GONE
                                 tvAllOneMadaAccountMoney.visibility = View.GONE
                             }

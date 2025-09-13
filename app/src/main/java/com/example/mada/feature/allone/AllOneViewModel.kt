@@ -38,6 +38,7 @@ class AllOneViewModel @Inject constructor(
 
     init {
         getAccount()
+        getCard()
         getMoney()
     }
 
@@ -63,23 +64,40 @@ class AllOneViewModel @Inject constructor(
             }.collectLatest { result ->
                 val today = DateUtil.getToday()
 
-                if (result.sum() > 0) _state.update { it.copy(isBudgetExist = true) }
+                if (result.sum() > 0) _state.update {
+                    it.copy(
+                        isBudgetExist = true,
+                        money = result[today] - BudgetUtil.expenditure[today]
+                    )
+                }
+            }
+        }
+    }
 
-                _state.update { it.copy(money = result[today] - BudgetUtil.expenditure[today]) }
-
-                Log.d(TAG, "getMoney: " + _state.value)
+    private fun getCard() {
+        viewModelScope.launch {
+            dataStoreRepository.getCard().onStart {
+                _result.emit(Result.Loading)
+            }.catch {
+                _result.emit(Result.Finish)
+            }.collectLatest { result ->
+                _state.update { it.copy(isCreated = result) }
             }
         }
     }
 
     fun navigateNextFragment() = viewModelScope.launch {
-        if (_state.value.isSigned) _action.emit(AllOneAction.NavigateHomeView)
-        else _action.emit(AllOneAction.NavigateOnBoardingView)
+        if (_state.value.isCreated) _action.emit(AllOneAction.NavigateHomeView)
+        else {
+            if (_state.value.isSigned) _action.emit(AllOneAction.NavigationCardView)
+            else _action.emit(AllOneAction.NavigateOnBoardingView)
+        }
     }
 }
 
 data class AllOneState(
     var isSigned: Boolean = false, // 계좌 개설 여부
+    var isCreated: Boolean = false, // 카드 개설 여부
     var isBudgetExist: Boolean = false, // 예산 설정 여부
     var money: Int = 0 // 오늘 쓸 수 있는 돈
 )
@@ -87,6 +105,7 @@ data class AllOneState(
 sealed interface AllOneAction {
     class ShowToast(val content: String) : AllOneAction
     data object NavigateOnBoardingView : AllOneAction
+    data object NavigationCardView : AllOneAction
     data object NavigateHomeView : AllOneAction
 }
 
