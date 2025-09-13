@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_allOneFragment_to_onBoardingFragment"
             app:destination="@id/onBoardingFragment" />
+        <action
+            android:id="@+id/action_allOneFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/onBoardingFragment"
@@ -35,6 +38,9 @@
         <action
             android:id="@+id/action_homeFragment_to_moneyLeftFragment"
             app:destination="@id/moneyLeftFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_weekSavingFragment"
+            app:destination="@id/weekSavingFragment" />
     </fragment>
 
     <fragment
@@ -45,5 +51,10 @@
         android:id="@+id/moneyLeftFragment"
         android:name="com.example.mada.feature.money_left.MoneyLeftFragment"
         android:label="MoneyLeftFragment" />
+    <fragment
+        android:id="@+id/weekSavingFragment"
+        android:name="com.example.mada.feature.week_saving.WeekSavingFragment"
+        android:label="WeekSavingFragment"
+        tools:layout="@layout/fragment_week_saving" />
 
 </navigation>
