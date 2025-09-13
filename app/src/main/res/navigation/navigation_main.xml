@@ -72,6 +72,14 @@
         android:id="@+id/cardFragment"
         android:name="com.example.mada.card.CardFragment"
         android:label="CardFragment"
-        tools:layout="@layout/fragment_card"/>
+        tools:layout="@layout/fragment_card">
+        <action
+            android:id="@+id/action_cardFragment_self"
+            app:destination="@id/cardFragment" />
+        <action
+            android:id="@+id/action_cardFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/allOneFragment" />
+    </fragment>
 
 </navigation>
