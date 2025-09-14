@@ -75,36 +75,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
                 launch {
                     viewModel.state.collect { state ->
+                        when (state.today) {
+                            0 -> binding.cvHomeMonday.visibility = View.VISIBLE
+                            1 -> binding.cvHomeTuesday.visibility = View.VISIBLE
+                            2 -> binding.cvHomeWednesday.visibility = View.VISIBLE
+                            3 -> binding.cvHomeThursday.visibility = View.VISIBLE
+                            4 -> binding.cvHomeFriday.visibility = View.VISIBLE
+                            5 -> binding.cvHomeSaturday.visibility = View.VISIBLE
+                            6 -> binding.cvHomeSunday.visibility = View.VISIBLE
+                        }
+
                         if (state.isBudgetExist) {
                             binding.apply {
-                                clHome.setBackgroundResource(R.drawable.bg_home)
-                                clHome.alpha = 0.3f
                                 cvHomeInitial.visibility = View.INVISIBLE
                                 ivHome.visibility = View.VISIBLE
+                                tvHomeBuildComment.text =
+                                    resources.getString(R.string.money_diary_build_comment)
                                 ivBalloon.setImageResource(R.drawable.ic_balloon)
-                                tvHomeBuildComment.text = resources.getString(R.string.money_diary_build_comment)
-                                tvHomeBuildComment.setTextColor(ContextCompat.getColor(requireContext(),R.color.nh_green))
-
-                                when(state.today) {
-                                    0 -> cvHomeMonday.visibility = View.VISIBLE
-                                    1 -> cvHomeTuesday.visibility = View.VISIBLE
-                                    2 -> cvHomeWednesday.visibility = View.VISIBLE
-                                    3 -> cvHomeThursday.visibility = View.VISIBLE
-                                    4 -> cvHomeFriday.visibility = View.VISIBLE
-                                    5 -> cvHomeSaturday.visibility = View.VISIBLE
-                                    6 -> cvHomeSunday.visibility = View.VISIBLE
-                                }
                             }
 
                         } else {
                             binding.apply {
-                                clHome.setBackgroundResource(R.color.home_initial_background)
-                                clHome.alpha = 1f
                                 cvHomeInitial.visibility = View.VISIBLE
                                 ivHome.visibility = View.INVISIBLE
+                                tvHomeBuildComment.text =
+                                    resources.getString(R.string.money_diary_build_comment_initial)
                                 ivBalloon.setImageResource(R.drawable.ic_initial_balloon)
-                                tvHomeBuildComment.text = resources.getString(R.string.money_diary_build_comment_initial)
-                                tvHomeBuildComment.setTextColor(ContextCompat.getColor(requireContext(),R.color.home_initial_comment))
                             }
                         }
                     }

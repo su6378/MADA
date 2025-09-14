@@ -94,7 +94,11 @@ data class HomeState(
     var isBudgetExist: Boolean = false,
     var month: String = "",
     val week: List<String> = arrayListOf(),
-    var today: Int = 0
+    var today: Int = 0,
+    var todayLeftContent: String = "예산을 설정해 주세요 \uD83D\uDE03",
+    var todayProgress: String = "0%",
+    var todayBudget: String = "0원",
+    var weekLeftContent: String = "0원 저축할 수 있어요!"
 )
 
 sealed interface HomeAction {
