@@ -1,0 +1,24 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 배경 -->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="12dp" /> <!-- 둥근 모서리 -->
+            <solid android:color="#EBEBEB"/> <!-- 배경색 -->
+        </shape>
+    </item>
+
+    <!-- 진행 부분 -->
+    <item android:id="@android:id/progress">
+        <scale android:scaleWidth="100%">
+            <shape android:shape="rectangle">
+                <corners android:radius="12dp" /> <!-- 둥근 모서리 -->
+                <gradient
+                    android:type="linear"
+                    android:angle="0"
+                    android:startColor="#DBE3BD"
+                    android:endColor="@color/nh_green"/>
+            </shape>
+        </scale>
+    </item>
+</layer-list>

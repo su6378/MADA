@@ -36,477 +36,477 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_home" />
 
-        <TextView
-            android:id="@+id/tv_home_month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/pretendard_bold"
-            android:text="@{vm.state.month}"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_home" />
-
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_home_week_calendar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="10dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_home_month"
-            app:strokeWidth="0dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:elevation="1dp">
-
-                <TextView
-                    android:id="@+id/tv_monday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginEnd="2dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/money_left_monday"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_home_monday"
-                    app:layout_constraintStart_toStartOf="@id/iv_home_monday"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_monday_day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="18dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@{vm.state.week[0]}"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/tv_monday"
-                    app:layout_constraintStart_toStartOf="@id/tv_monday"
-                    app:layout_constraintTop_toBottomOf="@id/tv_monday" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_home_monday"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_hammer"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toStartOf="@id/iv_home_tuesday"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_monday" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_home_monday"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="-12dp"
-                    android:layout_marginTop="-6dp"
-                    android:layout_marginEnd="-12dp"
-                    android:layout_marginBottom="-8dp"
-                    android:alpha="0.5"
-                    android:backgroundTint="#DAF1DD"
-                    android:visibility="invisible"
-                    app:cardCornerRadius="5dp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_monday_day"
-                    app:layout_constraintEnd_toEndOf="@id/tv_monday"
-                    app:layout_constraintStart_toStartOf="@id/tv_monday"
-                    app:layout_constraintTop_toTopOf="@id/tv_monday"
-                    app:strokeWidth="0dp" />
-
-                <TextView
-                    android:id="@+id/tv_tuesday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="2dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/money_left_tuesday"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_home_tuesday"
-                    app:layout_constraintStart_toStartOf="@id/iv_home_tuesday"
-                    app:layout_constraintTop_toTopOf="@id/tv_monday" />
-
-                <TextView
-                    android:id="@+id/tv_tuesday_day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="18dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@{vm.state.week[1]}"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/tv_tuesday"
-                    app:layout_constraintStart_toStartOf="@id/tv_tuesday"
-                    app:layout_constraintTop_toBottomOf="@id/tv_tuesday" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_home_tuesday"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:src="@drawable/ic_hammer"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_home_wednesday"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@id/iv_home_monday"
-                    app:layout_constraintTop_toBottomOf="@id/tv_tuesday" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_home_tuesday"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="-12dp"
-                    android:layout_marginTop="-6dp"
-                    android:layout_marginEnd="-12dp"
-                    android:layout_marginBottom="-8dp"
-                    android:alpha="0.5"
-                    android:backgroundTint="#DAF1DD"
-                    android:visibility="invisible"
-                    app:cardCornerRadius="5dp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_tuesday_day"
-                    app:layout_constraintEnd_toEndOf="@id/tv_tuesday"
-                    app:layout_constraintStart_toStartOf="@id/tv_tuesday"
-                    app:layout_constraintTop_toTopOf="@id/tv_tuesday"
-                    app:strokeWidth="0dp" />
-
-                <TextView
-                    android:id="@+id/tv_wednesday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="2dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/money_left_wednesday"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_home_wednesday"
-                    app:layout_constraintStart_toStartOf="@id/iv_home_wednesday"
-                    app:layout_constraintTop_toTopOf="@id/tv_monday" />
-
-                <TextView
-                    android:id="@+id/tv_wednesday_day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="18dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@{vm.state.week[2]}"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/tv_wednesday"
-                    app:layout_constraintStart_toStartOf="@id/tv_wednesday"
-                    app:layout_constraintTop_toBottomOf="@id/tv_wednesday" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_home_wednesday"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="-12dp"
-                    android:layout_marginTop="-6dp"
-                    android:layout_marginEnd="-12dp"
-                    android:layout_marginBottom="-8dp"
-                    android:alpha="0.5"
-                    android:backgroundTint="#DAF1DD"
-                    android:visibility="invisible"
-                    app:cardCornerRadius="5dp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_wednesday_day"
-                    app:layout_constraintEnd_toEndOf="@id/tv_wednesday"
-                    app:layout_constraintStart_toStartOf="@id/tv_wednesday"
-                    app:layout_constraintTop_toTopOf="@id/tv_wednesday"
-                    app:strokeWidth="0dp" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_home_wednesday"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:src="@drawable/ic_hammer"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_home_thursday"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@id/iv_home_tuesday"
-                    app:layout_constraintTop_toBottomOf="@id/tv_wednesday" />
-
-                <TextView
-                    android:id="@+id/tv_thursday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="2dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/money_left_thursday"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_home_thursday"
-                    app:layout_constraintStart_toStartOf="@id/iv_home_thursday"
-                    app:layout_constraintTop_toTopOf="@id/tv_monday" />
-
-                <TextView
-                    android:id="@+id/tv_thursday_day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="18dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@{vm.state.week[3]}"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/tv_thursday"
-                    app:layout_constraintStart_toStartOf="@id/tv_thursday"
-                    app:layout_constraintTop_toBottomOf="@id/tv_thursday" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_home_thursday"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="-12dp"
-                    android:layout_marginTop="-6dp"
-                    android:layout_marginEnd="-12dp"
-                    android:layout_marginBottom="-8dp"
-                    android:alpha="0.5"
-                    android:backgroundTint="#DAF1DD"
-                    android:visibility="invisible"
-                    app:cardCornerRadius="5dp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_thursday_day"
-                    app:layout_constraintEnd_toEndOf="@id/tv_thursday"
-                    app:layout_constraintStart_toStartOf="@id/tv_thursday"
-                    app:layout_constraintTop_toTopOf="@id/tv_thursday"
-                    app:strokeWidth="0dp" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_home_thursday"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:src="@drawable/ic_hammer"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_home_friday"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@id/iv_home_wednesday"
-                    app:layout_constraintTop_toBottomOf="@id/tv_thursday" />
-
-                <TextView
-                    android:id="@+id/tv_friday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="2dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/money_left_friday"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_home_friday"
-                    app:layout_constraintStart_toStartOf="@id/iv_home_friday"
-                    app:layout_constraintTop_toTopOf="@id/tv_monday" />
-
-                <TextView
-                    android:id="@+id/tv_friday_day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="18dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@{vm.state.week[4]}"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/tv_friday"
-                    app:layout_constraintStart_toStartOf="@id/tv_friday"
-                    app:layout_constraintTop_toBottomOf="@id/tv_friday" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_home_friday"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="-12dp"
-                    android:layout_marginTop="-6dp"
-                    android:layout_marginEnd="-12dp"
-                    android:layout_marginBottom="-8dp"
-                    android:alpha="0.5"
-                    android:backgroundTint="#DAF1DD"
-                    android:visibility="invisible"
-                    app:cardCornerRadius="5dp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_friday_day"
-                    app:layout_constraintEnd_toEndOf="@id/tv_friday"
-                    app:layout_constraintStart_toStartOf="@id/tv_friday"
-                    app:layout_constraintTop_toTopOf="@id/tv_friday"
-                    app:strokeWidth="0dp" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_home_friday"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:src="@drawable/ic_hammer"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_home_saturday"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@id/iv_home_thursday"
-                    app:layout_constraintTop_toBottomOf="@id/tv_friday" />
-
-                <TextView
-                    android:id="@+id/tv_saturday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="2dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/money_left_saturday"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_home_saturday"
-                    app:layout_constraintStart_toStartOf="@id/iv_home_saturday"
-                    app:layout_constraintTop_toTopOf="@id/tv_monday" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_home_saturday"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:src="@drawable/ic_hammer"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_home_sunday"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@id/iv_home_friday"
-                    app:layout_constraintTop_toBottomOf="@id/tv_saturday" />
-
-                <TextView
-                    android:id="@+id/tv_saturday_day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="18dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@{vm.state.week[5]}"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/tv_saturday"
-                    app:layout_constraintStart_toStartOf="@id/tv_saturday"
-                    app:layout_constraintTop_toBottomOf="@id/tv_saturday" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_home_saturday"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="-12dp"
-                    android:layout_marginTop="-6dp"
-                    android:layout_marginEnd="-12dp"
-                    android:layout_marginBottom="-8dp"
-                    android:alpha="0.5"
-                    android:backgroundTint="#DAF1DD"
-                    android:visibility="invisible"
-                    app:cardCornerRadius="5dp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_saturday_day"
-                    app:layout_constraintEnd_toEndOf="@id/tv_saturday"
-                    app:layout_constraintStart_toStartOf="@id/tv_saturday"
-                    app:layout_constraintTop_toTopOf="@id/tv_saturday"
-                    app:strokeWidth="0dp" />
-
-
-                <TextView
-                    android:id="@+id/tv_sunday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="2dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/money_left_sunday"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_home_sunday"
-                    app:layout_constraintStart_toStartOf="@id/iv_home_sunday"
-                    app:layout_constraintTop_toTopOf="@id/tv_monday" />
-
-                <TextView
-                    android:id="@+id/tv_sunday_day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:elevation="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@{vm.state.week[6]}"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="@id/tv_sunday"
-                    app:layout_constraintStart_toStartOf="@id/tv_sunday"
-                    app:layout_constraintTop_toBottomOf="@id/tv_sunday" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_home_sunday"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:src="@drawable/ic_hammer"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@id/iv_home_saturday"
-                    app:layout_constraintTop_toBottomOf="@id/tv_sunday" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_home_sunday"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="-12dp"
-                    android:layout_marginTop="-6dp"
-                    android:layout_marginEnd="-12dp"
-                    android:layout_marginBottom="-8dp"
-                    android:alpha="0.5"
-                    android:backgroundTint="#DAF1DD"
-                    android:visibility="invisible"
-                    app:cardCornerRadius="5dp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_sunday_day"
-                    app:layout_constraintEnd_toEndOf="@id/tv_sunday"
-                    app:layout_constraintStart_toStartOf="@id/tv_sunday"
-                    app:layout_constraintTop_toTopOf="@id/tv_sunday"
-                    app:strokeWidth="0dp" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.google.android.material.card.MaterialCardView>
-
         <androidx.core.widget.NestedScrollView
             android:id="@+id/sv_home"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cv_home_week_calendar">
+            app:layout_constraintTop_toBottomOf="@id/toolbar_home">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/tv_home_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="@{vm.state.month}"
+                    android:textSize="20sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_home_week_calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_home_month"
+                    app:strokeWidth="0dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:elevation="1dp">
+
+                        <TextView
+                            android:id="@+id/tv_monday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="13dp"
+                            android:layout_marginEnd="2dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@string/money_left_monday"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="@+id/iv_home_monday"
+                            app:layout_constraintStart_toStartOf="@id/iv_home_monday"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_monday_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="18dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@{vm.state.week[0]}"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/tv_monday"
+                            app:layout_constraintStart_toStartOf="@id/tv_monday"
+                            app:layout_constraintTop_toBottomOf="@id/tv_monday" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_home_monday"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_hammer"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toStartOf="@id/iv_home_tuesday"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_monday" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_home_monday"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="-12dp"
+                            android:layout_marginTop="-6dp"
+                            android:layout_marginEnd="-12dp"
+                            android:layout_marginBottom="-8dp"
+                            android:alpha="0.5"
+                            android:backgroundTint="#DAF1DD"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="5dp"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_monday_day"
+                            app:layout_constraintEnd_toEndOf="@id/tv_monday"
+                            app:layout_constraintStart_toStartOf="@id/tv_monday"
+                            app:layout_constraintTop_toTopOf="@id/tv_monday"
+                            app:strokeWidth="0dp" />
+
+                        <TextView
+                            android:id="@+id/tv_tuesday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="2dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@string/money_left_tuesday"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="@+id/iv_home_tuesday"
+                            app:layout_constraintStart_toStartOf="@id/iv_home_tuesday"
+                            app:layout_constraintTop_toTopOf="@id/tv_monday" />
+
+                        <TextView
+                            android:id="@+id/tv_tuesday_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="18dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@{vm.state.week[1]}"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/tv_tuesday"
+                            app:layout_constraintStart_toStartOf="@id/tv_tuesday"
+                            app:layout_constraintTop_toBottomOf="@id/tv_tuesday" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_home_tuesday"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/ic_hammer"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toStartOf="@+id/iv_home_wednesday"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintStart_toEndOf="@id/iv_home_monday"
+                            app:layout_constraintTop_toBottomOf="@id/tv_tuesday" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_home_tuesday"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="-12dp"
+                            android:layout_marginTop="-6dp"
+                            android:layout_marginEnd="-12dp"
+                            android:layout_marginBottom="-8dp"
+                            android:alpha="0.5"
+                            android:backgroundTint="#DAF1DD"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="5dp"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_tuesday_day"
+                            app:layout_constraintEnd_toEndOf="@id/tv_tuesday"
+                            app:layout_constraintStart_toStartOf="@id/tv_tuesday"
+                            app:layout_constraintTop_toTopOf="@id/tv_tuesday"
+                            app:strokeWidth="0dp" />
+
+                        <TextView
+                            android:id="@+id/tv_wednesday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="2dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@string/money_left_wednesday"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="@+id/iv_home_wednesday"
+                            app:layout_constraintStart_toStartOf="@id/iv_home_wednesday"
+                            app:layout_constraintTop_toTopOf="@id/tv_monday" />
+
+                        <TextView
+                            android:id="@+id/tv_wednesday_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="18dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@{vm.state.week[2]}"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/tv_wednesday"
+                            app:layout_constraintStart_toStartOf="@id/tv_wednesday"
+                            app:layout_constraintTop_toBottomOf="@id/tv_wednesday" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_home_wednesday"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="-12dp"
+                            android:layout_marginTop="-6dp"
+                            android:layout_marginEnd="-12dp"
+                            android:layout_marginBottom="-8dp"
+                            android:alpha="0.5"
+                            android:backgroundTint="#DAF1DD"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="5dp"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_wednesday_day"
+                            app:layout_constraintEnd_toEndOf="@id/tv_wednesday"
+                            app:layout_constraintStart_toStartOf="@id/tv_wednesday"
+                            app:layout_constraintTop_toTopOf="@id/tv_wednesday"
+                            app:strokeWidth="0dp" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_home_wednesday"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/ic_hammer"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toStartOf="@+id/iv_home_thursday"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintStart_toEndOf="@id/iv_home_tuesday"
+                            app:layout_constraintTop_toBottomOf="@id/tv_wednesday" />
+
+                        <TextView
+                            android:id="@+id/tv_thursday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="2dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@string/money_left_thursday"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="@+id/iv_home_thursday"
+                            app:layout_constraintStart_toStartOf="@id/iv_home_thursday"
+                            app:layout_constraintTop_toTopOf="@id/tv_monday" />
+
+                        <TextView
+                            android:id="@+id/tv_thursday_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="18dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@{vm.state.week[3]}"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/tv_thursday"
+                            app:layout_constraintStart_toStartOf="@id/tv_thursday"
+                            app:layout_constraintTop_toBottomOf="@id/tv_thursday" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_home_thursday"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="-12dp"
+                            android:layout_marginTop="-6dp"
+                            android:layout_marginEnd="-12dp"
+                            android:layout_marginBottom="-8dp"
+                            android:alpha="0.5"
+                            android:backgroundTint="#DAF1DD"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="5dp"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_thursday_day"
+                            app:layout_constraintEnd_toEndOf="@id/tv_thursday"
+                            app:layout_constraintStart_toStartOf="@id/tv_thursday"
+                            app:layout_constraintTop_toTopOf="@id/tv_thursday"
+                            app:strokeWidth="0dp" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_home_thursday"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/ic_hammer"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toStartOf="@+id/iv_home_friday"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintStart_toEndOf="@id/iv_home_wednesday"
+                            app:layout_constraintTop_toBottomOf="@id/tv_thursday" />
+
+                        <TextView
+                            android:id="@+id/tv_friday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="2dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@string/money_left_friday"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="@+id/iv_home_friday"
+                            app:layout_constraintStart_toStartOf="@id/iv_home_friday"
+                            app:layout_constraintTop_toTopOf="@id/tv_monday" />
+
+                        <TextView
+                            android:id="@+id/tv_friday_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="18dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@{vm.state.week[4]}"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/tv_friday"
+                            app:layout_constraintStart_toStartOf="@id/tv_friday"
+                            app:layout_constraintTop_toBottomOf="@id/tv_friday" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_home_friday"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="-12dp"
+                            android:layout_marginTop="-6dp"
+                            android:layout_marginEnd="-12dp"
+                            android:layout_marginBottom="-8dp"
+                            android:alpha="0.5"
+                            android:backgroundTint="#DAF1DD"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="5dp"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_friday_day"
+                            app:layout_constraintEnd_toEndOf="@id/tv_friday"
+                            app:layout_constraintStart_toStartOf="@id/tv_friday"
+                            app:layout_constraintTop_toTopOf="@id/tv_friday"
+                            app:strokeWidth="0dp" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_home_friday"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/ic_hammer"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toStartOf="@+id/iv_home_saturday"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintStart_toEndOf="@id/iv_home_thursday"
+                            app:layout_constraintTop_toBottomOf="@id/tv_friday" />
+
+                        <TextView
+                            android:id="@+id/tv_saturday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="2dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@string/money_left_saturday"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="@+id/iv_home_saturday"
+                            app:layout_constraintStart_toStartOf="@id/iv_home_saturday"
+                            app:layout_constraintTop_toTopOf="@id/tv_monday" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_home_saturday"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/ic_hammer"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toStartOf="@+id/iv_home_sunday"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintStart_toEndOf="@id/iv_home_friday"
+                            app:layout_constraintTop_toBottomOf="@id/tv_saturday" />
+
+                        <TextView
+                            android:id="@+id/tv_saturday_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="18dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@{vm.state.week[5]}"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/tv_saturday"
+                            app:layout_constraintStart_toStartOf="@id/tv_saturday"
+                            app:layout_constraintTop_toBottomOf="@id/tv_saturday" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_home_saturday"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="-12dp"
+                            android:layout_marginTop="-6dp"
+                            android:layout_marginEnd="-12dp"
+                            android:layout_marginBottom="-8dp"
+                            android:alpha="0.5"
+                            android:backgroundTint="#DAF1DD"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="5dp"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_saturday_day"
+                            app:layout_constraintEnd_toEndOf="@id/tv_saturday"
+                            app:layout_constraintStart_toStartOf="@id/tv_saturday"
+                            app:layout_constraintTop_toTopOf="@id/tv_saturday"
+                            app:strokeWidth="0dp" />
+
+
+                        <TextView
+                            android:id="@+id/tv_sunday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="2dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@string/money_left_sunday"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="@+id/iv_home_sunday"
+                            app:layout_constraintStart_toStartOf="@id/iv_home_sunday"
+                            app:layout_constraintTop_toTopOf="@id/tv_monday" />
+
+                        <TextView
+                            android:id="@+id/tv_sunday_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:elevation="10dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@{vm.state.week[6]}"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="@id/tv_sunday"
+                            app:layout_constraintStart_toStartOf="@id/tv_sunday"
+                            app:layout_constraintTop_toBottomOf="@id/tv_sunday" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_home_sunday"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/ic_hammer"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintStart_toEndOf="@id/iv_home_saturday"
+                            app:layout_constraintTop_toBottomOf="@id/tv_sunday" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_home_sunday"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="-12dp"
+                            android:layout_marginTop="-6dp"
+                            android:layout_marginEnd="-12dp"
+                            android:layout_marginBottom="-8dp"
+                            android:alpha="0.5"
+                            android:backgroundTint="#DAF1DD"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="5dp"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_sunday_day"
+                            app:layout_constraintEnd_toEndOf="@id/tv_sunday"
+                            app:layout_constraintStart_toStartOf="@id/tv_sunday"
+                            app:layout_constraintTop_toTopOf="@id/tv_sunday"
+                            app:strokeWidth="0dp" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_balloon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:paddingHorizontal="10dp"
-                    android:src="@drawable/ic_initial_balloon"
+                    android:src="@drawable/ic_balloon"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_week_calendar" />
 
                 <TextView
                     android:id="@+id/tv_home_build_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="4dp"
                     android:fontFamily="@font/pretendard_medium"
                     android:textColor="@color/nh_green"
                     android:textSize="14sp"
@@ -519,11 +519,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="56dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:visibility="invisible"
-                    app:cardBackgroundColor="#D9D9D9"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="10dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp"
                     app:layout_constraintTop_toBottomOf="@id/iv_balloon">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -532,24 +533,15 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/iv_home_initial"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="30dp"
+                            android:layout_width="354dp"
+                            android:layout_height="266dp"
                             android:src="@drawable/ic_home_initial"
+                            android:scaleType="fitCenter"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/iv_home_question_mark"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_question_mark"
-                            app:layout_constraintBottom_toBottomOf="@id/iv_home_initial"
-                            app:layout_constraintEnd_toEndOf="@id/iv_home_initial"
-                            app:layout_constraintStart_toStartOf="@id/iv_home_initial"
-                            app:layout_constraintTop_toTopOf="@id/iv_home_initial" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -559,15 +551,188 @@
                     android:id="@+id/iv_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="20dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/ic_home"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_balloon" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_home_today_left_money"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/iv_home"
+                    app:strokeWidth="0dp">
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_today_left_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@string/home_today_left_title"
+                            android:textColor="@color/gray"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_today_left_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/pretendard_semibold"
+                            android:text="@{vm.state.todayLeftContent}"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_today_left_title" />
+
+                        <TextView
+                            android:id="@+id/tv_home_today_progress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            android:fontFamily="@font/pretendard_semibold"
+                            android:text="@{vm.state.todayProgress}"
+                            android:textColor="@color/nh_green"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_today_left_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_today_left_content" />
+
+                        <ProgressBar
+                            android:id="@+id/progress_home"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="6dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="12dp"
+                            android:indeterminateTint="@color/orange"
+                            android:max="100"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/progress_home"
+                            app:layout_constraintTop_toBottomOf="@id/tv_today_left_content" />
+
+                        <TextView
+                            android:id="@+id/tv_home_today_budget_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="16dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@string/home_today_budget"
+                            android:textColor="@color/gray"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/progress_home"
+                            app:layout_constraintVertical_bias="0" />
+
+                        <TextView
+                            android:id="@+id/tv_home_today_budget"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="20dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:text="@{vm.state.todayBudget}"
+                            android:textColor="@color/gray"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/progress_home" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_home_week_left_money"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_today_left_money"
+                    app:strokeWidth="0dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_home_pig"
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:layout_marginVertical="14dp"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_pig"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_home_week_left_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="@id/iv_home_pig"
+                            app:layout_constraintStart_toEndOf="@id/iv_home_pig"
+                            android:layout_marginStart="10dp"
+                            android:textColor="@color/gray"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:textSize="14sp"
+                            android:text="@string/home_week_left_title"/>
+
+                        <TextView
+                            android:id="@+id/tv_home_week_left_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/tv_home_week_left_title"
+                            app:layout_constraintStart_toEndOf="@id/iv_home_pig"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/pretendard_semibold"
+                            android:textSize="16sp"
+                            app:layout_constraintVertical_bias="1"
+                            app:layout_constraintBottom_toBottomOf="@id/iv_home_pig"
+                            android:text="@{vm.state.weekLeftContent}"/>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:src="@drawable/ic_next"
+                            android:layout_marginEnd="20dp"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_week_left_money" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
 
@@ -578,6 +743,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="100dp"
             android:text="주간 정산으로 이동"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:onClick="@{() -> vm.navigateWeekBudgetFragment()}" />
 
@@ -585,6 +751,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="남은 돈 화면으로 이동"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@id/btn3"
             app:layout_constraintTop_toBottomOf="@id/btn1"
             app:onClick="@{() -> vm.navigateMoneyLeftFragment()}" />
@@ -595,6 +762,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="이번주 저축가능 금액"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn1"
             app:onClick="@{() -> vm.navigateWeekSavingFragment()}" />

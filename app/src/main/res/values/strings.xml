@@ -18,6 +18,9 @@
     <string name="money_diary">머니 다이어리</string>
     <string name="money_diary_build_comment_initial">한 주 챌린지 완료 후 열려요</string>
     <string name="money_diary_build_comment">n주째 집 짓는중</string>
+    <string name="home_today_left_title">오늘 쓸 수 있는 돈</string>
+    <string name="home_today_budget">오늘 예산</string>
+    <string name="home_week_left_title">이번주 남는 돈</string>
 
     <!-- 온보딩 -->
     <string name="on_boarding_make_my_diary">내 다이어리 만들기</string>
