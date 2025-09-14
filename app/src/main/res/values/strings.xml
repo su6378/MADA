@@ -16,7 +16,8 @@
 
     <!--홈 화면 -->
     <string name="money_diary">머니 다이어리</string>
-    <string name="money_diary_balloon">21주째 집 짓는 중</string>
+    <string name="money_diary_build_comment_initial">한 주 챌린지 완료 후 열려요</string>
+    <string name="money_diary_build_comment">n주째 집 짓는중</string>
 
     <!-- 온보딩 -->
     <string name="on_boarding_make_my_diary">내 다이어리 만들기</string>
