@@ -2,6 +2,8 @@ package com.example.mada.feature.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mada.repository.DataStoreRepository
+import com.example.mada.util.DateUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,6 +11,10 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,6 +22,7 @@ private const val TAG = "DX"
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
     private val _action: MutableSharedFlow<HomeAction> = MutableSharedFlow()
     val action: SharedFlow<HomeAction> get() = _action.asSharedFlow()
@@ -26,17 +33,46 @@ class HomeViewModel @Inject constructor(
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState())
     val state: StateFlow<HomeState> get() = _state.asStateFlow()
 
-    // 질문 요청
-    fun request() {
+    init {
+        getDateInfo()
+        getBudgetInfo()
+    }
+
+    // 날짜 정보 받기
+    private fun getDateInfo() {
         viewModelScope.launch {
+            val dateInfo = DateUtil.getDateInfo()
+            val today = DateUtil.getToday()
+
+            _state.update {
+                it.copy(
+                    month = dateInfo.first(),
+                    week = dateInfo.subList(1, dateInfo.lastIndex + 1),
+                    today = today
+                )
+            }
+        }
+    }
+
+    // 예산 정보 받기
+    private fun getBudgetInfo() = viewModelScope.launch {
+        dataStoreRepository.getBudget().onStart {
             _result.emit(Result.Loading)
-
-            runCatching {
-
-            }.onSuccess { // 응답 성공
-
-            }.onFailure { // 응답 실패
-
+        }.catch {
+            _result.emit(Result.Finish)
+        }.collectLatest { result ->
+            if (result.sum() > 0) {
+                _state.update {
+                    it.copy(
+                        isBudgetExist = true
+                    )
+                }
+            } else {
+                _state.update {
+                    it.copy(
+                        isBudgetExist = false
+                    )
+                }
             }
         }
     }
@@ -44,15 +80,28 @@ class HomeViewModel @Inject constructor(
     fun navigateWeekBudgetFragment() = viewModelScope.launch {
         _action.emit(HomeAction.NavigateWeekBudgetView)
     }
+
+    fun navigateMoneyLeftFragment() = viewModelScope.launch {
+        _action.emit(HomeAction.NavigateMoneyLeftView)
+    }
+
+    fun navigateWeekSavingFragment() = viewModelScope.launch {
+        _action.emit(HomeAction.NavigateWeekSavingView)
+    }
 }
 
 data class HomeState(
-    val dataSomething: String = "",
+    var isBudgetExist: Boolean = false,
+    var month: String = "",
+    val week: List<String> = arrayListOf(),
+    var today: Int = 0
 )
 
 sealed interface HomeAction {
     class ShowToast(val content: String) : HomeAction
     data object NavigateWeekBudgetView : HomeAction
+    data object NavigateMoneyLeftView : HomeAction
+    data object NavigateWeekSavingView : HomeAction
 }
 
 sealed interface Result {
