@@ -83,6 +83,12 @@ abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
         dialog.setOnDismissListener { lifecycleOwner?.lifecycle?.removeObserver(observer) }
     }
 
+    protected fun showLoading(
+        dialog: Dialog,
+    ) {
+        dialog.show()
+    }
+
     protected fun showToast(message: String, duration: Int = Toast.LENGTH_LONG) {
         Toast.makeText(requireContext(), message, duration).show()
     }
