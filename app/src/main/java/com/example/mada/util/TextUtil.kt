@@ -1,6 +1,7 @@
 package com.example.mada.util
 
 import android.widget.TextView
+import com.google.android.material.textfield.TextInputEditText
 import java.util.Locale
 
 object TextUtil {
@@ -54,4 +55,12 @@ object TextUtil {
     }
 
     fun Int.toWon(): String  = String.format(Locale.KOREA, "%,d원", this)
+
+    fun getEditTextValueAsInt(editText: TextInputEditText): Int {
+        val text = editText.text?.toString() ?: ""
+        // "원" 제거 후 공백도 trim
+        val cleaned = text.replace("원", "").replace(",","").trim()
+        // 빈 문자열이면 0 반환, 아니면 Int 변환
+        return if (cleaned.isEmpty()) 0 else cleaned.toInt()
+    }
 }
