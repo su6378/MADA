@@ -30,6 +30,9 @@ object DateUtil {
             calendar.add(Calendar.DAY_OF_MONTH, 1)
         }
 
+        val weekOfMonth = calendar.get(Calendar.WEEK_OF_MONTH) // 몇 주차
+        dateInfo.add("${month}월 ${weekOfMonth}주차")
+
         return dateInfo
     }
 }

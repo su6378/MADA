@@ -49,7 +49,7 @@ class HomeViewModel @Inject constructor(
             _state.update {
                 it.copy(
                     month = dateInfo.first(),
-                    week = dateInfo.subList(1, dateInfo.lastIndex + 1),
+                    week = dateInfo.subList(1, dateInfo.lastIndex),
                     today = today
                 )
             }
