@@ -1,5 +1,6 @@
 package com.example.mada.feature.home
 
+import android.content.res.Resources
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mada.repository.DataStoreRepository
@@ -35,6 +36,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         getDateInfo()
+        getAccountInfo()
         getBudgetInfo()
     }
 
@@ -54,6 +56,17 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    // 계좌 개설 유무
+    private fun getAccountInfo() = viewModelScope.launch {
+        dataStoreRepository.getAccount().onStart {
+            _result.emit(Result.Loading)
+        }.catch {
+            _result.emit(Result.Finish)
+        }.collectLatest { result ->
+            _state.update { it.copy(isSigned = result) }
+        }
+    }
+
     // 예산 정보 받기
     private fun getBudgetInfo() = viewModelScope.launch {
         dataStoreRepository.getBudget().onStart {
@@ -61,18 +74,12 @@ class HomeViewModel @Inject constructor(
         }.catch {
             _result.emit(Result.Finish)
         }.collectLatest { result ->
+            _state.update { it.copy(budget = result) }
+
             if (result.sum() > 0) {
-                _state.update {
-                    it.copy(
-                        isBudgetExist = true
-                    )
-                }
+                _state.update { it.copy(isBudgetExist = true) }
             } else {
-                _state.update {
-                    it.copy(
-                        isBudgetExist = false
-                    )
-                }
+                _state.update { it.copy(isBudgetExist = false) }
             }
         }
     }
@@ -88,14 +95,19 @@ class HomeViewModel @Inject constructor(
     fun navigateWeekSavingFragment() = viewModelScope.launch {
         _action.emit(HomeAction.NavigateWeekSavingView)
     }
+
+    fun navigateAccountFragment() = viewModelScope.launch {
+        _action.emit(HomeAction.NavigateOnBoardingView)
+    }
 }
 
 data class HomeState(
+    var isSigned: Boolean = false,
     var isBudgetExist: Boolean = false,
+    var budget: List<Int> = arrayListOf(),
     var month: String = "",
     val week: List<String> = arrayListOf(),
     var today: Int = 0,
-    var todayLeftContent: String = "예산을 설정해 주세요 \uD83D\uDE03",
     var todayProgress: String = "0%",
     var todayBudget: String = "0원",
     var weekLeftContent: String = "0원 저축할 수 있어요!"
@@ -106,6 +118,7 @@ sealed interface HomeAction {
     data object NavigateWeekBudgetView : HomeAction
     data object NavigateMoneyLeftView : HomeAction
     data object NavigateWeekSavingView : HomeAction
+    data object NavigateOnBoardingView : HomeAction
 }
 
 sealed interface Result {

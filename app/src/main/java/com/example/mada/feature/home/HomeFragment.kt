@@ -2,7 +2,6 @@ package com.example.mada.feature.home
 
 import android.content.Context
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +11,8 @@ import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentHomeBinding
 import com.example.mada.dialog.AlertDialog
+import com.example.mada.util.BudgetUtil
+import com.example.mada.util.TextUtil.toWon
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -32,7 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun initView() {
         with(binding) {
-            showAlertDialog(dialog = AlertDialog(mainActivity) {}, viewLifecycleOwner)
+
         }
     }
 
@@ -50,10 +51,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 launch {
                     viewModel.action.collect { action ->
                         when (action) {
-                            is HomeAction.ShowToast -> showToast(action.content)
+                            is HomeAction.ShowToast -> showAlertDialog(
+                                dialog = AlertDialog(
+                                    mainActivity
+                                ) { navigate(HomeFragmentDirections.actionHomeFragmentToAccountFragment()) },
+                                viewLifecycleOwner
+                            )
+
                             is HomeAction.NavigateWeekBudgetView -> navigate(HomeFragmentDirections.actionHomeFragmentToWeekBudgetFragment())
                             is HomeAction.NavigateMoneyLeftView -> navigate(HomeFragmentDirections.actionHomeFragmentToMoneyLeftFragment())
                             is HomeAction.NavigateWeekSavingView -> navigate(HomeFragmentDirections.actionHomeFragmentToWeekSavingFragment())
+                            is HomeAction.NavigateOnBoardingView -> showAlertDialog(
+                                dialog = AlertDialog(
+                                    mainActivity
+                                ) { navigate(HomeFragmentDirections.actionHomeFragmentToAccountFragment()) },
+                                viewLifecycleOwner
+                            )
                         }
                     }
                 }
@@ -85,19 +98,46 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                             6 -> binding.cvHomeSunday.visibility = View.VISIBLE
                         }
 
-                        if (state.isBudgetExist) {
-                            binding.apply {
-                                cvHomeInitial.visibility = View.INVISIBLE
-                                ivHome.visibility = View.VISIBLE
-                                tvHomeBuildComment.text =
-                                    resources.getString(R.string.money_diary_build_comment)
-                                ivBalloon.setImageResource(R.drawable.ic_balloon)
+                        if (state.isSigned) { // 계좌 개설을 한 경우
+                            if (state.isBudgetExist) { // 예산 설정을 한 경우
+                                binding.apply {
+                                    cvHomeInitial.visibility = View.INVISIBLE
+                                    ivHome.visibility = View.VISIBLE
+                                    "${(state.budget[state.today] - BudgetUtil.expenditure[state.today]).toWon()}원 남았어요!".also {
+                                        tvTodayLeftContent.text = it
+                                    }
+                                    tvHomeBuildComment.text =
+                                        resources.getString(R.string.money_diary_build_comment)
+                                    ivBalloon.setImageResource(R.drawable.ic_balloon)
+                                }
+                            } else {
+                                binding.apply {
+                                    showAlertDialog(
+                                        dialog = AlertDialog(
+                                            mainActivity,
+                                            title = "예산 설정 하러 가기",
+                                            content = "예산이 설정되어 있지 않아요. 예산 설정 화면으로 이동하시겠어요?"
+                                        ) {
+                                            navigate(
+                                                HomeFragmentDirections.actionHomeFragmentToWeekBudgetFragment()
+                                            )
+                                        }, viewLifecycleOwner
+                                    )
+                                    cvHomeInitial.visibility = View.INVISIBLE
+                                    ivHome.visibility = View.VISIBLE
+                                    tvTodayLeftContent.text =
+                                        resources.getString(R.string.all_one_mada_need_budget)
+                                    tvHomeBuildComment.text =
+                                        resources.getString(R.string.money_diary_build_comment_before_challenge)
+                                    ivBalloon.setImageResource(R.drawable.ic_balloon)
+                                }
                             }
-
                         } else {
                             binding.apply {
                                 cvHomeInitial.visibility = View.VISIBLE
                                 ivHome.visibility = View.INVISIBLE
+                                tvTodayLeftContent.text =
+                                    resources.getString(R.string.money_diary_build_comment_initial)
                                 tvHomeBuildComment.text =
                                     resources.getString(R.string.money_diary_build_comment_initial)
                                 ivBalloon.setImageResource(R.drawable.ic_initial_balloon)

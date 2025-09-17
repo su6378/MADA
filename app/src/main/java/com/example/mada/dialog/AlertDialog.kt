@@ -14,6 +14,8 @@ import kotlin.system.exitProcess
 
 class AlertDialog(
     context: Context,
+    private var title: String = "",
+    private var content: String = "",
     private var onCustomListener: (() -> Unit)? = null,
 ) : Dialog(context) {
 
@@ -35,6 +37,9 @@ class AlertDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.run {
+            tvDialogTitle.text = title
+            tvDialogContent.text = content
+
             btnDialogOk.setOnClickListener {
                 onCustomListener?.invoke()
                 dismiss()

@@ -525,6 +525,7 @@
                     app:cardCornerRadius="10dp"
                     app:cardElevation="4dp"
                     app:strokeWidth="0dp"
+                    app:onClick="@{() -> vm.navigateAccountFragment()}"
                     app:layout_constraintTop_toBottomOf="@id/iv_balloon">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -593,7 +594,6 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/pretendard_semibold"
-                            android:text="@{vm.state.todayLeftContent}"
                             android:textSize="20sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0"

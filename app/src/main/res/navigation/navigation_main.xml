@@ -47,6 +47,10 @@
         <action
             android:id="@+id/action_homeFragment_to_weekSavingFragment"
             app:destination="@id/weekSavingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
+            app:popUpTo="@id/onBoardingFragment"/>
     </fragment>
 
     <fragment
