@@ -53,6 +53,12 @@ class HomeViewModel @Inject constructor(
                     today = today
                 )
             }
+
+            if (today == 6) {
+                _state.update {
+                    it.copy(isSaveAble = true)
+                }
+            }
         }
     }
 
@@ -110,7 +116,8 @@ data class HomeState(
     var today: Int = 0,
     var todayProgress: String = "0%",
     var todayBudget: String = "0원",
-    var weekLeftContent: String = "0원 저축할 수 있어요!"
+    var weekLeftContent: String = "0원 저축할 수 있어요!",
+    var isSaveAble: Boolean = false,
 )
 
 sealed interface HomeAction {

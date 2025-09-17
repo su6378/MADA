@@ -22,6 +22,7 @@
     <string name="home_today_left_title">오늘 쓸 수 있는 돈</string>
     <string name="home_today_budget">오늘 예산</string>
     <string name="home_week_left_title">이번주 남는 돈</string>
+    <string name="home_save_available">예산 저축은 이번주 일요일에 가능 합니다 😃</string>
 
     <!-- 온보딩 -->
     <string name="on_boarding_make_my_diary">내 다이어리 만들기</string>
