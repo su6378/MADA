@@ -753,20 +753,7 @@
             android:layout_height="wrap_content"
             android:text="남은 돈 화면으로 이동"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn3"
             app:layout_constraintTop_toBottomOf="@id/btn1"
             app:onClick="@{() -> vm.navigateMoneyLeftFragment()}" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="이번주 저축가능 금액"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn1"
-            app:onClick="@{() -> vm.navigateWeekSavingFragment()}" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
