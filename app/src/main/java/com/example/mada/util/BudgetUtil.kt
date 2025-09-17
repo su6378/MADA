@@ -12,7 +12,7 @@ object BudgetUtil {
         var min = 10000
         var max = 40000
         val step = 1000
-        val rangeSize = (max - min) / step + 1
+        var rangeSize = (max - min) / step + 1
 
         for (i in 0..3) { // 월요일 ~ 목요일
             myDataBudget[i] = min + (Random.nextInt(rangeSize) * step)
@@ -20,6 +20,7 @@ object BudgetUtil {
 
         min = 30000
         max = 80000
+        rangeSize = (max - min) / step + 1
 
         for (i in 4..6) {
             myDataBudget[i] = min + (Random.nextInt(rangeSize) * step)
