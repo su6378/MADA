@@ -58,7 +58,7 @@ class WeekBudgetViewModel @Inject constructor(
     private fun getMyData() {
         viewModelScope.launch {
             val budgetData = BudgetUtil.getRandomMoney().toList()
-            delay(1000)
+            delay(2000)
             _state.update {
                 it.copy(
                     isMyDataLinked = true,
