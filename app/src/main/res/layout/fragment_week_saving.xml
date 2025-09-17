@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.mada.feature.week_saving.WeekSavingViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".feature.week_saving.WeekSavingFragment">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_week_saving"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/week_saving"
+            app:titleCentered="true"
+            app:titleTextAppearance="@style/ToolbarTitleText"
+            app:titleTextColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_week_saving_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="28dp"
+            android:fontFamily="@font/pretendard_semibold"
+            app:layout_constraintEnd_toStartOf="@id/iv_blinker"
+            app:layout_constraintHorizontal_weight="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_week_saving" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_blinker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_blinker"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="fitEnd"
+            app:layout_constraintHorizontal_weight="0.2"
+            app:layout_constraintStart_toEndOf="@id/tv_week_saving_comment"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_week_saving" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_saving"
+            app:layout_constraintTop_toBottomOf="@id/tv_week_saving_comment">
+
+            <TextView
+                android:id="@+id/tv_week_saving_monday"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/money_left_monday"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/cv_week_saving_monday"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_monday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_monday"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_weight="0.1" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_week_saving_monday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toTopOf="@id/tv_week_saving_thursday"
+                app:layout_constraintEnd_toStartOf="@id/cv_week_saving_tuesday"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_week_saving_monday"
+                app:layout_constraintVertical_weight="0.6"
+                app:strokeColor="#EBEBEB"
+                app:strokeWidth="1dp">
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_monday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:elevation="10dp"
+                app:layout_constraintBottom_toTopOf="@id/iv_week_saving_monday_card"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_monday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_monday"
+                app:layout_constraintTop_toTopOf="@id/cv_week_saving_monday" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_monday_card"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:elevation="4dp"
+                android:src="@drawable/card_radius"
+                app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_monday"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_monday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_monday" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_monday_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_week_saving_monday_card"
+                app:layout_constraintEnd_toEndOf="@id/iv_week_saving_monday_card"
+                app:layout_constraintStart_toStartOf="@id/iv_week_saving_monday_card"
+                app:layout_constraintTop_toTopOf="@id/iv_week_saving_monday_card" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_tuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/money_left_tuesday"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_tuesday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_tuesday"
+                app:layout_constraintTop_toTopOf="@id/tv_week_saving_monday" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_week_saving_tuesday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_monday"
+                app:layout_constraintEnd_toStartOf="@id/cv_week_saving_wednesday"
+                app:layout_constraintStart_toEndOf="@id/cv_week_saving_monday"
+                app:layout_constraintTop_toTopOf="@id/cv_week_saving_monday"
+                app:strokeColor="#EBEBEB"
+                app:strokeWidth="1dp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_tuesday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:elevation="10dp"
+                app:layout_constraintBottom_toTopOf="@id/iv_week_saving_tuesday_card"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_tuesday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_tuesday"
+                app:layout_constraintTop_toTopOf="@id/cv_week_saving_tuesday" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_tuesday_card"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:elevation="4dp"
+                android:src="@drawable/card_radius"
+                app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_tuesday"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_tuesday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_tuesday" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_tuesday_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_week_saving_tuesday_card"
+                app:layout_constraintEnd_toEndOf="@id/iv_week_saving_tuesday_card"
+                app:layout_constraintStart_toStartOf="@id/iv_week_saving_tuesday_card"
+                app:layout_constraintTop_toTopOf="@id/iv_week_saving_tuesday_card" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_wednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/money_left_wednesday"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_wednesday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_wednesday"
+                app:layout_constraintTop_toTopOf="@id/tv_week_saving_monday" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_week_saving_wednesday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_monday"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cv_week_saving_tuesday"
+                app:layout_constraintTop_toTopOf="@id/cv_week_saving_monday"
+                app:strokeColor="#EBEBEB"
+                app:strokeWidth="1dp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_wednesday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:elevation="10dp"
+                app:layout_constraintBottom_toTopOf="@id/iv_week_saving_wednesday_card"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_wednesday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_wednesday"
+                app:layout_constraintTop_toTopOf="@id/cv_week_saving_wednesday" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_wednesday_card"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:elevation="4dp"
+                android:src="@drawable/card_radius"
+                app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_wednesday"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_wednesday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_wednesday" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_wednesday_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_week_saving_wednesday_card"
+                app:layout_constraintEnd_toEndOf="@id/iv_week_saving_wednesday_card"
+                app:layout_constraintStart_toStartOf="@id/iv_week_saving_wednesday_card"
+                app:layout_constraintTop_toTopOf="@id/iv_week_saving_wednesday_card" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_thursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/money_left_thursday"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/cv_week_saving_thursday"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_thursday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_thursday"
+                app:layout_constraintTop_toBottomOf="@id/cv_week_saving_monday"
+                app:layout_constraintVertical_weight="0.1" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_week_saving_thursday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toTopOf="@id/tv_week_saving_sunday"
+                app:layout_constraintEnd_toStartOf="@id/cv_week_saving_friday"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_week_saving_thursday"
+                app:layout_constraintVertical_weight="0.6"
+                app:strokeColor="#EBEBEB"
+                app:strokeWidth="1dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_thursday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:elevation="10dp"
+                app:layout_constraintBottom_toTopOf="@id/iv_week_saving_thursday_card"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_thursday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_thursday"
+                app:layout_constraintTop_toTopOf="@id/cv_week_saving_thursday" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_thursday_card"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:elevation="4dp"
+                android:src="@drawable/card_radius"
+                app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_thursday"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_thursday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_thursday" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_thursday_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_week_saving_thursday_card"
+                app:layout_constraintEnd_toEndOf="@id/iv_week_saving_thursday_card"
+                app:layout_constraintStart_toStartOf="@id/iv_week_saving_thursday_card"
+                app:layout_constraintTop_toTopOf="@id/iv_week_saving_thursday_card" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_friday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/money_left_friday"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_friday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_friday"
+                app:layout_constraintTop_toTopOf="@id/tv_week_saving_thursday" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_week_saving_friday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_thursday"
+                app:layout_constraintEnd_toStartOf="@id/cv_week_saving_saturday"
+                app:layout_constraintStart_toEndOf="@id/cv_week_saving_thursday"
+                app:layout_constraintTop_toTopOf="@id/cv_week_saving_thursday"
+                app:strokeColor="#EBEBEB"
+                app:strokeWidth="1dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_friday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:elevation="10dp"
+                app:layout_constraintBottom_toTopOf="@id/iv_week_saving_friday_card"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_friday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_friday"
+                app:layout_constraintTop_toTopOf="@id/cv_week_saving_friday" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_friday_card"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:elevation="4dp"
+                android:src="@drawable/card_radius"
+                app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_friday"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_friday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_friday" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_friday_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_week_saving_friday_card"
+                app:layout_constraintEnd_toEndOf="@id/iv_week_saving_friday_card"
+                app:layout_constraintStart_toStartOf="@id/iv_week_saving_friday_card"
+                app:layout_constraintTop_toTopOf="@id/iv_week_saving_friday_card" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_saturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/money_left_saturday"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_saturday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_saturday"
+                app:layout_constraintTop_toTopOf="@id/tv_week_saving_thursday" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_week_saving_saturday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_thursday"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cv_week_saving_friday"
+                app:layout_constraintTop_toTopOf="@id/cv_week_saving_thursday"
+                app:strokeColor="#EBEBEB"
+                app:strokeWidth="1dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_saturday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:elevation="10dp"
+                app:layout_constraintBottom_toTopOf="@id/iv_week_saving_saturday_card"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_saturday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_saturday"
+                app:layout_constraintTop_toTopOf="@id/cv_week_saving_saturday" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_saturday_card"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:elevation="4dp"
+                android:src="@drawable/card_radius"
+                app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_saturday"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_saturday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_saturday" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_saturday_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_week_saving_saturday_card"
+                app:layout_constraintEnd_toEndOf="@id/iv_week_saving_saturday_card"
+                app:layout_constraintStart_toStartOf="@id/iv_week_saving_saturday_card"
+                app:layout_constraintTop_toTopOf="@id/iv_week_saving_saturday_card" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/money_left_sunday"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/cv_week_saving_sunday"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_sunday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_sunday"
+                app:layout_constraintTop_toBottomOf="@id/cv_week_saving_thursday"
+                app:layout_constraintVertical_weight="0.1" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_week_saving_sunday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_thursday"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_week_saving_sunday"
+                app:layout_constraintVertical_weight="0.6"
+                app:strokeColor="#EBEBEB"
+                app:strokeWidth="1dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_sunday"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:elevation="10dp"
+                app:layout_constraintBottom_toTopOf="@id/iv_week_saving_sunday_card"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_sunday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_sunday"
+                app:layout_constraintTop_toTopOf="@id/cv_week_saving_sunday" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_sunday_card"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:elevation="4dp"
+                android:src="@drawable/card_radius"
+                app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_sunday"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_sunday"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_sunday" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_sunday_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_week_saving_sunday_card"
+                app:layout_constraintEnd_toEndOf="@id/iv_week_saving_sunday_card"
+                app:layout_constraintStart_toStartOf="@id/iv_week_saving_sunday_card"
+                app:layout_constraintTop_toTopOf="@id/iv_week_saving_sunday_card" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/week_saving_week_money"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cv_week_saving_sunday"
+                app:layout_constraintTop_toTopOf="@id/tv_week_saving_sunday" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_week_saving_week"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_sunday"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cv_week_saving_sunday"
+                app:layout_constraintTop_toTopOf="@id/cv_week_saving_sunday"
+                app:strokeColor="#EBEBEB"
+                app:strokeWidth="1dp">
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_week"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:elevation="10dp"
+                app:layout_constraintBottom_toTopOf="@id/iv_week_saving_week_card"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_week"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_week"
+                app:layout_constraintTop_toTopOf="@id/cv_week_saving_week" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_week_saving_week_card"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:elevation="4dp"
+                android:src="@drawable/card_radius"
+                app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_week"
+                app:layout_constraintEnd_toEndOf="@id/cv_week_saving_week"
+                app:layout_constraintStart_toStartOf="@id/cv_week_saving_week" />
+
+            <TextView
+                android:id="@+id/tv_week_saving_week_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_week_saving_week_card"
+                app:layout_constraintEnd_toEndOf="@id/iv_week_saving_week_card"
+                app:layout_constraintStart_toStartOf="@id/iv_week_saving_week_card"
+                app:layout_constraintTop_toTopOf="@id/iv_week_saving_week_card" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_saving"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
+            android:elevation="20dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:paddingVertical="14dp"
+            android:text="@string/week_saving_navigate"
+            android:textSize="20sp"
+            app:cornerRadius="12dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
