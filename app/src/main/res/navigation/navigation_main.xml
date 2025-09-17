@@ -56,7 +56,13 @@
     <fragment
         android:id="@+id/weekBudgetFragment"
         android:name="com.example.mada.feature.budget.WeekBudgetFragment"
-        android:label="WeekBudgetFragment" />
+        android:label="WeekBudgetFragment"
+        tools:layout="@layout/fragment_week_budget">
+        <action
+            android:id="@+id/action_weekBudgetFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/moneyLeftFragment"
         android:name="com.example.mada.feature.money_left.MoneyLeftFragment"
