@@ -41,6 +41,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         binding.vm = viewModel
 
         binding.apply {
+            toolbarHome.setNavigationOnClickListener {
+                backNavigate()
+            }
         }
 
     }
