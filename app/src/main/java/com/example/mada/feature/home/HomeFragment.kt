@@ -106,7 +106,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                 binding.apply {
                                     cvHomeInitial.visibility = View.INVISIBLE
                                     ivHome.visibility = View.VISIBLE
-                                    "${(state.budget[state.today] - BudgetUtil.expenditure[state.today]).toWon()}원 남았어요!".also {
+                                    "${(state.budget[state.today] - BudgetUtil.expenditure[state.today]).toWon()} 남았어요!".also {
                                         tvTodayLeftContent.text = it
                                     }
                                     tvHomeBuildComment.text =
