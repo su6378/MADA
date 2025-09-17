@@ -28,8 +28,7 @@
 
     <!-- 주간 예산 설정 -->
     <string name="week_budget_title">예산 설정</string>
-    <string name="week_budget_week">9월 3주차</string>
-    <string name="week_budget_day">9.15(월) ~ 9.21(일)</string>
+    <string name="week_budget_my_data_commnet">미이데이터 자산 정보를 불러오고 있어요!</string>
     <string name="week_budget_amount">총 263,000원</string>
     <string name="week_budget_comment">지난주 사용 금액을 기반으로 이번주 예산을 설정했어요!</string>
     <string name="week_budget_comment2">캘린더 일정을 기반으로 이번주 예산을 설정했어요!</string>
@@ -67,7 +66,6 @@
     <string name="money_left_saturday">토</string>
     <string name="money_left_sunday">일</string>
 
-
     <!-- 버튼 -->
     <string name="setting">설정하기</string>
     <string name="next">다음</string>
@@ -75,4 +73,6 @@
     <string name="cancel">닫기</string>
     <string name="sign_up">가입하기</string>
     <string name="create_card">카드 만들기</string>
+
+
 </resources>
