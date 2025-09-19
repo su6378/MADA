@@ -17,4 +17,7 @@
 
     <color name="home_initial_background">#EEEEEEEE</color>
     <color name="home_initial_comment">#9A9A9A9A</color>
+
+    <color name="unselected_dot">#D9D9D9</color>
+    <color name="selected_dot">#5F5D5D</color>
 </resources>

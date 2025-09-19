@@ -47,7 +47,11 @@
     <string name="week_budget_calendar_saturday_comment">카페 + 교통비가 예상되는 일정이에요</string>
     <string name="week_budget_calendar_sunday_comment">쇼핑 지출이 예상되는 일정이에요</string>
 
-    <!-- 저축 바인더 -->
+    <!-- 바인더 목록 -->
+    <string name="binder_list">바인더 목록</string>
+    <string name="binder_list_week_binder">주간 예산 바인더</string>
+    <string name="binder_list_save_binder">저축 바인더</string>
+
     <!-- 이번주 저축 가능한 금액-->
     <string name="week_saving">이번주 저축가능 금액</string>
     <string name="week_saving_navigate">저축하러 가기</string>
