@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.datastore.preference)
     implementation(libs.typewriter.android)
     implementation(libs.bundles.android.carousel)
+    implementation(libs.circle.image.android)
     kapt(libs.hilt.android.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
