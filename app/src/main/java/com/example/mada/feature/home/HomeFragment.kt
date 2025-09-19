@@ -57,9 +57,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                         when (action) {
                             is HomeAction.ShowToast -> showAlertDialog(
                                 dialog = AlertDialog(
-                                    mainActivity
-                                ) { navigate(HomeFragmentDirections.actionHomeFragmentToAccountFragment()) },
-                                viewLifecycleOwner
+                                    mainActivity,
+                                    title = resources.getString(R.string.home_create_account),
+                                    content = resources.getString(R.string.home_recommend_create_account)
+                                ) {
+                                    navigate(
+                                        HomeFragmentDirections.actionHomeFragmentToAccountFragment()
+                                    )
+                                }, viewLifecycleOwner
                             )
 
                             is HomeAction.NavigateWeekBudgetView -> navigate(HomeFragmentDirections.actionHomeFragmentToWeekBudgetFragment())
@@ -79,6 +84,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                 ) { navigate(HomeFragmentDirections.actionHomeFragmentToAccountFragment()) },
                                 viewLifecycleOwner
                             )
+
+                            is HomeAction.NavigateBinderListView -> {
+                                if (!binding.vm!!.state.value.isSigned) {
+                                    showAlertDialog(
+                                        dialog = AlertDialog(
+                                            mainActivity,
+                                            title = resources.getString(R.string.home_create_account),
+                                            content = resources.getString(R.string.home_recommend_create_account)
+                                        ) {
+                                            navigate(
+                                                HomeFragmentDirections.actionHomeFragmentToAccountFragment()
+                                            )
+                                        }, viewLifecycleOwner
+                                    )
+                                } else navigate(HomeFragmentDirections.actionHomeFragmentToBudgetListFragment())
+                            }
                         }
                     }
                 }
@@ -166,8 +187,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private fun setCalendarHammer(state: HomeState) {
         val budget = state.budget
         val expenditure = BudgetUtil.expenditure
-
-        Log.d(TAG, "setCalendarHammer: $budget")
 
         binding.apply {
             for (i in budget.indices) {

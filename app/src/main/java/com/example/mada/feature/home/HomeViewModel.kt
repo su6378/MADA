@@ -44,7 +44,8 @@ class HomeViewModel @Inject constructor(
     private fun getDateInfo() {
         viewModelScope.launch {
             val dateInfo = DateUtil.getDateInfo()
-            val today = DateUtil.getToday()
+//            val today = DateUtil.getToday()
+            val today = 6
 
             _state.update {
                 it.copy(
@@ -105,6 +106,10 @@ class HomeViewModel @Inject constructor(
     fun navigateAccountFragment() = viewModelScope.launch {
         _action.emit(HomeAction.NavigateOnBoardingView)
     }
+
+    fun navigateBinderListFragment() = viewModelScope.launch {
+        _action.emit(HomeAction.NavigateBinderListView)
+    }
 }
 
 data class HomeState(
@@ -126,6 +131,7 @@ sealed interface HomeAction {
     data object NavigateMoneyLeftView : HomeAction
     data object NavigateWeekSavingView : HomeAction
     data object NavigateOnBoardingView : HomeAction
+    data object NavigateBinderListView : HomeAction
 }
 
 sealed interface Result {

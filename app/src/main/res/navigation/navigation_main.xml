@@ -51,6 +51,9 @@
             android:id="@+id/action_homeFragment_to_accountFragment"
             app:destination="@id/accountFragment"
             app:popUpTo="@id/onBoardingFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_budgetListFragment"
+            app:destination="@id/budgetListFragment" />
     </fragment>
 
     <fragment
@@ -94,5 +97,10 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/allOneFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/budgetListFragment"
+        android:name="com.example.mada.feature.budget_list.BudgetListFragment"
+        android:label="BudgetListFragment"
+        tools:layout="@layout/fragment_budget_list"/>
 
 </navigation>

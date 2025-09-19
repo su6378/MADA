@@ -57,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
                     android:src="@drawable/ic_home_diary"
+                    app:onClick="@{() -> vm.navigateBinderListFragment()}"
                     app:layout_constraintBottom_toBottomOf="@id/tv_home_month"
                     app:layout_constraintEnd_toStartOf="@id/iv_home_alarm"
                     app:layout_constraintTop_toTopOf="@id/tv_home_month" />

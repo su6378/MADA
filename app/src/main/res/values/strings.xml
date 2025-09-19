@@ -17,6 +17,8 @@
     <!--홈 화면 -->
     <string name="money_diary">머니 다이어리</string>
     <string name="money_diary_build_comment_initial">계좌를 개설해 주세요 🥲</string>
+    <string name="home_create_account">계좌 개설</string>
+    <string name="home_recommend_create_account">계좌가 개설 되어 있지 않아요. 계좌 개설 화면으로 이동하시겠어요?</string>
     <string name="money_diary_build_comment">n주째 집 짓는중</string>
     <string name="money_diary_build_comment_before_challenge">한 주 챌린지 완료 후 열려요</string>
     <string name="home_today_left_title">오늘 쓸 수 있는 돈</string>
