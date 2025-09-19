@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.0"
+agp = "8.6.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -9,7 +9,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.2"
 constraintlayout = "2.1.4"
-navigation = "2.5.3"
+navigation = "2.8.0"
 navigationFragmentKtx = "2.8.0"
 navigationUiKtx = "2.8.0"
 legacySupportV4 = "1.0.0"
@@ -17,11 +17,13 @@ lifecycleLivedataKtx = "2.8.5"
 lifecycleViewmodelKtx = "2.8.5"
 fragmentKtx = "1.5.6"
 hilt = "2.52"
-kapt = "1.7.10"
+kapt = "1.9.0"
 lottie = "5.2.0"
 datastore = "1.0.0"
 typewriter = "v1.3"
 rainbow = "1.0.4"
+circleindicator = "2.1.6"
+imageSlider = "2.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -59,10 +61,15 @@ datastore-core = { module = "androidx.datastore:datastore-core", version.ref = "
 typewriter-android = { module = "com.github.NitishGadangi:TypeWriter-TextView", version.ref = "typewriter" }
 
 # Rainbow
-rainbow-android = { module = "com.github.skydoves:rainbow", version.ref = "rainbow"}
+rainbow-android = { module = "com.github.skydoves:rainbow", version.ref = "rainbow" }
+
+# Carousel
+circle-indicator-android = { module = "me.relex:circleindicator", version.ref = "circleindicator" }
+image-slider-android = { module = "org.imaginativeworld.whynotimagecarousel:whynotimagecarousel", version.ref = "imageSlider" }
 
 [bundles]
 androidx-navigation = ["androidx-navigation-fragment", "androidx-navigation-ui"]
+android-carousel = ["circle-indicator-android","image-slider-android"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
