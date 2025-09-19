@@ -55,7 +55,7 @@
 
     <fragment
         android:id="@+id/weekBudgetFragment"
-        android:name="com.example.mada.feature.budget.WeekBudgetFragment"
+        android:name="com.example.mada.feature.week_budget.WeekBudgetFragment"
         android:label="WeekBudgetFragment"
         tools:layout="@layout/fragment_week_budget">
         <action

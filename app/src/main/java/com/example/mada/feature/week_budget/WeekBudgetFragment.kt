@@ -1,10 +1,9 @@
-package com.example.mada.feature.budget
+package com.example.mada.feature.week_budget
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -17,7 +16,6 @@ import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentWeekBudgetBinding
 import com.example.mada.dialog.AlertDialog
 import com.example.mada.dialog.LoadingDialog
-import com.example.mada.feature.home.HomeFragmentDirections
 import com.example.mada.util.TextUtil
 import com.example.mada.util.TextUtil.toWon
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,9 +1,7 @@
-package com.example.mada.feature.budget
+package com.example.mada.feature.week_budget
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mada.feature.account.AccountAction
 import com.example.mada.repository.DataStoreRepository
 import com.example.mada.util.BudgetUtil
 import com.example.mada.util.DateUtil

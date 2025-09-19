@@ -7,14 +7,14 @@
 
         <variable
             name="vm"
-            type="com.example.mada.feature.budget.WeekBudgetViewModel" />
+            type="com.example.mada.feature.week_budget.WeekBudgetViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".feature.budget.WeekBudgetFragment">
+        tools:context=".feature.week_budget.WeekBudgetFragment">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_week_budget"
