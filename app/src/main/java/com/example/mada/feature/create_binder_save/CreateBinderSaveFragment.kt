@@ -119,11 +119,13 @@ class CreateBinderSaveFragment :
                 savingAmountPerMonth.toWon()
             )
 
-            tvCreateBinderSaveTargetComment.setColoredSubstrings(
-                "${etCreateBinderSaveTargetPeriod.text.toString()}까지\n 월 ${
-                    savingAmountPerMonth.toWon()
-                } 저축이 필요해요.", ranges, colorRes = R.color.nh_green
-            )
+            if (selectDate != 0L) {
+                tvCreateBinderSaveTargetComment.setColoredSubstrings(
+                    "${etCreateBinderSaveTargetPeriod.text.toString()}까지\n 월 ${
+                        savingAmountPerMonth.toWon()
+                    } 저축이 필요해요.", ranges, colorRes = R.color.nh_green
+                )
+            }
         }
     }
 
