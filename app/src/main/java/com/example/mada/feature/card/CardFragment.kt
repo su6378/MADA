@@ -1,4 +1,4 @@
-package com.example.mada.card
+package com.example.mada.feature.card
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
