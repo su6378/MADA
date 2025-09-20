@@ -86,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/cardFragment"
-        android:name="com.example.mada.card.CardFragment"
+        android:name="com.example.mada.feature.card.CardFragment"
         android:label="CardFragment"
         tools:layout="@layout/fragment_card">
         <action

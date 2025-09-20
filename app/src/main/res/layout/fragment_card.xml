@@ -6,13 +6,13 @@
     <data>
         <variable
             name="vm"
-            type="com.example.mada.card.CardViewModel" />
+            type="com.example.mada.feature.card.CardViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".card.CardFragment"
+        tools:context=".feature.card.CardFragment"
         android:background="@color/white">
 
         <com.google.android.material.appbar.MaterialToolbar
