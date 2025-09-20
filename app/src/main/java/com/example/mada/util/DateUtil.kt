@@ -41,7 +41,7 @@ object DateUtil {
         return dateInfo
     }
 
-    fun getWeeksInMonth(year: Int, month: Int): List<String> {
+    fun getWeeksInMonth(year: Int, month: Int): Pair<List<String>, Int> {
         val sdf = SimpleDateFormat("M월 d일", Locale.KOREA)
         val weekList = mutableListOf<String>()
 
@@ -63,6 +63,9 @@ object DateUtil {
         }
 
         val currentWeekStart = firstWeekMonday.clone() as Calendar
+        val today = Calendar.getInstance().time
+        var currentIndex = -1
+        var index = 0
 
         while (true) {
             val weekStart = currentWeekStart.clone() as Calendar
@@ -71,6 +74,13 @@ object DateUtil {
 
             val weekStr = "${sdf.format(weekStart.time)} ~ ${sdf.format(weekEnd.time)}"
             weekList.add(weekStr)
+
+            // 오늘 날짜가 포함된 주면 인덱스 저장
+            if (today >= weekStart.time && today <= weekEnd.time) {
+                currentIndex = index
+            }
+
+            index++
 
             // 다음 주로 이동
             currentWeekStart.add(Calendar.DATE, 7)
@@ -81,6 +91,6 @@ object DateUtil {
             }
         }
 
-        return weekList
+        return Pair(weekList, currentIndex)
     }
 }
