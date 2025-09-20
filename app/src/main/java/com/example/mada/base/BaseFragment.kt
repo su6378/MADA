@@ -1,7 +1,6 @@
 package com.example.mada.base
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -17,8 +15,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation.findNavController
-import com.example.mada.MainActivity
-import com.example.mada.loading.LoadingTest
 
 abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
 
