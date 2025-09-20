@@ -174,7 +174,7 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
         binding.apply {
             if (position == 0) {
                 if (viewModel.state.value.isBudgetExist) {
-
+                    navigate(BudgetListFragmentDirections.actionBudgetListFragmentToBinderBudgetFragment())
                 }else showAlertDialog(
                     dialog = AlertDialog(
                         mainActivity,

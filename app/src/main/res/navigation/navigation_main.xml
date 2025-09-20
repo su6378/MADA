@@ -106,6 +106,14 @@
             android:id="@+id/action_budgetListFragment_to_weekBudgetFragment"
             app:destination="@id/weekBudgetFragment"
             app:popUpTo="@id/homeFragment"/>
+        <action
+            android:id="@+id/action_budgetListFragment_to_binderBudgetFragment"
+            app:destination="@id/binderBudgetFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/binderBudgetFragment"
+        android:name="com.example.mada.feature.binder_budget.BinderBudgetFragment"
+        android:label="BinderBudgetFragment"
+        tools:layout="@layout/fragment_binder_budget"/>
 
 </navigation>
