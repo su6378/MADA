@@ -109,11 +109,19 @@
         <action
             android:id="@+id/action_budgetListFragment_to_binderBudgetFragment"
             app:destination="@id/binderBudgetFragment" />
+        <action
+            android:id="@+id/action_budgetListFragment_to_binderSaveFragment"
+            app:destination="@id/binderSaveFragment" />
     </fragment>
     <fragment
         android:id="@+id/binderBudgetFragment"
         android:name="com.example.mada.feature.binder_budget.BinderBudgetFragment"
         android:label="BinderBudgetFragment"
         tools:layout="@layout/fragment_binder_budget"/>
+    <fragment
+        android:id="@+id/binderSaveFragment"
+        android:name="com.example.mada.feature.binder_save.BinderSaveFragment"
+        android:label="BinderSaveFragment"
+        tools:layout="@layout/fragment_binder_save"/>
 
 </navigation>

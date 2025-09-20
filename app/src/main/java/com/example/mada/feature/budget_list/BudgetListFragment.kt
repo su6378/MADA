@@ -172,10 +172,8 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
     // 해당 바인더 선택시 이동
     private fun navigateBinderDetailFragment(position: Int) {
         binding.apply {
-            if (position == 0) {
-                if (viewModel.state.value.isBudgetExist) {
-                    navigate(BudgetListFragmentDirections.actionBudgetListFragmentToBinderBudgetFragment())
-                }else showAlertDialog(
+            if (!viewModel.state.value.isBudgetExist) {
+                showAlertDialog(
                     dialog = AlertDialog(
                         mainActivity,
                         title = resources.getString(R.string.binder_list_navigate_budget),
@@ -184,6 +182,9 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
                         navigate(BudgetListFragmentDirections.actionBudgetListFragmentToWeekBudgetFragment())
                     }, viewLifecycleOwner
                 )
+            }else {
+                if (position == 0) navigate(BudgetListFragmentDirections.actionBudgetListFragmentToBinderBudgetFragment())
+                else navigate(BudgetListFragmentDirections.actionBudgetListFragmentToBinderSaveFragment())
             }
         }
     }
