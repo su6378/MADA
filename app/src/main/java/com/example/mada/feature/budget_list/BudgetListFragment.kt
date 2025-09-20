@@ -1,6 +1,7 @@
 package com.example.mada.feature.budget_list
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.constraintlayout.helper.widget.Carousel
@@ -41,6 +42,7 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
     override fun initView() {
         with(binding) {
             carouselBinderList.setData(images)
+            carouselBinderList.next()
             carouselBinderList.setIndicator(indicatorBinderList)
             carouselBinderList.registerLifecycle(viewLifecycleOwner)
         }
