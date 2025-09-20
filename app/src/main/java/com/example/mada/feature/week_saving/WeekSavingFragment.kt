@@ -73,8 +73,8 @@ class WeekSavingFragment : BaseFragment<FragmentWeekSavingBinding, WeekSavingVie
                         binding.apply {
                             val budgetValue = vm!!.budget.value
                             val comment = "이번주 예산 " + budgetValue.sum()
-                                .toWon() + " 중에 " + (budgetValue.sum() - 10000).toWon()+ "이 남았어요!"
-                            val ranges = listOf(budgetValue.sum().toWon(), (budgetValue.sum() - 10000).toWon(), ("원"))
+                                .toWon() + " 중에 " + (budgetValue.sum() - BudgetUtil.expenditure.sum()).toWon()+ "이 남았어요!"
+                            val ranges = listOf(budgetValue.sum().toWon(), (budgetValue.sum() - BudgetUtil.expenditure.sum()).toWon(), ("원"))
 
                             tvWeekSavingComment.setColoredSubstrings(comment, ranges, colorRes = R.color.nh_green)
 
@@ -113,7 +113,10 @@ class WeekSavingFragment : BaseFragment<FragmentWeekSavingBinding, WeekSavingVie
             if (budget[4] - expenditure[4] > 0) ivWeekSavingFriday.setImageResource(R.drawable.ic_small_money)
             if (budget[5] - expenditure[5] > 0) ivWeekSavingSaturday.setImageResource(R.drawable.ic_small_money)
             if (budget[6] - expenditure[6] > 0) ivWeekSavingSunday.setImageResource(R.drawable.ic_small_money)
-            if (budget.sum() - expenditure.sum() > 0) ivWeekSavingWeek.setImageResource(R.drawable.ic_big_money)
+            if (budget.sum() - expenditure.sum() > 0) {
+                ivWeekSavingWeek.setImageResource(R.drawable.ic_big_money)
+                ivBlinker.setImageResource(R.drawable.ic_blinker_green)
+            }
 
         }
     }
