@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.example.mada.feature.binder_budget.BinderBudgetViewModel" />
@@ -26,5 +27,208 @@
             app:titleTextAppearance="@style/ToolbarTitleText"
             app:titleTextColor="@color/black" />
 
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_binder_list">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/dropdown_binder_budget"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@android:color/transparent"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:endIconMode="none"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/dropdown_menu_binder_budget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:dropDownHeight="280dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:gravity="center_vertical"
+                        android:inputType="none"
+                        app:dropDownBackgroundTint="@color/white" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:src="@drawable/ic_down"
+                    app:layout_constraintBottom_toBottomOf="@id/dropdown_binder_budget"
+                    app:layout_constraintStart_toEndOf="@id/dropdown_binder_budget"
+                    app:layout_constraintTop_toTopOf="@id/dropdown_binder_budget" />
+
+                <TextView
+                    android:id="@+id/tv_binder_budget_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dropdown_binder_budget" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_binder_budget_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:src="@drawable/budget_binder_center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_binder_budget_day" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="100dp"
+                    android:layout_height="142dp"
+                    android:layout_marginStart="-24dp"
+                    android:layout_marginTop="114dp"
+                    android:rotation="-15"
+                    android:src="@drawable/ic_budget_binder"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/iv_binder_budget_center" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="126dp"
+                    android:layout_height="166dp"
+                    android:layout_marginTop="105dp"
+                    android:layout_marginEnd="-20dp"
+                    android:src="@drawable/budget_binder_end"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/iv_binder_budget_center" />
+
+
+                <TextView
+                    android:id="@+id/tv_binder_budget_monday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="@string/binder_budget_monday"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_binder_budget_center" />
+
+                <TextView
+                    android:id="@+id/tv_binder_budget_monday_budget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="@{vm.state.leftBudget}"
+                    android:textSize="40sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_binder_budget_monday" />
+
+                <TextView
+                    android:id="@+id/tv_binder_budget_monday_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@{vm.state.budgetProgressText}"
+                    android:textSize="14sp"
+                    android:textColor="#6B6B6B"
+                    android:layout_marginEnd="40dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_binder_budget_monday_budget" />
+
+                <ProgressBar
+                    android:id="@+id/progress_binder_budget"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="14dp"
+                    android:indeterminateTint="@color/home_initial_comment"
+                    android:max="100"
+                    android:progress="@{vm.state.budgetProgress}"
+                    android:progressDrawable="@drawable/progress_home"
+                    app:layout_constraintTop_toBottomOf="@id/tv_binder_budget_monday_progress" />
+
+                <TextView
+                    android:id="@+id/tv_binder_budget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="@string/budget"
+                    android:textSize="14sp"
+                    android:textColor="@color/gray"
+                    android:layout_marginStart="2dp"
+                    app:layout_constraintStart_toStartOf="@id/progress_binder_budget"
+                    app:layout_constraintTop_toBottomOf="@id/progress_binder_budget" />
+
+                <TextView
+                    android:id="@+id/tv_binder_budget_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@{vm.state.budget}"
+                    android:textSize="14sp"
+                    android:textColor="@color/gray"
+                    app:layout_constraintEnd_toEndOf="@id/progress_binder_budget"
+                    app:layout_constraintTop_toBottomOf="@id/progress_binder_budget" />
+
+                <TextView
+                    android:id="@+id/tv_binder_expenditure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="@string/expenditure"
+                    android:textSize="14sp"
+                    android:textColor="@color/gray"
+                    android:layout_marginStart="2dp"
+                    app:layout_constraintStart_toStartOf="@id/progress_binder_budget"
+                    app:layout_constraintTop_toBottomOf="@id/tv_binder_budget" />
+
+                <TextView
+                    android:id="@+id/tv_binder_budget_expenditure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@{vm.state.expenditure}"
+                    android:textSize="14sp"
+                    android:textColor="@color/gray"
+                    app:layout_constraintEnd_toEndOf="@id/progress_binder_budget"
+                    app:layout_constraintTop_toBottomOf="@id/tv_binder_budget_money" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_binder_budget_expenditure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="40dp"
+                    android:src="@drawable/bg_binder_budget_expenditure"
+                    app:layout_constraintTop_toBottomOf="@id/tv_binder_budget_expenditure"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    app:layout_constraintTop_toBottomOf="@id/iv_binder_budget_expenditure"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

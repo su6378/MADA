@@ -1,6 +1,9 @@
 package com.example.mada.feature.binder_budget
 
 import android.content.Context
+import android.util.Log
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -9,6 +12,7 @@ import com.example.mada.MainActivity
 import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentBinderBudgetBinding
+import com.example.mada.util.DateUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -22,6 +26,9 @@ class BinderBudgetFragment : BaseFragment<FragmentBinderBudgetBinding, BinderBud
 
     private lateinit var mainActivity: MainActivity
 
+    private val dropdownMenu = arrayListOf<String>()
+    private var todayWeek: Int = 0
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
@@ -29,6 +36,8 @@ class BinderBudgetFragment : BaseFragment<FragmentBinderBudgetBinding, BinderBud
 
     override fun initView() {
         with(binding) {
+            setDropDownMenu()
+
 
         }
     }
@@ -39,6 +48,17 @@ class BinderBudgetFragment : BaseFragment<FragmentBinderBudgetBinding, BinderBud
 
             toolbarBinderList.setNavigationOnClickListener {
                 backNavigate()
+            }
+
+            dropdownMenuBinderBudget.setOnClickListener {
+                dropdownMenuBinderBudget.showDropDown()
+                dropdownMenuBinderBudget.listSelection = todayWeek // 이번주에 해당되는 position으로 세팅
+            }
+
+            dropdownMenuBinderBudget.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+                val selectedWeek = parent.getItemAtPosition(position) as String
+
+                setToday(selectedWeek)
             }
         }
     }
@@ -76,6 +96,49 @@ class BinderBudgetFragment : BaseFragment<FragmentBinderBudgetBinding, BinderBud
                     }
                 }
             }
+        }
+    }
+
+    // 드롭박스 메뉴 세팅
+    private fun setDropDownMenu() {
+        var thisWeek = ""
+
+        for (i in 8..9) {
+            dropdownMenu.addAll(DateUtil.getWeeksInMonth(2025, i).first)
+            if (DateUtil.getWeeksInMonth(2025, i).second != -1) thisWeek =
+                DateUtil.getWeeksInMonth(2025, i).first[DateUtil.getWeeksInMonth(2025, i).second]
+        }
+
+        for (i in dropdownMenu.indices) {
+            if (thisWeek == dropdownMenu[i]) todayWeek = i
+        }
+
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_dropdown_item_1line,
+            dropdownMenu
+        )
+
+        binding.dropdownMenuBinderBudget.apply {
+            setAdapter(adapter)
+            setText(thisWeek, false)
+        }
+
+        setToday(thisWeek)
+    }
+
+    // 날짜 세팅
+    private fun setToday(thisWeek: String) {
+        binding.apply {
+            var monday = ""
+
+            for (i in dropdownMenu.indices) {
+                if (thisWeek == dropdownMenu[i]) {
+                    monday = thisWeek.split("~")[0].trim()
+                }
+            }
+
+            tvBinderBudgetDay.text = monday
         }
     }
 }
