@@ -1,5 +1,6 @@
 package com.example.mada.feature.budget_list
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mada.repository.DataStoreRepository
@@ -38,6 +39,7 @@ class BudgetListViewModel @Inject constructor(
 
     init {
         getBudgetInfo()
+        getSaveBinder()
     }
 
     // 예산 정보 받기
@@ -54,15 +56,26 @@ class BudgetListViewModel @Inject constructor(
             }
         }
     }
+
+    // 저축 바인더 정보 받기
+    private fun getSaveBinder() = viewModelScope.launch {
+        dataStoreRepository.getSaveBinder().onStart {
+            _result.emit(Result.Loading)
+        }.catch {
+            _result.emit(Result.Finish)
+        }.collectLatest { result ->
+            if (result.isNotEmpty()) _state.update { it.copy(isSaveBinderExist = true) }
+        }
+    }
 }
 
 data class BudgetListState(
     var isBudgetExist: Boolean = false,
+    var isSaveBinderExist: Boolean = false
 )
 
 sealed interface BudgetListAction {
     class ShowToast(val content: String) : BudgetListAction
-    data object ShowBudgetDialog : BudgetListAction
 }
 
 sealed interface Result {

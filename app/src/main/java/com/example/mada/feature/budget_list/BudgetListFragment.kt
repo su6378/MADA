@@ -93,19 +93,6 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
                     viewModel.action.collect { action ->
                         when (action) {
                             is BudgetListAction.ShowToast -> showToast(action.content)
-                            is BudgetListAction.ShowBudgetDialog -> {
-//                                val budget = getBudgetInfo()
-//
-//                                showAlertDialog(
-//                                    dialog = AlertDialog(
-//                                        mainActivity,
-//                                        title = "예산 설정",
-//                                        content = "입력한 예산으로 설정하시겠어요?"
-//                                    ) {
-//                                        binding.vm!!.setBudgetInfo(budget)
-//                                    }, viewLifecycleOwner
-//                                )
-                            }
                         }
                     }
                 }
@@ -182,9 +169,22 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
                         navigate(BudgetListFragmentDirections.actionBudgetListFragmentToWeekBudgetFragment())
                     }, viewLifecycleOwner
                 )
-            }else {
+            } else {
                 if (position == 0) navigate(BudgetListFragmentDirections.actionBudgetListFragmentToBinderBudgetFragment())
-                else navigate(BudgetListFragmentDirections.actionBudgetListFragmentToBinderSaveFragment())
+                else {
+                    if (viewModel.state.value.isSaveBinderExist) navigate(
+                        BudgetListFragmentDirections.actionBudgetListFragmentToBinderSaveFragment()
+                    )
+                    else showAlertDialog(
+                        dialog = AlertDialog(
+                            mainActivity,
+                            title = resources.getString(R.string.binder_budget_create_binder_save),
+                            content = resources.getString(R.string.binder_budget_create_binder_save_comment)
+                        ) {
+                            navigate(BudgetListFragmentDirections.actionBudgetListFragmentToCreateBinderSaveFragment())
+                        }, viewLifecycleOwner
+                    )
+                }
             }
         }
     }

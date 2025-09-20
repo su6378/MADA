@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -25,6 +26,7 @@ class DataStore(
     private val fridayPreference = intPreferencesKey("FRIDAY")
     private val saturdayPreference = intPreferencesKey("SATURDAY")
     private val sundayPreference = intPreferencesKey("SUNDAY")
+    private val saveBinderPreference = stringSetPreferencesKey("SAVE")
 
     suspend fun setAccount(account: Boolean) {
         context.dataStore.edit { preference ->
@@ -108,6 +110,31 @@ class DataStore(
                     prefs[saturdayPreference] ?: 0,
                     prefs[sundayPreference] ?: 0,
                 )
+            }
+    }
+
+    suspend fun setSaveBinder(
+        name: String,
+        targetAmount: String,
+        targetPeriod: String
+    ) {
+        context.dataStore.edit { preference ->
+            preference[saveBinderPreference] = setOf(name, targetAmount, targetPeriod)
+        }
+    }
+
+    suspend fun getSaveBinder(): Flow<Set<String>> {
+        return context.dataStore.data
+            .catch { exception ->
+                if (exception is IOException) {
+                    exception.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw exception
+                }
+            }
+            .map { prefs ->
+                prefs[saveBinderPreference] ?: emptySet()
             }
     }
 }

@@ -112,6 +112,9 @@
         <action
             android:id="@+id/action_budgetListFragment_to_binderSaveFragment"
             app:destination="@id/binderSaveFragment" />
+        <action
+            android:id="@+id/action_budgetListFragment_to_createBinderSaveFragment"
+            app:destination="@id/createBinderSaveFragment" />
     </fragment>
     <fragment
         android:id="@+id/binderBudgetFragment"
@@ -123,5 +126,10 @@
         android:name="com.example.mada.feature.binder_save.BinderSaveFragment"
         android:label="BinderSaveFragment"
         tools:layout="@layout/fragment_binder_save"/>
+    <fragment
+        android:id="@+id/createBinderSaveFragment"
+        android:name="com.example.mada.feature.create_CreateBinder_save.CreateBinderSaveFragment"
+        android:label="CreateBinderSaveFragment"
+        tools:layout="@layout/fragment_create_binder_save"/>
 
 </navigation>

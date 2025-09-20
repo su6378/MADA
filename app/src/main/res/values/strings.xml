@@ -59,6 +59,11 @@
     <string name="binder_budget_monday">월요일</string>
     <string name="budget">예산</string>
     <string name="expenditure">지출</string>
+    <string name="binder_budget_create_binder_save">저축 바인더 생성</string>
+    <string name="binder_budget_create_binder_save_comment">저축 바인더가 생성되지 않았어요.\n저축 바인더 생성 화면으로 이동하시겠습니까?</string>
+
+    <!-- 저축 바인더 생성 -->
+    <string name="create_binder_save">저축 바인더 설정하기</string>
 
     <!-- 이번주 저축 가능한 금액-->
     <string name="week_saving">이번주 저축가능 금액</string>
