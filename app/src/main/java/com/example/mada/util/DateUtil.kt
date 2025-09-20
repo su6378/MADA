@@ -1,9 +1,10 @@
 package com.example.mada.util
 
-import android.util.Log
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.Calendar
 import java.util.Locale
+import kotlin.math.ceil
 
 private const val TAG = "DX"
 object DateUtil {
@@ -92,5 +93,16 @@ object DateUtil {
         }
 
         return Pair(weekList, currentIndex)
+    }
+
+    fun getSavingAmountPerMonth(goalAmount: Int, targetMillis: Long): Int {
+        val today = Calendar.getInstance()
+        val target = Calendar.getInstance().apply { timeInMillis = targetMillis }
+
+        // 개월 수 계산
+        val months = (target.get(Calendar.YEAR) - today.get(Calendar.YEAR)) * 12 +
+                (target.get(Calendar.MONTH) - today.get(Calendar.MONTH)) + 1 // 현재 달 포함
+
+        return ceil(goalAmount.toDouble() / months).toInt()
     }
 }

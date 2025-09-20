@@ -64,6 +64,12 @@
 
     <!-- 저축 바인더 생성 -->
     <string name="create_binder_save">저축 바인더 설정하기</string>
+    <string name="create_binder_save_name">목표명</string>
+    <string name="create_binder_save_target_amount">목표 금액</string>
+    <string name="create_binder_save_target_period">목표 기간</string>
+    <string name="create_binder_save_name_hint">목표명을 입력해 주세요</string>
+    <string name="create_binder_save_target_amount_hint">목표 금액을 입력해 주세요</string>
+    <string name="create_binder_save_target_period_hint">목표 기간을 입력해 주세요</string>
 
     <!-- 이번주 저축 가능한 금액-->
     <string name="week_saving">이번주 저축가능 금액</string>
