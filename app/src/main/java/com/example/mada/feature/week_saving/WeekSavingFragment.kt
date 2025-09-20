@@ -74,7 +74,7 @@ class WeekSavingFragment : BaseFragment<FragmentWeekSavingBinding, WeekSavingVie
                             val budgetValue = vm!!.budget.value
                             val comment = "이번주 예산 " + budgetValue.sum()
                                 .toWon() + " 중에 " + (budgetValue.sum() - BudgetUtil.expenditure.sum()).toWon()+ "이 남았어요!"
-                            val ranges = listOf(budgetValue.sum().toWon(), (budgetValue.sum() - BudgetUtil.expenditure.sum()).toWon(), ("원"))
+                            val ranges = listOf(budgetValue.sum().toWon(), (budgetValue.sum() - BudgetUtil.expenditure.sum()).toWon())
 
                             tvWeekSavingComment.setColoredSubstrings(comment, ranges, colorRes = R.color.nh_green)
 
