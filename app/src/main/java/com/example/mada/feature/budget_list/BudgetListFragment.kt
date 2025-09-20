@@ -13,8 +13,10 @@ import com.example.mada.MainActivity
 import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentBudgetListBinding
+import com.example.mada.dialog.AlertDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.utils.dpToPx
@@ -60,13 +62,7 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
                     carouselItem: CarouselItem?
                 ) {
                     super.onScrollStateChanged(recyclerView, newState, position, carouselItem)
-                    if (position == 0) {
-                        carouselBinderList.carouselPaddingEnd = 80.dpToPx(requireContext())
-                        carouselBinderList.carouselPaddingStart = 30.dpToPx(requireContext())
-                    } else {
-                        carouselBinderList.carouselPaddingEnd = 30.dpToPx(requireContext())
-                        carouselBinderList.carouselPaddingStart = 80.dpToPx(requireContext())
-                    }
+                    setBinderPadding(position)
                 }
 
                 override fun onScrolled(
@@ -77,12 +73,13 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
                     carouselItem: CarouselItem?
                 ) {
                     super.onScrolled(recyclerView, dx, dy, position, carouselItem)
-                    if (position == 0) {
-                        tvBinderListType.text =
-                            resources.getString(R.string.binder_list_week_binder)
+                    setBiderType(position)
+                }
+            }
 
-                    } else tvBinderListType.text =
-                        resources.getString(R.string.binder_list_save_binder)
+            carouselBinderList.carouselListener = object : CarouselListener {
+                override fun onClick(position: Int, carouselItem: CarouselItem) {
+                    navigateBinderDetailFragment(position)
                 }
             }
 
@@ -109,8 +106,6 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
 //                                    }, viewLifecycleOwner
 //                                )
                             }
-
-                            is BudgetListAction.NavigateHomeView -> {}
                         }
                     }
                 }
@@ -135,6 +130,60 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
 
                     }
                 }
+            }
+        }
+    }
+
+    // 선택된 바인더에 따른 패딩 조절
+    private fun setBinderPadding(position: Int) {
+        binding.apply {
+            if (position == 0) {
+                carouselBinderList.carouselPaddingEnd = 80.dpToPx(requireContext())
+                carouselBinderList.carouselPaddingStart = 30.dpToPx(requireContext())
+            } else {
+                carouselBinderList.carouselPaddingEnd = 30.dpToPx(requireContext())
+                carouselBinderList.carouselPaddingStart = 80.dpToPx(requireContext())
+            }
+        }
+    }
+
+    // 선택된 바인더 UI 세팅
+    private fun setBiderType(position: Int) {
+        binding.apply {
+            if (position == 0) {
+                tvBinderListType.text =
+                    resources.getString(R.string.binder_list_week_binder)
+                ivBinderListCloud.setImageResource(R.drawable.ic_binder_cloud)
+                ivBinderListHeart.setImageResource(R.drawable.ic_binder_heart)
+                ivBinderListAlle.setImageResource(R.drawable.ic_binder_alle)
+                ivBinderListOnee.setImageResource(R.drawable.ic_binder_onee)
+                ivBinderListGreen.setImageResource(R.drawable.ic_binder_green)
+
+            } else tvBinderListType.text =
+                resources.getString(R.string.binder_list_save_binder)
+            ivBinderListCloud.setImageResource(R.drawable.ic_binder_cloud)
+            ivBinderListHeart.setImageResource(R.drawable.ic_binder_heart)
+            ivBinderListAlle.setImageResource(R.drawable.ic_binder_alle)
+            ivBinderListOnee.setImageResource(R.drawable.ic_binder_onee)
+            ivBinderListGreen.setImageResource(R.drawable.ic_binder_green)
+        }
+    }
+
+    // 해당 바인더 선택시 이동
+    private fun navigateBinderDetailFragment(position: Int) {
+        binding.apply {
+            if (position == 0) {
+                if (viewModel.state.value.isBudgetExist) {
+
+                }else showAlertDialog(
+                    dialog = AlertDialog(
+                        mainActivity,
+                        title = resources.getString(R.string.binder_list_navigate_budget),
+                        content = resources.getString(R.string.binder_list_navigate_budget_comment)
+                    ) {
+                        navigate(BudgetListFragmentDirections.actionBudgetListFragmentToWeekBudgetFragment())
+                    }, viewLifecycleOwner
+                )
             }
         }
     }

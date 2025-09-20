@@ -51,6 +51,8 @@
     <string name="binder_list">바인더 목록</string>
     <string name="binder_list_week_binder">주간 예산 바인더</string>
     <string name="binder_list_save_binder">저축 바인더</string>
+    <string name="binder_list_navigate_budget">예산 설정 하기</string>
+    <string name="binder_list_navigate_budget_comment">예산을 설정해 주세요.\n예산 설정 화면으로 이동하시겠습니까?</string>
 
     <!-- 이번주 저축 가능한 금액-->
     <string name="week_saving">이번주 저축가능 금액</string>

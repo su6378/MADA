@@ -101,6 +101,11 @@
         android:id="@+id/budgetListFragment"
         android:name="com.example.mada.feature.budget_list.BudgetListFragment"
         android:label="BudgetListFragment"
-        tools:layout="@layout/fragment_budget_list"/>
+        tools:layout="@layout/fragment_budget_list">
+        <action
+            android:id="@+id/action_budgetListFragment_to_weekBudgetFragment"
+            app:destination="@id/weekBudgetFragment"
+            app:popUpTo="@id/homeFragment"/>
+    </fragment>
 
 </navigation>

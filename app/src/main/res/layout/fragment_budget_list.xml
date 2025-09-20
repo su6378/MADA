@@ -76,6 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_binder_cloud"
+            android:layout_marginStart="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_binder_list_heart"
             app:layout_constraintStart_toStartOf="parent"
@@ -115,6 +116,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_binder_green"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="60dp"
             app:layout_constraintStart_toEndOf="@id/iv_binder_list_onee"
             app:layout_constraintTop_toTopOf="@id/iv_binder_list_cloud" />
 
