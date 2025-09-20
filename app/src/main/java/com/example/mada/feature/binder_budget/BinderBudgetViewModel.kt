@@ -49,11 +49,6 @@ class BinderBudgetViewModel @Inject constructor(
         }.catch {
             _result.emit(Result.Finish)
         }.collectLatest { result ->
-            Log.d(TAG, "getBudgetInfo: ${result[0]} ${BudgetUtil.expenditure[0]}\n")
-            Log.d(
-                TAG,
-                "getBudgetInfo: ${round((result[0] - BudgetUtil.expenditure[0]).toDouble() / result[0].toDouble())}"
-            )
             _state.update {
                 it.copy(
                     budgetList = result,
