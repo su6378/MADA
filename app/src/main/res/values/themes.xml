@@ -23,5 +23,14 @@
         <item name="android:fontFamily">@font/pretendard_semibold</item>
     </style>
 
+    <style name="CustomDatePickerTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <!-- 다이얼로그 배경 -->
+        <item name="materialCalendarStyle">@style/CustomCalendarStyle</item>
+    </style>
+
+    <style name="CustomCalendarStyle" parent="Widget.MaterialComponents.MaterialCalendar">
+        <item name="backgroundTint">@color/white</item>
+    </style>
+
     <style name="Theme.MADA" parent="Base.Theme.MADA" />
 </resources>
