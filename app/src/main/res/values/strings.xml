@@ -73,6 +73,12 @@
     <string name="create_binder_save_target_amount_hint">목표 금액을 입력해 주세요</string>
     <string name="create_binder_save_target_period_hint">목표 기간을 입력해 주세요</string>
 
+    <!-- 저축 바인더 상세 -->
+    <string name="binder_save">저축 바인더</string>
+    <string name="binder_save_save_money">저축한 금액</string>
+    <string name="binder_save_save_money_history">저축 이력</string>
+    <string name="binder_save_save_money_no_history">아직 저축을 하지 않았어요!</string>
+
     <!-- 이번주 저축 가능한 금액-->
     <string name="week_saving">이번주 저축가능 금액</string>
     <string name="week_saving_navigate">저축하러 가기</string>
