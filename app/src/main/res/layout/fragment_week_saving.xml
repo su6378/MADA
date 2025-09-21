@@ -43,9 +43,9 @@
             android:id="@+id/iv_blinker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:scaleType="fitEnd"
             android:src="@drawable/ic_blinker"
             app:layout_constraintEnd_toEndOf="parent"
-            android:scaleType="fitEnd"
             app:layout_constraintHorizontal_weight="0.2"
             app:layout_constraintStart_toEndOf="@id/tv_week_saving_comment"
             app:layout_constraintTop_toBottomOf="@id/toolbar_week_saving" />
@@ -279,7 +279,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_week_saving_thursday"
                 app:layout_constraintVertical_weight="0.6"
                 app:strokeColor="#EBEBEB"
-                app:strokeWidth="1dp"/>
+                app:strokeWidth="1dp" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_week_saving_thursday"
@@ -341,7 +341,7 @@
                 app:layout_constraintStart_toEndOf="@id/cv_week_saving_thursday"
                 app:layout_constraintTop_toTopOf="@id/cv_week_saving_thursday"
                 app:strokeColor="#EBEBEB"
-                app:strokeWidth="1dp"/>
+                app:strokeWidth="1dp" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_week_saving_friday"
@@ -403,7 +403,7 @@
                 app:layout_constraintStart_toEndOf="@id/cv_week_saving_friday"
                 app:layout_constraintTop_toTopOf="@id/cv_week_saving_thursday"
                 app:strokeColor="#EBEBEB"
-                app:strokeWidth="1dp"/>
+                app:strokeWidth="1dp" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_week_saving_saturday"
@@ -470,7 +470,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_week_saving_sunday"
                 app:layout_constraintVertical_weight="0.6"
                 app:strokeColor="#EBEBEB"
-                app:strokeWidth="1dp"/>
+                app:strokeWidth="1dp" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_week_saving_sunday"
@@ -585,7 +585,8 @@
             android:text="@string/week_saving_navigate"
             android:textSize="20sp"
             app:cornerRadius="12dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:onClick="@{() -> vm.showSetBudgetDialog()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

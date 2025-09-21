@@ -84,7 +84,7 @@
     <string name="week_saving_navigate">저축하러 가기</string>
     <string name="week_saving_week_money">이번주 저금할 돈</string>
 
-    <!-- 이번주 남는 돈 -->
+    <!-- 이번주 남는 돈 저축하기 -->
     <string name="money_left">이번주 남는 돈</string>
     <string name="money_left_monday">월</string>
     <string name="money_left_tuesday">화</string>
@@ -93,6 +93,8 @@
     <string name="money_left_friday">금</string>
     <string name="money_left_saturday">토</string>
     <string name="money_left_sunday">일</string>
+    <string name="money_left_save">이번주 남는 돈 저축하기</string>
+    <string name="money_left_save_comment">이번주 남는 돈을 저축하시겠습니까?</string>
 
     <!-- 버튼 -->
     <string name="setting">설정하기</string>

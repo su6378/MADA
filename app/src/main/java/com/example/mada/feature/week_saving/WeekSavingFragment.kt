@@ -1,12 +1,16 @@
 package com.example.mada.feature.week_saving
 
+import android.content.Context
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.mada.MainActivity
 import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentWeekSavingBinding
+import com.example.mada.dialog.AlertDialog
+import com.example.mada.feature.week_budget.WeekBudgetFragmentDirections
 import com.example.mada.util.BudgetUtil
 import com.example.mada.util.TextUtil.setColoredSubstrings
 import com.example.mada.util.TextUtil.toWon
@@ -20,6 +24,13 @@ class WeekSavingFragment : BaseFragment<FragmentWeekSavingBinding, WeekSavingVie
     override val layoutResourceId: Int
         get() = R.layout.fragment_week_saving
     override val viewModel: WeekSavingViewModel by viewModels()
+
+    private lateinit var mainActivity: MainActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
 
     override fun initView() {
         with(binding) {}
@@ -41,8 +52,20 @@ class WeekSavingFragment : BaseFragment<FragmentWeekSavingBinding, WeekSavingVie
                 launch {
                     viewModel.action.collect { action ->
                         when (action) {
-                            is WeekSavingAction.ShowToast -> showToast(action.content)
-                            is WeekSavingAction.NavigateWeekBudgetView -> {
+                            WeekSavingAction.ShowSetBudgetDialog -> {
+                                showAlertDialog(
+                                    dialog = AlertDialog(
+                                        mainActivity,
+                                        title = resources.getString(R.string.money_left_save),
+                                        content = resources.getString(R.string.money_left_save_comment)
+                                    ) {
+                                        viewModel.setThisWeekBudget()
+                                    }, viewLifecycleOwner
+                                )
+                            }
+                            WeekSavingAction.NavigateHomeView -> {
+                                showToast("이번주 예산을 저축했습니다 \uD83D\uDE03")
+                                backNavigate()
                             }
                         }
                     }
