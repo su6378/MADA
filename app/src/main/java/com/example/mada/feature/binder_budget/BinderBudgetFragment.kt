@@ -57,8 +57,6 @@ class BinderBudgetFragment : BaseFragment<FragmentBinderBudgetBinding, BinderBud
 
             dropdownMenuBinderBudget.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
                 val selectedWeek = parent.getItemAtPosition(position) as String
-
-                setToday(selectedWeek)
             }
         }
     }
@@ -122,23 +120,6 @@ class BinderBudgetFragment : BaseFragment<FragmentBinderBudgetBinding, BinderBud
         binding.dropdownMenuBinderBudget.apply {
             setAdapter(adapter)
             setText(thisWeek, false)
-        }
-
-        setToday(thisWeek)
-    }
-
-    // 날짜 세팅
-    private fun setToday(thisWeek: String) {
-        binding.apply {
-            var monday = ""
-
-            for (i in dropdownMenu.indices) {
-                if (thisWeek == dropdownMenu[i]) {
-                    monday = thisWeek.split("~")[0].trim()
-                }
-            }
-
-            tvBinderBudgetDay.text = monday
         }
     }
 }

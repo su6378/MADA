@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mada.repository.DataStoreRepository
 import com.example.mada.util.BudgetUtil
+import com.example.mada.util.DateUtil
 import com.example.mada.util.TextUtil.toWon
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -38,8 +39,29 @@ class BinderBudgetViewModel @Inject constructor(
     private val _state: MutableStateFlow<BinderBudgetState> = MutableStateFlow(BinderBudgetState())
     val state: StateFlow<BinderBudgetState> get() = _state.asStateFlow()
 
+    private val days = listOf("월요일", "화요알", "수요일", "목요알", "금요일", "토요일", "일요일")
+
     init {
-        getBudgetInfo()
+        getDateInfo()
+    }
+
+    // 날짜 정보 받기
+    private fun getDateInfo() {
+        viewModelScope.launch {
+            val today = DateUtil.getToday()
+            val dateInfo = DateUtil.getDateInfo()
+
+            Log.d(TAG, "getDateInfo: ${DateUtil.getDateInfo()}")
+            _state.update {
+                it.copy(
+                    day = days[today],
+                    today = today,
+                    todayText = "${dateInfo.first()} ${dateInfo[today + 1]}일"
+                )
+            }
+
+            getBudgetInfo()
+        }
     }
 
     // 예산 정보 받기
@@ -52,11 +74,11 @@ class BinderBudgetViewModel @Inject constructor(
             _state.update {
                 it.copy(
                     budgetList = result,
-                    leftBudget = (result[0] - BudgetUtil.expenditure[0]).toWon(),
-                    budget = result[0].toWon(),
-                    expenditure = BudgetUtil.expenditure[0].toWon(),
-                    budgetProgress = ((result[0] - BudgetUtil.expenditure[0]).toDouble() / result[0].toDouble() * 100).roundToInt(),
-                    budgetProgressText = "${((result[0] - BudgetUtil.expenditure[0]).toDouble() / result[0].toDouble() * 100).roundToInt()}%"
+                    leftBudget = (result[_state.value.today] - BudgetUtil.expenditure[_state.value.today]).toWon(),
+                    budget = result[_state.value.today].toWon(),
+                    expenditure = BudgetUtil.expenditure[_state.value.today].toWon(),
+                    budgetProgress = ((result[_state.value.today] - BudgetUtil.expenditure[_state.value.today]).toDouble() / result[_state.value.today].toDouble() * 100).roundToInt(),
+                    budgetProgressText = "${((result[_state.value.today] - BudgetUtil.expenditure[_state.value.today]).toDouble() / result[_state.value.today].toDouble() * 100).roundToInt()}%"
                 )
             }
         }
@@ -64,7 +86,9 @@ class BinderBudgetViewModel @Inject constructor(
 }
 
 data class BinderBudgetState(
-    var isSaveAble: Boolean = false,
+    var today: Int = 0,
+    var todayText: String = "",
+    var day: String = "",
     var budgetList: List<Int> = arrayListOf(),
     var leftBudget: String = "",
     var budget: String = "",
