@@ -201,7 +201,7 @@
             android:textSize="20sp"
             app:cornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:onClick="@{() -> vm.navigateBinderSaveFragment()}" />
+            app:onClick="@{() -> vm.showCreateSaveBinderDialog()}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

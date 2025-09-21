@@ -25,16 +25,34 @@ class CreateBinderSaveViewModel @Inject constructor(
     private val _result: MutableSharedFlow<Result> = MutableSharedFlow()
     val result: SharedFlow<Result> get() = _result.asSharedFlow()
 
-    private val _state: MutableStateFlow<CreateBinderSaveState> = MutableStateFlow(CreateBinderSaveState())
+    private val _state: MutableStateFlow<CreateBinderSaveState> =
+        MutableStateFlow(CreateBinderSaveState())
     val state: StateFlow<CreateBinderSaveState> get() = _state.asStateFlow()
 
     init {
 
     }
 
-    fun navigateBinderSaveFragment() = viewModelScope.launch {
-        _action.emit(CreateBinderSaveAction.NavigateBinderSaveView)
+    fun showCreateSaveBinderDialog() = viewModelScope.launch {
+        _action.emit(CreateBinderSaveAction.ShowCreateSaveBinderDialog)
     }
+
+    fun createSaveBinder(name: String, targetAmount: String, targetPeriod: String) =
+        viewModelScope.launch {
+            runCatching {
+                _result.emit(Result.Loading)
+                dataStoreRepository.setSaveBinder(
+                    name = name,
+                    targetAmount = targetAmount,
+                    targetPeriod = targetPeriod
+                )
+            }.onSuccess { // 응답 성공
+                _result.emit(Result.Finish)
+                _action.emit(CreateBinderSaveAction.NavigateBinderSaveView)
+            }.onFailure { // 응답 실패
+                _result.emit(Result.Finish)
+            }
+        }
 }
 
 data class CreateBinderSaveState(
@@ -43,6 +61,7 @@ data class CreateBinderSaveState(
 
 sealed interface CreateBinderSaveAction {
     class ShowToast(val content: String) : CreateBinderSaveAction
+    data object ShowCreateSaveBinderDialog : CreateBinderSaveAction
     data object NavigateBinderSaveView : CreateBinderSaveAction
 }
 

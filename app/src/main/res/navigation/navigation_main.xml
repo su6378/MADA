@@ -130,6 +130,11 @@
         android:id="@+id/createBinderSaveFragment"
         android:name="com.example.mada.feature.create_CreateBinder_save.CreateBinderSaveFragment"
         android:label="CreateBinderSaveFragment"
-        tools:layout="@layout/fragment_create_binder_save"/>
+        tools:layout="@layout/fragment_create_binder_save">
+        <action
+            android:id="@+id/action_createBinderSaveFragment_to_binderSaveFragment"
+            app:destination="@id/binderSaveFragment"
+            app:popUpTo="@id/budgetListFragment"/>
+    </fragment>
 
 </navigation>

@@ -12,6 +12,8 @@ import com.example.mada.MainActivity
 import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentCreateBinderSaveBinding
+import com.example.mada.dialog.AlertDialog
+import com.example.mada.feature.budget_list.BudgetListFragmentDirections
 import com.example.mada.util.DateUtil
 import com.example.mada.util.TextUtil.setColoredSubstrings
 import com.example.mada.util.TextUtil.toWon
@@ -38,6 +40,7 @@ class CreateBinderSaveFragment :
     private var amount: Int = 0
     private var selectDate: Long = 0
     private var savingAmountPerMonth: Int = 0
+    private var targetPeriod: String = ""
     private var ranges: List<String> = listOf()
 
 
@@ -77,7 +80,35 @@ class CreateBinderSaveFragment :
                     viewModel.action.collect { action ->
                         when (action) {
                             is CreateBinderSaveAction.ShowToast -> showToast(action.content)
-                            is CreateBinderSaveAction.NavigateBinderSaveView -> {}
+                            is CreateBinderSaveAction.ShowCreateSaveBinderDialog -> {
+                                binding.apply {
+                                    if (etCreateBinderSaveName.text.isNullOrEmpty() || etCreateBinderSaveTargetAmount.text.isNullOrEmpty() || etCreateBinderSaveTargetPeriod.text.isNullOrEmpty()) {
+                                        showToast("모든 정보를 입력해 주세요!")
+                                    } else {
+                                        showAlertDialog(
+                                            dialog = AlertDialog(
+                                                mainActivity,
+                                                title = resources.getString(R.string.binder_budget_create_binder_create_binder),
+                                                content = resources.getString(R.string.binder_budget_create_binder_create_binder_comment)
+                                            ) {
+                                                viewModel.createSaveBinder(
+                                                    name = etCreateBinderSaveName.text.toString(),
+                                                    targetAmount = amount.toWon(),
+                                                    targetPeriod = targetPeriod
+                                                )
+
+                                            }, viewLifecycleOwner
+                                        )
+                                    }
+                                }
+                            }
+
+                            is CreateBinderSaveAction.NavigateBinderSaveView -> {
+                                showToast("저축 바인더를 생성했어요!")
+                                navigate(
+                                    CreateBinderSaveFragmentDirections.actionCreateBinderSaveFragmentToBinderSaveFragment()
+                                )
+                            }
                         }
                     }
                 }
@@ -136,6 +167,7 @@ class CreateBinderSaveFragment :
 
         val picker = MaterialDatePicker.Builder.datePicker()
             .setTitleText("목표 기간 선택")
+            .setTheme(R.style.CustomDatePickerTheme)
             .setCalendarConstraints(constraintsBuilder)
             .build()
 
@@ -153,6 +185,7 @@ class CreateBinderSaveFragment :
                     )
                 )
                 etCreateBinderSaveTargetPeriod.setText(date)
+                targetPeriod = date
 
                 amount =
                     if (targetAmount.isNullOrEmpty()) 0 else etCreateBinderSaveTargetAmount.text.toString()
