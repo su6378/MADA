@@ -236,20 +236,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     // 오늘 쓸 수 있는 돈 + 남은 금액에 따른 % 컬러 변경
     private fun setTodayMoneyLeft(state: HomeState) {
         binding.apply {
-            if (state.isSigned) { // 계좌 개설을 한 경우
-                if (state.isBudgetExist) { // 예산 설정한 경우
-                    "${(state.budget[state.today] - BudgetUtil.expenditure[state.today]).toWon()} 남았어요!".also {
-                        tvTodayLeftContent.text = it
-                    }
-                } else tvTodayLeftContent.text =
-                    resources.getString(R.string.all_one_mada_need_budget)
-            } else tvTodayLeftContent.text =
-                resources.getString(R.string.money_diary_build_comment_initial)
-
             val progress =
                 (((state.budget[state.today] - BudgetUtil.expenditure[state.today]).toDouble() / state.budget[state.today].toDouble()) * 100).roundToInt()
 
-            if ((((state.budget[state.today] - BudgetUtil.expenditure[state.today]).toDouble() / state.budget[state.today].toDouble()) * 100).roundToInt() < 50) {
+            if (progress < 50) {
                 tvHomeTodayProgress.setTextColor(
                     ContextCompat.getColor(
                         requireContext(), R.color.red

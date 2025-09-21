@@ -1,6 +1,7 @@
 package com.example.mada.feature.home
 
 import android.content.res.Resources
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mada.repository.DataStoreRepository
@@ -75,9 +76,9 @@ class HomeViewModel @Inject constructor(
         }.catch {
             _result.emit(Result.Finish)
         }.collectLatest { result ->
-            _state.update {
-                it.copy(isBudgetExist = result)
-            }
+            _state.update { it.copy(isBudgetExist = result) }
+            Log.d(TAG, "getBudgetExist: $result")
+            if (!result) _state.update { it.copy(todayBudgetComment = "예산을 설정해 주세요 \uD83D\uDE03") }
         }
     }
 
@@ -89,6 +90,8 @@ class HomeViewModel @Inject constructor(
             _result.emit(Result.Finish)
         }.collectLatest { result ->
             _state.update { it.copy(isSigned = result) }
+
+            if (!result) _state.update { it.copy(todayBudgetComment = "계좌를 개설해 주세요 \uD83E\uDD72") }
         }
     }
 
@@ -102,15 +105,33 @@ class HomeViewModel @Inject constructor(
             _state.update { it.copy(budget = result) }
 
             if (result.isNotEmpty() && _state.value.isBudgetExist) {
-                val progress =
-                    (((state.value.budget[state.value.today] - BudgetUtil.expenditure[state.value.today]).toDouble() / state.value.budget[state.value.today].toDouble()) * 100).roundToInt()
+                var progress = 0
+
+                if (((((state.value.budget[state.value.today] - BudgetUtil.expenditure[state.value.today]).toDouble() / state.value.budget[state.value.today].toDouble()) * 100).roundToInt()) > 0)
+                    progress =
+                        ((((state.value.budget[state.value.today] - BudgetUtil.expenditure[state.value.today]).toDouble() / state.value.budget[state.value.today].toDouble()) * 100).roundToInt())
+
+                var todayBudget = 0
+
+                if ((result[state.value.today] - BudgetUtil.expenditure[state.value.today]) > 0) todayBudget =
+                    (result[state.value.today] - BudgetUtil.expenditure[state.value.today])
 
                 _state.update {
                     it.copy(
                         todayProgress = progress,
                         todayProgressText = "${progress}%",
+                        todayBudgetComment = "${todayBudget.toWon()} 남았어요!",
                         todayBudget = result[state.value.today].toWon(),
-                        weekLeftContent = "${(result[state.value.today] - BudgetUtil.expenditure[state.value.today]).toWon()} 저축할 수 있어요!"
+                        weekLeftContent = "${(result.sum() - BudgetUtil.expenditure.sum()).toWon()} 저축할 수 있어요!"
+                    )
+                }
+            } else {
+                _state.update {
+                    it.copy(
+                        todayProgress = 0,
+                        todayProgressText = "0%",
+                        todayBudget = 0.toWon(),
+                        weekLeftContent = "${0.toWon()} 저축할 수 있어요!"
                     )
                 }
             }
@@ -150,6 +171,7 @@ data class HomeState(
     var todayProgress: Int = 0,
     var todayProgressText: String = "0%",
     var todayBudget: String = "0원",
+    var todayBudgetComment: String = "0원 남았어요!",
     var weekLeftContent: String = "0원 저축할 수 있어요!",
     var isSaveAble: Boolean = false,
     var step: Int = 0,
