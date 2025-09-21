@@ -71,7 +71,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                 }, viewLifecycleOwner
                             )
 
-                            is HomeAction.NavigateWeekBudgetView -> navigate(HomeFragmentDirections.actionHomeFragmentToWeekBudgetFragment())
                             is HomeAction.NavigateWeekSavingView -> {
                                 binding.apply {
                                     if (!viewModel.state.value.isSigned) {
@@ -109,13 +108,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                     }
                                 }
                             }
-
-                            is HomeAction.NavigateOnBoardingView -> showAlertDialog(
-                                dialog = AlertDialog(
-                                    mainActivity
-                                ) { navigate(HomeFragmentDirections.actionHomeFragmentToAccountFragment()) },
-                                viewLifecycleOwner
-                            )
 
                             is HomeAction.NavigateBinderListView -> {
                                 if (!binding.vm!!.state.value.isSigned) {

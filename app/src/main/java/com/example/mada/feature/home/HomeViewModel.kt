@@ -127,16 +127,8 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun navigateWeekBudgetFragment() = viewModelScope.launch {
-        _action.emit(HomeAction.NavigateWeekBudgetView)
-    }
-
     fun navigateWeekSavingFragment() = viewModelScope.launch {
         _action.emit(HomeAction.NavigateWeekSavingView)
-    }
-
-    fun navigateAccountFragment() = viewModelScope.launch {
-        _action.emit(HomeAction.NavigateOnBoardingView)
     }
 
     fun navigateBinderListFragment() = viewModelScope.launch {
@@ -165,9 +157,7 @@ data class HomeState(
 
 sealed interface HomeAction {
     class ShowToast(val content: String) : HomeAction
-    data object NavigateWeekBudgetView : HomeAction
     data object NavigateWeekSavingView : HomeAction
-    data object NavigateOnBoardingView : HomeAction
     data object NavigateBinderListView : HomeAction
     data object ShowCreateBudgetDialog : HomeAction
 }
