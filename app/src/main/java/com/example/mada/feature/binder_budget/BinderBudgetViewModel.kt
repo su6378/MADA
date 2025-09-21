@@ -51,7 +51,6 @@ class BinderBudgetViewModel @Inject constructor(
             val today = DateUtil.getToday()
             val dateInfo = DateUtil.getDateInfo()
 
-            Log.d(TAG, "getDateInfo: ${DateUtil.getDateInfo()}")
             _state.update {
                 it.copy(
                     day = days[today],

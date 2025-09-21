@@ -78,7 +78,6 @@ class HomeViewModel @Inject constructor(
             _result.emit(Result.Finish)
         }.collectLatest { result ->
             _state.update { it.copy(isBudgetExist = result) }
-            Log.d(TAG, "getBudgetExist: $result")
             if (!result) _state.update { it.copy(todayBudgetComment = "예산을 설정해 주세요 \uD83D\uDE03") }
         }
     }
