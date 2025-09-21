@@ -180,7 +180,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                         title = resources.getString(R.string.home_share_image),
                                         content = resources.getString(R.string.home_share_image_comment)
                                     ) {
-                                        shareDrawableImage(requireContext(), R.drawable.bg_home_last_week)
+                                        shareDrawableImage(requireContext(), viewModel.state.value)
                                     }, viewLifecycleOwner
                                 )
                             }
@@ -303,7 +303,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     // 집 이미지 공유
-    private fun shareDrawableImage(context: Context, drawableId: Int) {
+    private fun shareDrawableImage(context: Context, state: HomeState) {
+        var drawableId: Int = 0
+
+        when(state.step) {
+            0 -> drawableId = R.drawable.bg_home_initial
+            1 -> drawableId = R.drawable.bg_home_one_week
+            2 -> drawableId = R.drawable.bg_home_two_week
+            else -> drawableId = R.drawable.bg_home_last_week
+        }
+
         // Drawable → Bitmap 변환
         val drawable = ContextCompat.getDrawable(context, drawableId)!!
         val bitmap = (drawable as BitmapDrawable).bitmap
