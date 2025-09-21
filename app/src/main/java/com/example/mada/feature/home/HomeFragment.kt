@@ -15,6 +15,7 @@ import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentHomeBinding
 import com.example.mada.dialog.AlertDialog
+import com.example.mada.feature.budget_list.BudgetListFragmentDirections
 import com.example.mada.util.BudgetUtil
 import com.example.mada.util.TextUtil.toWon
 import dagger.hilt.android.AndroidEntryPoint
@@ -91,6 +92,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                                 resources.getString(
                                                     R.string.home_save_available
                                                 )
+                                            ) else if (!viewModel.state.value.isSaveBudgetExist) showAlertDialog(
+                                                dialog = AlertDialog(
+                                                    mainActivity,
+                                                    title = resources.getString(R.string.binder_budget_create_binder_save),
+                                                    content = resources.getString(R.string.binder_budget_create_binder_save_comment)
+                                                ) {
+                                                    navigate(HomeFragmentDirections.actionHomeFragmentToCreateBinderSaveFragment())
+                                                }, viewLifecycleOwner
                                             )
                                             else navigate(HomeFragmentDirections.actionHomeFragmentToWeekSavingFragment())
                                         }

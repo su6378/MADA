@@ -44,6 +44,7 @@ class HomeViewModel @Inject constructor(
         getBudgetExist()
         getBudgetInfo()
         getStepInfo()
+        getSaveBudgetExist()
     }
 
     // 날짜 정보 받기
@@ -148,6 +149,16 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private fun getSaveBudgetExist() = viewModelScope.launch {
+        dataStoreRepository.getSaveBinder().onStart {
+            _result.emit(Result.Loading)
+        }.catch {
+            _result.emit(Result.Finish)
+        }.collectLatest { result ->
+            if (result.isNotEmpty()) _state.update { it.copy(isSaveBudgetExist = true) }
+        }
+    }
+
     fun navigateWeekSavingFragment() = viewModelScope.launch {
         _action.emit(HomeAction.NavigateWeekSavingView)
     }
@@ -175,6 +186,7 @@ data class HomeState(
     var weekLeftContent: String = "0원 저축할 수 있어요!",
     var isSaveAble: Boolean = false,
     var step: Int = 0,
+    var isSaveBudgetExist: Boolean = false,
 )
 
 sealed interface HomeAction {
