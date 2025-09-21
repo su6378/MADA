@@ -84,6 +84,7 @@ class BinderSaveViewModel @Inject constructor(
                     _state.update {
                         it.copy(
                             saveMoney = (result.sum() - BudgetUtil.expenditure.sum()).toWon(),
+                            budgetProgress = ((result.sum() - BudgetUtil.expenditure.sum()).toDouble() / result.sum().toDouble() * 100).roundToInt(),
                             budgetProgressText ="${((result.sum() - BudgetUtil.expenditure.sum()).toDouble() / result.sum().toDouble() * 100).roundToInt()}% 달성중",
                             saveWeek = DateUtil.getCurrentWeekInfo(),
                             saveWeekMoney = result.sum().toWon()
