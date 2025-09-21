@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_homeFragment_to_budgetListFragment"
             app:destination="@id/budgetListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_binderBudgetFragment"
+            app:destination="@id/binderBudgetFragment" />
     </fragment>
 
     <fragment

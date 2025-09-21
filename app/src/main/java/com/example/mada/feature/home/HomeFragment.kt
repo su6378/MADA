@@ -74,7 +74,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                             is HomeAction.NavigateWeekBudgetView -> navigate(HomeFragmentDirections.actionHomeFragmentToWeekBudgetFragment())
                             is HomeAction.NavigateWeekSavingView -> {
                                 binding.apply {
-                                    if (!vm!!.state.value.isSigned) {
+                                    if (!viewModel.state.value.isSigned) {
                                         showAlertDialog(
                                             dialog = AlertDialog(
                                                 mainActivity,
@@ -87,12 +87,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                             }, viewLifecycleOwner
                                         )
                                     }else {
-                                        if (!binding.vm!!.state.value.isSaveAble) showToast(
-                                            resources.getString(
-                                                R.string.home_save_available
+                                        if (viewModel.state.value.isBudgetExist) {
+                                            if (!binding.vm!!.state.value.isSaveAble) showToast(
+                                                resources.getString(
+                                                    R.string.home_save_available
+                                                )
                                             )
+                                            else navigate(HomeFragmentDirections.actionHomeFragmentToWeekSavingFragment())
+                                        }
+                                        else showAlertDialog(
+                                            dialog = AlertDialog(
+                                                mainActivity,
+                                                title = resources.getString(R.string.home_set_budget),
+                                                content = resources.getString(R.string.home_set_budget_comment),
+                                            ) {
+                                                navigate(
+                                                    HomeFragmentDirections.actionHomeFragmentToWeekBudgetFragment()
+                                                )
+                                            }, viewLifecycleOwner
                                         )
-                                        else navigate(HomeFragmentDirections.actionHomeFragmentToWeekSavingFragment())
                                     }
                                 }
                             }
@@ -119,6 +132,39 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                     )
                                 } else navigate(HomeFragmentDirections.actionHomeFragmentToBudgetListFragment())
                             }
+
+                            is HomeAction.ShowCreateBudgetDialog -> {
+                                binding.apply {
+                                    if (!viewModel.state.value.isSigned) {
+                                        showAlertDialog(
+                                            dialog = AlertDialog(
+                                                mainActivity,
+                                                title = resources.getString(R.string.home_create_account),
+                                                content = resources.getString(R.string.home_recommend_create_account)
+                                            ) {
+                                                navigate(
+                                                    HomeFragmentDirections.actionHomeFragmentToAccountFragment()
+                                                )
+                                            }, viewLifecycleOwner
+                                        )
+                                    }else {
+                                        if (viewModel.state.value.isBudgetExist) {
+                                            navigate(HomeFragmentDirections.actionHomeFragmentToBinderBudgetFragment())
+                                        }
+                                        else showAlertDialog(
+                                            dialog = AlertDialog(
+                                                mainActivity,
+                                                title = resources.getString(R.string.home_set_budget),
+                                                content = resources.getString(R.string.home_set_budget_comment),
+                                            ) {
+                                                navigate(
+                                                    HomeFragmentDirections.actionHomeFragmentToWeekBudgetFragment()
+                                                )
+                                            }, viewLifecycleOwner
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -144,24 +190,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                         setTodayMoneyLeft(state)
                         setCalendarHammer(state)
                         setViewByStep(state)
-
-                        if (state.isSigned) { // 계좌 개설을 한 경우
-                            if (!state.isBudgetExist) { // 예산 설정을 한 경우
-                                binding.apply {
-                                    showAlertDialog(
-                                        dialog = AlertDialog(
-                                            mainActivity,
-                                            title = "예산 설정 하러 가기",
-                                            content = "예산이 설정되어 있지 않아요. 예산 설정 화면으로 이동하시겠어요?"
-                                        ) {
-                                            navigate(
-                                                HomeFragmentDirections.actionHomeFragmentToWeekBudgetFragment()
-                                            )
-                                        }, viewLifecycleOwner
-                                    )
-                                }
-                            }
-                        }
                     }
                 }
             }
