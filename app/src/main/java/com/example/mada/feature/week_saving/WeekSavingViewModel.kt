@@ -3,6 +3,7 @@ package com.example.mada.feature.week_saving
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mada.feature.week_budget.WeekBudgetAction
 import com.example.mada.repository.DataStoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,9 +39,9 @@ class WeekSavingViewModel @Inject constructor(
 
     init {
         getBudget()
+        getStepInfo()
     }
 
-    //예산 요청
     private fun getBudget() {
         viewModelScope.launch {
             dataStoreRepository.getBudget().onStart {
@@ -53,18 +55,56 @@ class WeekSavingViewModel @Inject constructor(
         }
     }
 
-    fun navigateWeekBudgetFragment() = viewModelScope.launch {
-        _action.emit(WeekSavingAction.NavigateWeekBudgetView)
+    private fun getStepInfo() = viewModelScope.launch {
+        dataStoreRepository.getStep().onStart {
+            _result.emit(Result.Loading)
+        }.catch {
+            _result.emit(Result.Finish)
+        }.collectLatest { result ->
+            _state.update {
+                it.copy(step = result)
+            }
+            _result.emit(Result.Finish)
+        }
+    }
+
+    fun setThisWeekBudget() = viewModelScope.launch {
+        runCatching {
+            _result.emit(Result.Loading)
+            dataStoreRepository.setBudget()
+        }.onSuccess { // 응답 성공
+            _result.emit(Result.Finish)
+            setStepInfo()
+        }.onFailure { // 응답 실패
+            _result.emit(Result.Finish)
+        }
+    }
+
+    fun setStepInfo() = viewModelScope.launch {
+        runCatching {
+            _result.emit(Result.Loading)
+            dataStoreRepository.setStep(_state.value.step + 1)
+        }.onSuccess { // 응답 성공
+            _result.emit(Result.Finish)
+            _action.emit(WeekSavingAction.NavigateHomeView)
+
+        }.onFailure { // 응답 실패
+            _result.emit(Result.Finish)
+        }
+    }
+
+    fun showSetBudgetDialog() = viewModelScope.launch {
+        _action.emit(WeekSavingAction.ShowSetBudgetDialog)
     }
 }
 
 data class WeekSavingState(
-    val dataSomething: String = "",
+    var step: Int = 0,
 )
 
 sealed interface WeekSavingAction {
-    class ShowToast(val content: String) : WeekSavingAction
-    data object NavigateWeekBudgetView : WeekSavingAction
+    data object ShowSetBudgetDialog : WeekSavingAction
+    data object NavigateHomeView : WeekSavingAction
 }
 
 sealed interface Result {
