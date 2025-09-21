@@ -71,23 +71,12 @@ class WeekSavingViewModel @Inject constructor(
     fun setThisWeekBudget() = viewModelScope.launch {
         runCatching {
             _result.emit(Result.Loading)
+            dataStoreRepository.setBudgetExist(false)
             dataStoreRepository.setBudget()
-        }.onSuccess { // 응답 성공
-            _result.emit(Result.Finish)
-            setStepInfo()
-        }.onFailure { // 응답 실패
-            _result.emit(Result.Finish)
-        }
-    }
-
-    fun setStepInfo() = viewModelScope.launch {
-        runCatching {
-            _result.emit(Result.Loading)
             dataStoreRepository.setStep(_state.value.step + 1)
         }.onSuccess { // 응답 성공
             _result.emit(Result.Finish)
             _action.emit(WeekSavingAction.NavigateHomeView)
-
         }.onFailure { // 응답 실패
             _result.emit(Result.Finish)
         }

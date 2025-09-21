@@ -37,6 +37,7 @@ class HomeViewModel @Inject constructor(
     init {
         getDateInfo()
         getAccountInfo()
+        getBudgetExist()
         getBudgetInfo()
     }
 
@@ -63,6 +64,16 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private fun getBudgetExist() = viewModelScope.launch {
+        dataStoreRepository.getBudgetExist().onStart {
+            _result.emit(Result.Loading)
+        }.catch {
+            _result.emit(Result.Finish)
+        }.collectLatest { result ->
+            _state.update { it.copy(isBudgetExist = result) }
+        }
+    }
+
     // 계좌 개설 유무
     private fun getAccountInfo() = viewModelScope.launch {
         dataStoreRepository.getAccount().onStart {
@@ -82,12 +93,6 @@ class HomeViewModel @Inject constructor(
             _result.emit(Result.Finish)
         }.collectLatest { result ->
             _state.update { it.copy(budget = result) }
-
-            if (result.sum() > 0) {
-                _state.update { it.copy(isBudgetExist = true) }
-            } else {
-                _state.update { it.copy(isBudgetExist = false) }
-            }
         }
     }
 

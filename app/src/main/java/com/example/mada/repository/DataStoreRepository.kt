@@ -17,6 +17,10 @@ class DataStoreRepository @Inject constructor(
 
     suspend fun getCard() = dataStore.getCard()
 
+    suspend fun setBudgetExist(exist: Boolean) = dataStore.setBudgetExist(exist)
+
+    suspend fun getBudgetExist() = dataStore.getBudgetExist()
+
     suspend fun setBudget(
         monday: Int = 0,
         tuesday: Int = 0,

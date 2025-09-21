@@ -39,6 +39,7 @@ class AllOneViewModel @Inject constructor(
     init {
         getAccount()
         getCard()
+        getBudget()
         getMoney()
     }
 
@@ -55,6 +56,20 @@ class AllOneViewModel @Inject constructor(
         }
     }
 
+    private fun getBudget() {
+        viewModelScope.launch {
+            dataStoreRepository.getBudgetExist().onStart {
+                _result.emit(Result.Loading)
+            }.catch {
+                _result.emit(Result.Finish)
+            }.collectLatest { result ->
+                _state.update { it.copy(isBudgetExist = true)
+
+                }
+            }
+        }
+    }
+
     private fun getMoney() {
         viewModelScope.launch {
             dataStoreRepository.getBudget().onStart {
@@ -66,7 +81,6 @@ class AllOneViewModel @Inject constructor(
 
                 if (result.sum() > 0) _state.update {
                     it.copy(
-                        isBudgetExist = true,
                         money = result[today] - BudgetUtil.expenditure[today]
                     )
                 }

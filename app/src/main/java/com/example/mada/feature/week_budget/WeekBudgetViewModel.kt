@@ -72,6 +72,7 @@ class WeekBudgetViewModel @Inject constructor(
         viewModelScope.launch {
             runCatching {
                 _result.emit(Result.Loading)
+                dataStoreRepository.setBudgetExist(true)
                 dataStoreRepository.setBudget(
                     monday = budgetInfo[0],
                     tuesday = budgetInfo[1],

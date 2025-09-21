@@ -44,16 +44,12 @@ class BudgetListViewModel @Inject constructor(
 
     // 예산 정보 받기
     private fun getBudgetInfo() = viewModelScope.launch {
-        dataStoreRepository.getBudget().onStart {
+        dataStoreRepository.getBudgetExist().onStart {
             _result.emit(Result.Loading)
         }.catch {
             _result.emit(Result.Finish)
         }.collectLatest { result ->
-            if (result.sum() > 0) {
-                _state.update { it.copy(isBudgetExist = true) }
-            } else {
-                _state.update { it.copy(isBudgetExist = false) }
-            }
+            _state.update { it.copy(isBudgetExist = result) }
         }
     }
 

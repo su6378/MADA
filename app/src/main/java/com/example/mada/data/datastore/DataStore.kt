@@ -28,6 +28,8 @@ class DataStore(
     private val sundayPreference = intPreferencesKey("SUNDAY")
     private val saveBinderPreference = stringSetPreferencesKey("SAVE")
     private val stepPreference = intPreferencesKey("STEP")
+    private val budgetExistPreference = booleanPreferencesKey("EXIST")
+    private val oneBudgetPreference = stringSetPreferencesKey("ONE")
 
     suspend fun setAccount(account: Boolean) {
         context.dataStore.edit { preference ->
@@ -68,6 +70,27 @@ class DataStore(
             }
             .map { prefs ->
                 prefs[cardPreference] ?: false
+            }
+    }
+
+    suspend fun setBudgetExist(exist: Boolean) {
+        context.dataStore.edit { preference ->
+            preference[budgetExistPreference] = exist
+        }
+    }
+
+    suspend fun getBudgetExist(): Flow<Boolean> {
+        return context.dataStore.data
+            .catch { exception ->
+                if (exception is IOException) {
+                    exception.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw exception
+                }
+            }
+            .map { prefs ->
+                prefs[budgetExistPreference] ?: false
             }
     }
 
