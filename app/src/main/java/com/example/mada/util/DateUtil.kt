@@ -105,4 +105,16 @@ object DateUtil {
 
         return ceil(goalAmount.toDouble() / months).toInt()
     }
+
+    fun getCurrentWeekInfo(): String {
+        val calendar = Calendar.getInstance(Locale.KOREA)
+
+        // 주 시작 요일을 월요일로 설정
+        calendar.firstDayOfWeek = Calendar.MONDAY
+
+        val month = calendar.get(Calendar.MONTH) + 1 // Calendar.MONTH는 0부터 시작
+        val weekOfMonth = calendar.get(Calendar.WEEK_OF_MONTH)
+
+        return "${month}월 ${weekOfMonth}주차"
+    }
 }
