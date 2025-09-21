@@ -4,7 +4,9 @@ import android.content.res.Resources
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mada.repository.DataStoreRepository
+import com.example.mada.util.BudgetUtil
 import com.example.mada.util.DateUtil
+import com.example.mada.util.TextUtil.toWon
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,6 +20,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 private const val TAG = "DX"
 
@@ -39,6 +42,7 @@ class HomeViewModel @Inject constructor(
         getAccountInfo()
         getBudgetExist()
         getBudgetInfo()
+        getStepInfo()
     }
 
     // 날짜 정보 받기
@@ -64,13 +68,16 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    // 예산 설정 유무
     private fun getBudgetExist() = viewModelScope.launch {
         dataStoreRepository.getBudgetExist().onStart {
             _result.emit(Result.Loading)
         }.catch {
             _result.emit(Result.Finish)
         }.collectLatest { result ->
-            _state.update { it.copy(isBudgetExist = result) }
+            _state.update {
+                it.copy(isBudgetExist = result)
+            }
         }
     }
 
@@ -93,6 +100,30 @@ class HomeViewModel @Inject constructor(
             _result.emit(Result.Finish)
         }.collectLatest { result ->
             _state.update { it.copy(budget = result) }
+
+            if (result.isNotEmpty() && _state.value.isBudgetExist) {
+                val progress =
+                    (((state.value.budget[state.value.today] - BudgetUtil.expenditure[state.value.today]).toDouble() / state.value.budget[state.value.today].toDouble()) * 100).roundToInt()
+
+                _state.update {
+                    it.copy(
+                        todayProgress = progress,
+                        todayProgressText = "${progress}%",
+                        todayBudget = result[state.value.today].toWon(),
+                        weekLeftContent = "${(result[state.value.today] - BudgetUtil.expenditure[state.value.today]).toWon()} 저축할 수 있어요!"
+                    )
+                }
+            }
+        }
+    }
+
+    private fun getStepInfo() = viewModelScope.launch {
+        dataStoreRepository.getStep().onStart {
+            _result.emit(Result.Loading)
+        }.catch {
+            _result.emit(Result.Finish)
+        }.collectLatest { result ->
+            _state.update { it.copy(step = result) }
         }
     }
 
@@ -120,10 +151,12 @@ data class HomeState(
     var month: String = "",
     val week: List<String> = arrayListOf(),
     var today: Int = 0,
-    var todayProgress: String = "0%",
+    var todayProgress: Int = 0,
+    var todayProgressText: String = "0%",
     var todayBudget: String = "0원",
     var weekLeftContent: String = "0원 저축할 수 있어요!",
     var isSaveAble: Boolean = false,
+    var step: Int = 0,
 )
 
 sealed interface HomeAction {

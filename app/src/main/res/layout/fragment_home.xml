@@ -57,10 +57,22 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
                     android:src="@drawable/ic_home_diary"
-                    app:onClick="@{() -> vm.navigateBinderListFragment()}"
                     app:layout_constraintBottom_toBottomOf="@id/tv_home_month"
                     app:layout_constraintEnd_toStartOf="@id/iv_home_alarm"
-                    app:layout_constraintTop_toTopOf="@id/tv_home_month" />
+                    app:layout_constraintTop_toTopOf="@id/tv_home_month"
+                    app:onClick="@{() -> vm.navigateBinderListFragment()}" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_home_create_budget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="-26dp"
+                    android:elevation="10dp"
+                    android:src="@drawable/ballon_create_budget"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="@id/iv_home_diary"
+                    app:layout_constraintTop_toBottomOf="@id/iv_home_diary" />
+
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_home_alarm"
@@ -417,9 +429,9 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="18dp"
                             android:elevation="10dp"
-                            android:textSize="14sp"
                             android:fontFamily="@font/pretendard_medium"
                             android:text="@{vm.state.week[5]}"
+                            android:textSize="14sp"
                             android:visibility="invisible"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@id/tv_saturday"
@@ -519,79 +531,32 @@
                     app:layout_constraintTop_toBottomOf="@id/cv_home_week_calendar" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_balloon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:paddingHorizontal="10dp"
-                    android:src="@drawable/ic_balloon"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/cl_home_background" />
-
-                <TextView
-                    android:id="@+id/tv_home_build_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:textColor="@color/nh_green"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@id/iv_balloon"
-                    app:layout_constraintStart_toStartOf="@id/iv_balloon"
-                    app:layout_constraintTop_toTopOf="@id/iv_balloon" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_home_initial"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="56dp"
-                    android:layout_marginTop="10dp"
-                    android:visibility="invisible"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="4dp"
-                    app:layout_constraintTop_toBottomOf="@id/iv_balloon"
-                    app:onClick="@{() -> vm.navigateAccountFragment()}"
-                    app:strokeWidth="0dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/iv_home_initial"
-                            android:layout_width="354dp"
-                            android:layout_height="266dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_home_initial"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_home"
-                    android:visibility="invisible"
+                    android:layout_marginTop="40dp"
+                    android:src="@drawable/bg_home_initial"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_balloon" />
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_week_calendar" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_home_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="-10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/ic_share"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_home"
+                    app:layout_constraintEnd_toEndOf="@id/iv_home" />
+
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_home_today_left_money"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="40dp"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:layout_constraintTop_toBottomOf="@id/iv_home"
@@ -633,7 +598,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="20dp"
                             android:fontFamily="@font/pretendard_semibold"
-                            android:text="@{vm.state.todayProgress}"
+                            android:text="@{vm.state.todayProgressText}"
                             android:textColor="@color/nh_green"
                             android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="@id/tv_today_left_content"
@@ -647,9 +612,8 @@
                             android:layout_height="6dp"
                             android:layout_marginHorizontal="20dp"
                             android:layout_marginTop="12dp"
-                            android:indeterminateTint="@color/orange"
                             android:max="100"
-                            android:progress="0"
+                            android:progress="@{vm.state.todayProgress}"
                             android:progressDrawable="@drawable/progress_home"
                             app:layout_constraintTop_toBottomOf="@id/tv_today_left_content" />
 

@@ -3,6 +3,9 @@ package com.example.mada.feature.home
 import android.content.Context
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.view.marginEnd
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +19,7 @@ import com.example.mada.util.BudgetUtil
 import com.example.mada.util.TextUtil.toWon
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 private const val TAG = "DX"
 
@@ -66,14 +70,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                     )
                                 }, viewLifecycleOwner
                             )
+
                             is HomeAction.NavigateWeekBudgetView -> navigate(HomeFragmentDirections.actionHomeFragmentToWeekBudgetFragment())
                             is HomeAction.NavigateWeekSavingView -> {
-                                if (!binding.vm!!.state.value.isSaveAble) showToast(
-                                    resources.getString(
-                                        R.string.home_save_available
-                                    )
-                                )
-                                else navigate(HomeFragmentDirections.actionHomeFragmentToWeekSavingFragment())
+                                binding.apply {
+                                    if (!vm!!.state.value.isSigned) {
+                                        showAlertDialog(
+                                            dialog = AlertDialog(
+                                                mainActivity,
+                                                title = resources.getString(R.string.home_create_account),
+                                                content = resources.getString(R.string.home_recommend_create_account)
+                                            ) {
+                                                navigate(
+                                                    HomeFragmentDirections.actionHomeFragmentToAccountFragment()
+                                                )
+                                            }, viewLifecycleOwner
+                                        )
+                                    }else {
+                                        if (!binding.vm!!.state.value.isSaveAble) showToast(
+                                            resources.getString(
+                                                R.string.home_save_available
+                                            )
+                                        )
+                                        else navigate(HomeFragmentDirections.actionHomeFragmentToWeekSavingFragment())
+                                    }
+                                }
                             }
 
                             is HomeAction.NavigateOnBoardingView -> showAlertDialog(
@@ -122,18 +143,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                         setCalenderBackground(state)
                         setTodayMoneyLeft(state)
                         setCalendarHammer(state)
+                        setViewByStep(state)
 
                         if (state.isSigned) { // 계좌 개설을 한 경우
-                            if (state.isBudgetExist) { // 예산 설정을 한 경우
-                                binding.apply {
-                                    cvHomeInitial.visibility = View.INVISIBLE
-                                    ivHome.visibility = View.VISIBLE
-
-                                    tvHomeBuildComment.text =
-                                        resources.getString(R.string.money_diary_build_comment)
-                                    ivBalloon.setImageResource(R.drawable.ic_balloon)
-                                }
-                            } else {
+                            if (!state.isBudgetExist) { // 예산 설정을 한 경우
                                 binding.apply {
                                     showAlertDialog(
                                         dialog = AlertDialog(
@@ -146,20 +159,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                             )
                                         }, viewLifecycleOwner
                                     )
-                                    cvHomeInitial.visibility = View.INVISIBLE
-                                    ivHome.visibility = View.VISIBLE
-                                    tvHomeBuildComment.text =
-                                        resources.getString(R.string.money_diary_build_comment_before_challenge)
-                                    ivBalloon.setImageResource(R.drawable.ic_balloon)
                                 }
-                            }
-                        } else {
-                            binding.apply {
-                                cvHomeInitial.visibility = View.VISIBLE
-                                ivHome.visibility = View.INVISIBLE
-                                tvHomeBuildComment.text =
-                                    resources.getString(R.string.money_diary_build_comment_initial)
-                                ivBalloon.setImageResource(R.drawable.ic_initial_balloon)
                             }
                         }
                     }
@@ -213,7 +213,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         }
     }
 
-    // 오늘 쓸 수 있는 돈
+    // 오늘 쓸 수 있는 돈 + 남은 금액에 따른 % 컬러 변경
     private fun setTodayMoneyLeft(state: HomeState) {
         binding.apply {
             if (state.isSigned) { // 계좌 개설을 한 경우
@@ -225,6 +225,43 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                     resources.getString(R.string.all_one_mada_need_budget)
             } else tvTodayLeftContent.text =
                 resources.getString(R.string.money_diary_build_comment_initial)
+
+            val progress =
+                (((state.budget[state.today] - BudgetUtil.expenditure[state.today]).toDouble() / state.budget[state.today].toDouble()) * 100).roundToInt()
+
+            if ((((state.budget[state.today] - BudgetUtil.expenditure[state.today]).toDouble() / state.budget[state.today].toDouble()) * 100).roundToInt() < 50) {
+                tvHomeTodayProgress.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(), R.color.red
+                    )
+                )
+            }
+        }
+    }
+
+    // 주차별 화면 UI적용
+    private fun setViewByStep(state: HomeState) {
+        binding.apply {
+            when (state.step) {
+                0 -> { // 둘러보기 화면
+                    if (!state.isBudgetExist) ivHomeCreateBudget.visibility = View.VISIBLE
+                    ivHomeShare.visibility = View.INVISIBLE
+                }
+                1 -> { // 1주차
+                    ivHome.setImageResource(R.drawable.bg_home_one_week)
+                }
+                2 -> { // 2주차
+                    ivHome.setImageResource(R.drawable.bg_home_two_week)
+                }
+                else -> {
+                    ivHome.setImageResource(R.drawable.bg_home_last_week)
+
+                    val params = ivHomeShare.layoutParams as ViewGroup.MarginLayoutParams
+                    params.marginEnd = 80
+
+                    ivHomeShare.layoutParams = params
+                }
+            }
         }
     }
 }
