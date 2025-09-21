@@ -18,13 +18,13 @@ class DataStoreRepository @Inject constructor(
     suspend fun getCard() = dataStore.getCard()
 
     suspend fun setBudget(
-        monday: Int,
-        tuesday: Int,
-        wednesday: Int,
-        thursday: Int,
-        friday: Int,
-        saturday: Int,
-        sunday: Int
+        monday: Int = 0,
+        tuesday: Int = 0,
+        wednesday: Int = 0,
+        thursday: Int = 0,
+        friday: Int = 0,
+        saturday: Int = 0,
+        sunday: Int = 0
     ) = dataStore.setBudget(monday, tuesday, wednesday, thursday, friday, saturday, sunday)
 
     suspend fun getBudget() = dataStore.getBudget()
