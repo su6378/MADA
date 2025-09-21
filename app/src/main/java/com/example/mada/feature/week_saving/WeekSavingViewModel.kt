@@ -72,7 +72,6 @@ class WeekSavingViewModel @Inject constructor(
         runCatching {
             _result.emit(Result.Loading)
             dataStoreRepository.setBudgetExist(false)
-            dataStoreRepository.setBudget()
             dataStoreRepository.setStep(_state.value.step + 1)
         }.onSuccess { // 응답 성공
             _result.emit(Result.Finish)
