@@ -29,10 +29,6 @@ class CreateBinderSaveViewModel @Inject constructor(
         MutableStateFlow(CreateBinderSaveState())
     val state: StateFlow<CreateBinderSaveState> get() = _state.asStateFlow()
 
-    init {
-
-    }
-
     fun showCreateSaveBinderDialog() = viewModelScope.launch {
         _action.emit(CreateBinderSaveAction.ShowCreateSaveBinderDialog)
     }
@@ -55,9 +51,7 @@ class CreateBinderSaveViewModel @Inject constructor(
         }
 }
 
-data class CreateBinderSaveState(
-    var isSaveAble: Boolean = false,
-)
+data class CreateBinderSaveState(val nothing: String = "")
 
 sealed interface CreateBinderSaveAction {
     class ShowToast(val content: String) : CreateBinderSaveAction
