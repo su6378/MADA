@@ -1,10 +1,15 @@
 package com.example.mada.feature.home
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.core.view.marginEnd
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -20,6 +25,8 @@ import com.example.mada.util.BudgetUtil
 import com.example.mada.util.TextUtil.toWon
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 import kotlin.math.roundToInt
 
 private const val TAG = "DX"
@@ -166,6 +173,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                     }
                                 }
                             }
+                            is HomeAction.ShareHomeImage -> {
+                                showAlertDialog(
+                                    dialog = AlertDialog(
+                                        mainActivity,
+                                        title = resources.getString(R.string.home_share_image),
+                                        content = resources.getString(R.string.home_share_image_comment)
+                                    ) {
+                                        shareDrawableImage(requireContext(), R.drawable.bg_home_last_week)
+                                    }, viewLifecycleOwner
+                                )
+                            }
                         }
                     }
                 }
@@ -282,5 +300,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 }
             }
         }
+    }
+
+    // 집 이미지 공유
+    private fun shareDrawableImage(context: Context, drawableId: Int) {
+        // Drawable → Bitmap 변환
+        val drawable = ContextCompat.getDrawable(context, drawableId)!!
+        val bitmap = (drawable as BitmapDrawable).bitmap
+
+        // Bitmap → File 변환 (캐시 폴더 저장)
+        val file = File(context.cacheDir, "shared_image.png")
+        FileOutputStream(file).use { out ->
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+        }
+
+        // FileProvider 로 URI 발급
+        val uri: Uri = FileProvider.getUriForFile(
+            context,
+            "${context.packageName}.provider",
+            file
+        )
+
+        // 공유 Intent
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "image/png"
+            putExtra(Intent.EXTRA_STREAM, uri)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+
+        context.startActivity(Intent.createChooser(shareIntent, "이미지 공유"))
     }
 }

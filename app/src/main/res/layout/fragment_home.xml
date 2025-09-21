@@ -547,6 +547,7 @@
                     android:layout_marginEnd="-10dp"
                     android:layout_marginBottom="10dp"
                     android:src="@drawable/ic_share"
+                    app:onClick="@{() -> vm.shareHomeImage()}"
                     app:layout_constraintBottom_toBottomOf="@id/iv_home"
                     app:layout_constraintEnd_toEndOf="@id/iv_home" />
 
@@ -559,8 +560,8 @@
                     android:layout_marginTop="40dp"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
-                    app:onClick="@{() -> vm.navigateBinderBudgetFragment()}"
                     app:layout_constraintTop_toBottomOf="@id/iv_home"
+                    app:onClick="@{() -> vm.navigateBinderBudgetFragment()}"
                     app:strokeWidth="0dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -587,8 +588,8 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/pretendard_semibold"
-                            android:textSize="20sp"
                             android:text="@{vm.state.todayBudgetComment}"
+                            android:textSize="20sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintStart_toStartOf="parent"
