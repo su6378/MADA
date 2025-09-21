@@ -39,11 +39,12 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_binder_save_diary"
-                    android:layout_width="92dp"
-                    android:layout_height="142dp"
+                    android:layout_width="100dp"
+                    android:layout_height="180dp"
                     android:layout_marginStart="36dp"
                     android:layout_marginTop="76dp"
-                    android:src="@drawable/ic_save_binder_blue"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_budget_binder"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,36 +53,35 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:layout_marginTop="52dp"
                     android:fontFamily="@font/pretendard_semibold"
                     android:text="@string/create_binder_save_name"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@id/iv_binder_save_diary"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@id/iv_binder_save_diary"
+                    app:layout_constraintBottom_toTopOf="@id/tv_binder_save_target_amount_title"/>
 
                 <TextView
                     android:id="@+id/tv_binder_save_target_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="52dp"
                     android:fontFamily="@font/pretendard_semibold"
                     android:text="@{vm.state.targetName}"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.3"
                     app:layout_constraintStart_toEndOf="@id/tv_binder_save_target_name_title"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@id/tv_binder_save_target_name_title" />
 
                 <TextView
                     android:id="@+id/tv_binder_save_target_amount_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
                     android:fontFamily="@font/pretendard_semibold"
                     android:text="@string/create_binder_save_target_amount"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/tv_binder_save_target_name_title"
-                    app:layout_constraintTop_toBottomOf="@id/tv_binder_save_target_name_title" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_binder_save_target_name_title"
+                    app:layout_constraintBottom_toTopOf="@id/tv_binder_save_target_period_title"/>
 
                 <TextView
                     android:id="@+id/tv_binder_save_target_amount"
@@ -99,12 +99,12 @@
                     android:id="@+id/tv_binder_save_target_period_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
                     android:fontFamily="@font/pretendard_semibold"
                     android:text="@string/create_binder_save_target_period"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/tv_binder_save_target_name_title"
-                    app:layout_constraintTop_toBottomOf="@id/tv_binder_save_target_amount_title" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_binder_save_target_amount_title"
+                    app:layout_constraintBottom_toTopOf="@id/tv_binder_save_money_title"/>
 
                 <TextView
                     android:id="@+id/tv_binder_save_target_period"
@@ -122,12 +122,12 @@
                     android:id="@+id/tv_binder_save_money_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="36dp"
                     android:fontFamily="@font/pretendard_semibold"
                     android:text="@string/binder_save_save_money"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/tv_binder_save_target_name_title"
-                    app:layout_constraintTop_toBottomOf="@id/tv_binder_save_target_period_title" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_binder_save_target_period_title"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_binder_save_diary" />
 
                 <TextView
                     android:id="@+id/tv_binder_save_target_save_money"
@@ -148,7 +148,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:layout_marginHorizontal="40dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="56dp"
                     android:indeterminateTint="@color/home_initial_comment"
                     android:max="100"
                     android:progress="@{vm.state.budgetProgress}"
@@ -199,6 +199,14 @@
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tv_binder_save_history_week" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_binder_save_history_week_money"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginHorizontal="22dp"
+                    android:background="#EFECEC"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
