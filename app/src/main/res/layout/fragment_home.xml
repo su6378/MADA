@@ -763,24 +763,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:text="주간 정산으로 이동"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:onClick="@{() -> vm.navigateWeekBudgetFragment()}" />
-
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="남은 돈 화면으로 이동"
-            android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@id/btn1"
-            app:onClick="@{() -> vm.navigateMoneyLeftFragment()}" />
+        
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

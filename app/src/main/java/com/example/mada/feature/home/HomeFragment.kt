@@ -68,7 +68,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                             )
 
                             is HomeAction.NavigateWeekBudgetView -> navigate(HomeFragmentDirections.actionHomeFragmentToWeekBudgetFragment())
-                            is HomeAction.NavigateMoneyLeftView -> navigate(HomeFragmentDirections.actionHomeFragmentToMoneyLeftFragment())
                             is HomeAction.NavigateWeekSavingView -> {
                                 if (!binding.vm!!.state.value.isSaveAble) showToast(
                                     resources.getString(

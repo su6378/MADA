@@ -42,9 +42,6 @@
             android:id="@+id/action_homeFragment_to_weekBudgetFragment"
             app:destination="@id/weekBudgetFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_moneyLeftFragment"
-            app:destination="@id/moneyLeftFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_weekSavingFragment"
             app:destination="@id/weekSavingFragment" />
         <action
@@ -66,10 +63,6 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"/>
     </fragment>
-    <fragment
-        android:id="@+id/moneyLeftFragment"
-        android:name="com.example.mada.feature.money_left.MoneyLeftFragment"
-        android:label="MoneyLeftFragment" />
     <fragment
         android:id="@+id/weekSavingFragment"
         android:name="com.example.mada.feature.week_saving.WeekSavingFragment"
