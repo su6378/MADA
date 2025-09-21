@@ -27,6 +27,7 @@ class DataStore(
     private val saturdayPreference = intPreferencesKey("SATURDAY")
     private val sundayPreference = intPreferencesKey("SUNDAY")
     private val saveBinderPreference = stringSetPreferencesKey("SAVE")
+    private val stepPreference = intPreferencesKey("STEP")
 
     suspend fun setAccount(account: Boolean) {
         context.dataStore.edit { preference ->
@@ -135,6 +136,29 @@ class DataStore(
             }
             .map { prefs ->
                 prefs[saveBinderPreference] ?: emptySet()
+            }
+    }
+
+    suspend fun setStep(
+        step: Int
+    ) {
+        context.dataStore.edit { preference ->
+            preference[stepPreference] = step
+        }
+    }
+
+    suspend fun getStep(): Flow<Int> {
+        return context.dataStore.data
+            .catch { exception ->
+                if (exception is IOException) {
+                    exception.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw exception
+                }
+            }
+            .map { prefs ->
+                prefs[stepPreference] ?: 0
             }
     }
 }
