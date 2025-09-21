@@ -82,6 +82,7 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
             carouselBinderList.carouselListener = object : CarouselListener {
                 override fun onClick(position: Int, carouselItem: CarouselItem) {
                     navigateBinderDetailFragment(position)
+                    Log.d(TAG, "onClick: $position")
                 }
             }
 
@@ -161,32 +162,31 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
     // 해당 바인더 선택시 이동
     private fun navigateBinderDetailFragment(position: Int) {
         binding.apply {
-            if (!viewModel.state.value.isBudgetExist) {
-                showAlertDialog(
-                    dialog = AlertDialog(
-                        mainActivity,
-                        title = resources.getString(R.string.binder_list_navigate_budget),
-                        content = resources.getString(R.string.binder_list_navigate_budget_comment)
-                    ) {
-                        navigate(BudgetListFragmentDirections.actionBudgetListFragmentToWeekBudgetFragment())
-                    }, viewLifecycleOwner
-                )
-            } else {
-                if (position == 0) navigate(BudgetListFragmentDirections.actionBudgetListFragmentToBinderBudgetFragment())
-                else {
-                    if (viewModel.state.value.isSaveBinderExist) navigate(
-                        BudgetListFragmentDirections.actionBudgetListFragmentToBinderSaveFragment()
-                    )
-                    else showAlertDialog(
+            if (position == 0) {
+                if (!viewModel.state.value.isBudgetExist) {
+                    showAlertDialog(
                         dialog = AlertDialog(
                             mainActivity,
-                            title = resources.getString(R.string.binder_budget_create_binder_save),
-                            content = resources.getString(R.string.binder_budget_create_binder_save_comment)
+                            title = resources.getString(R.string.binder_list_navigate_budget),
+                            content = resources.getString(R.string.binder_list_navigate_budget_comment)
                         ) {
-                            navigate(BudgetListFragmentDirections.actionBudgetListFragmentToCreateBinderSaveFragment())
+                            navigate(BudgetListFragmentDirections.actionBudgetListFragmentToWeekBudgetFragment())
                         }, viewLifecycleOwner
                     )
-                }
+                }else navigate(BudgetListFragmentDirections.actionBudgetListFragmentToBinderBudgetFragment())
+            }else {
+                if (viewModel.state.value.isSaveBinderExist) navigate(
+                    BudgetListFragmentDirections.actionBudgetListFragmentToBinderSaveFragment()
+                )
+                else showAlertDialog(
+                    dialog = AlertDialog(
+                        mainActivity,
+                        title = resources.getString(R.string.binder_budget_create_binder_save),
+                        content = resources.getString(R.string.binder_budget_create_binder_save_comment)
+                    ) {
+                        navigate(BudgetListFragmentDirections.actionBudgetListFragmentToCreateBinderSaveFragment())
+                    }, viewLifecycleOwner
+                )
             }
         }
     }
