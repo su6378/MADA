@@ -82,7 +82,6 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
             carouselBinderList.carouselListener = object : CarouselListener {
                 override fun onClick(position: Int, carouselItem: CarouselItem) {
                     navigateBinderDetailFragment(position)
-                    Log.d(TAG, "onClick: $position")
                 }
             }
 
