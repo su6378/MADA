@@ -16,28 +16,40 @@ object DateUtil {
         return today - 1
     }
 
-    fun getDateInfo(): List<String> {
+    fun getDateInfo(weekOffset: Int = 0): List<String> {
         val dateInfo = arrayListOf<String>()
         val calendar = Calendar.getInstance()
         val dayFormat = SimpleDateFormat("d", Locale.KOREA)
+
+        // 주 시작을 월요일로 맞추기
+        calendar.firstDayOfWeek = Calendar.MONDAY
         val today = calendar.get(Calendar.DAY_OF_WEEK)
 
-        if (today == Calendar.SUNDAY) calendar.add(
-            Calendar.DAY_OF_WEEK,
-            -1
-        ) // 오늘이 일요일인 경우 시작을 지난주 월요일로 세팅
+        if (today == Calendar.SUNDAY) {
+            calendar.add(Calendar.DAY_OF_WEEK, -1) // 일요일이면 지난주 월요일로 세팅
+        }
 
+        // 이번 주 월요일로 이동
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
-        val month = calendar.get(Calendar.MONTH) + 1
-        dateInfo.add("${month}월")
 
+        // weekOffset 적용 (지난주/다음주 이동)
+        calendar.add(Calendar.WEEK_OF_YEAR, weekOffset)
+
+        // 월요일 기준 월/주차 계산
+        val mondayMonth = calendar.get(Calendar.MONTH) + 1
+        val weekOfMonth = calendar.get(Calendar.WEEK_OF_MONTH)
+
+        // 첫 번째: 월 (월요일 달 기준)
+        dateInfo.add("${mondayMonth}월")
+
+        // 월요일부터 일요일까지 날짜 추가
         for (i in 0 until 7) {
             dateInfo.add(dayFormat.format(calendar.time))
             calendar.add(Calendar.DAY_OF_MONTH, 1)
         }
 
-        val weekOfMonth = calendar.get(Calendar.WEEK_OF_MONTH) // 몇 주차
-        dateInfo.add("${month}월 ${weekOfMonth}주차")
+        // 마지막: 주차 (월요일 달 기준)
+        dateInfo.add("${mondayMonth}월 ${weekOfMonth}주차")
 
         return dateInfo
     }
@@ -93,6 +105,38 @@ object DateUtil {
         }
 
         return Pair(weekList, currentIndex)
+    }
+
+    fun getWeekRange(weekOffset: Int = 0): List<String> {
+        val sdf = SimpleDateFormat("M월 d일", Locale.KOREA)
+
+        val cal = Calendar.getInstance()
+        cal.firstDayOfWeek = Calendar.MONDAY
+
+        if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+            cal.add(Calendar.DATE, -1)
+        }
+
+        // 오늘이 속한 주의 월요일로 이동
+        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
+
+        val result = mutableListOf<String>()
+
+        for (i in 0..weekOffset) {
+            // 주 시작(월요일)
+            val weekStart = cal.clone() as Calendar
+
+            // 주 끝(일요일)
+            val weekEnd = cal.clone() as Calendar
+            weekEnd.add(Calendar.DATE, 6)
+
+            result.add("${sdf.format(weekStart.time)} ~ ${sdf.format(weekEnd.time)}")
+
+            // 다음 주로 이동
+            cal.add(Calendar.WEEK_OF_YEAR, 1)
+        }
+
+        return result
     }
 
     fun getSavingAmountPerMonth(goalAmount: Int, targetMillis: Long): Int {

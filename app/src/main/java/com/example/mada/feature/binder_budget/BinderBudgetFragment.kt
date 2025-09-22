@@ -12,6 +12,7 @@ import com.example.mada.MainActivity
 import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentBinderBudgetBinding
+import com.example.mada.feature.home.HomeState
 import com.example.mada.util.DateUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -36,9 +37,7 @@ class BinderBudgetFragment : BaseFragment<FragmentBinderBudgetBinding, BinderBud
 
     override fun initView() {
         with(binding) {
-            setDropDownMenu()
-
-
+            
         }
     }
 
@@ -90,7 +89,7 @@ class BinderBudgetFragment : BaseFragment<FragmentBinderBudgetBinding, BinderBud
 
                 launch {
                     viewModel.state.collect { state ->
-
+                        setDropDownMenu(state)
                     }
                 }
             }
@@ -98,18 +97,30 @@ class BinderBudgetFragment : BaseFragment<FragmentBinderBudgetBinding, BinderBud
     }
 
     // 드롭박스 메뉴 세팅
-    private fun setDropDownMenu() {
+    private fun setDropDownMenu(state: BinderBudgetState) {
         var thisWeek = ""
+        
+        var weekOffset = 0
+        
+        if (state.step == 1) weekOffset = 1
+        else if (state.step == 2) weekOffset = 2
+        else if (state.step > 2) weekOffset = 20
 
-        for (i in 8..9) {
-            dropdownMenu.addAll(DateUtil.getWeeksInMonth(2025, i).first)
-            if (DateUtil.getWeeksInMonth(2025, i).second != -1) thisWeek =
-                DateUtil.getWeeksInMonth(2025, i).first[DateUtil.getWeeksInMonth(2025, i).second]
-        }
+        Log.d(TAG, "setDropDownMenu: ${DateUtil.getWeekRange(weekOffset)}")
 
-        for (i in dropdownMenu.indices) {
-            if (thisWeek == dropdownMenu[i]) todayWeek = i
-        }
+        dropdownMenu.addAll(DateUtil.getWeekRange(weekOffset))
+
+//        for (i in 8..9) {
+//            dropdownMenu.addAll(DateUtil.getWeeksInMonth(2025, i).first)
+//            if (DateUtil.getWeeksInMonth(2025, i).second != -1) thisWeek =
+//                DateUtil.getWeeksInMonth(2025, i).first[DateUtil.getWeeksInMonth(2025, i).second]
+//        }
+
+        thisWeek = dropdownMenu.last()
+
+//        for (i in dropdownMenu.indices) {
+//            if (thisWeek == dropdownMenu[i]) todayWeek = i
+//        }
 
         val adapter = ArrayAdapter(
             requireContext(),

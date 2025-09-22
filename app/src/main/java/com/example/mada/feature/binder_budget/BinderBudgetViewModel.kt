@@ -42,20 +42,43 @@ class BinderBudgetViewModel @Inject constructor(
     private val days = listOf("월요일", "화요알", "수요일", "목요알", "금요일", "토요일", "일요일")
 
     init {
-        getDateInfo()
+        getStepInfo()
+    }
+
+    private fun getStepInfo() = viewModelScope.launch {
+        dataStoreRepository.getStep().onStart {
+            _result.emit(Result.Loading)
+        }.catch {
+            _result.emit(Result.Finish)
+        }.collectLatest { result ->
+            _state.update { it.copy(step = result) }
+            getDateInfo()
+        }
     }
 
     // 날짜 정보 받기
     private fun getDateInfo() {
         viewModelScope.launch {
-            val today = DateUtil.getToday()
-            val dateInfo = DateUtil.getDateInfo()
+            var weekOffset = 0
+
+            if (_state.value.step == 1) weekOffset = 1
+            else if (_state.value.step == 2) weekOffset = 2
+            else if (_state.value.step > 2) weekOffset = 20
+
+            val today = 6
+//            val today = DateUtil.getToday()
+            val dateInfo = DateUtil.getDateInfo(weekOffset)
+
+            var todayText : String = ""
+
+            if (dateInfo[1].toInt() > dateInfo[7].toInt()) todayText = "${dateInfo[0][0].digitToInt() + 1}월 ${dateInfo[today + 1]}일"
+            else todayText = "${dateInfo.first()} ${dateInfo[today + 1]}일"
 
             _state.update {
                 it.copy(
                     day = days[today],
                     today = today,
-                    todayText = "${dateInfo.first()} ${dateInfo[today + 1]}일"
+                    todayText = todayText
                 )
             }
 
@@ -70,21 +93,30 @@ class BinderBudgetViewModel @Inject constructor(
         }.catch {
             _result.emit(Result.Finish)
         }.collectLatest { result ->
-            _state.update {
-                it.copy(
-                    budgetList = result,
-                    leftBudget = (result[_state.value.today] - BudgetUtil.expenditure[_state.value.today]).toWon(),
-                    budget = result[_state.value.today].toWon(),
-                    expenditure = BudgetUtil.expenditure[_state.value.today].toWon(),
-                    budgetProgress = ((result[_state.value.today] - BudgetUtil.expenditure[_state.value.today]).toDouble() / result[_state.value.today].toDouble() * 100).roundToInt(),
-                    budgetProgressText = "${((result[_state.value.today] - BudgetUtil.expenditure[_state.value.today]).toDouble() / result[_state.value.today].toDouble() * 100).roundToInt()}%"
-                )
+            var progress = 0
+
+            if (result.isNotEmpty()) {
+                if (((((result[state.value.today] - BudgetUtil.expenditure[state.value.today]).toDouble() / result[state.value.today].toDouble()) * 100).roundToInt()) > 0)
+                    progress =
+                        ((((result[state.value.today] - BudgetUtil.expenditure[state.value.today]).toDouble() / result[state.value.today].toDouble()) * 100).roundToInt())
+
+                _state.update {
+                    it.copy(
+                        budgetList = result,
+                        leftBudget = (result[_state.value.today] - BudgetUtil.expenditure[_state.value.today]).toWon(),
+                        budget = result[_state.value.today].toWon(),
+                        expenditure = BudgetUtil.expenditure[_state.value.today].toWon(),
+                        budgetProgress = progress,
+                        budgetProgressText = "${progress}%"
+                    )
+                }
             }
         }
     }
 }
 
 data class BinderBudgetState(
+    var step: Int = 0,
     var today: Int = 0,
     var todayText: String = "",
     var day: String = "",

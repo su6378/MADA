@@ -39,18 +39,24 @@ class HomeViewModel @Inject constructor(
     val state: StateFlow<HomeState> get() = _state.asStateFlow()
 
     init {
-        getDateInfo()
+        getStepInfo()
         getAccountInfo()
         getBudgetExist()
         getBudgetInfo()
-        getStepInfo()
         getSaveBudgetExist()
     }
 
     // 날짜 정보 받기
     private fun getDateInfo() {
         viewModelScope.launch {
-            val dateInfo = DateUtil.getDateInfo()
+            var weekOffset = 0
+
+            if (_state.value.step == 1) weekOffset = 1
+            else if (_state.value.step == 2) weekOffset = 2
+            else if (_state.value.step > 2) weekOffset = 20
+
+            val dateInfo = DateUtil.getDateInfo(weekOffset)
+
 //            val today = DateUtil.getToday()
             val today = 6
 
@@ -145,6 +151,7 @@ class HomeViewModel @Inject constructor(
             _result.emit(Result.Finish)
         }.collectLatest { result ->
             _state.update { it.copy(step = result) }
+            getDateInfo()
         }
     }
 

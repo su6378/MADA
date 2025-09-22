@@ -1,5 +1,6 @@
 package com.example.mada.feature.week_budget
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mada.repository.DataStoreRepository
@@ -14,6 +15,9 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,20 +38,46 @@ class WeekBudgetViewModel @Inject constructor(
     val state: StateFlow<WeekBudgetState> get() = _state.asStateFlow()
 
     init {
-        getDateInfo()
+        getStepInfo()
         getMyData()
+    }
+
+    private fun getStepInfo() = viewModelScope.launch {
+        dataStoreRepository.getStep().onStart {
+            _result.emit(Result.Loading)
+        }.catch {
+            _result.emit(Result.Finish)
+        }.collectLatest { result ->
+            _state.update { it.copy(step = result) }
+            getDateInfo()
+        }
     }
 
     // 날짜 정보 받기
     private fun getDateInfo() {
         viewModelScope.launch {
-            val dateInfo = DateUtil.getDateInfo()
-            val today = DateUtil.getToday()
-            _state.update {
-                it.copy(
-                    weekInfo = dateInfo.last(),
-                    dayInfo = "${dateInfo[0][0]}.${dateInfo[1]}(월) ~ ${dateInfo[0][0]}.${dateInfo[7]}(일)"
-                )
+            var weekOffset = 0
+            if (_state.value.step == 1) weekOffset = 1
+            else if (_state.value.step == 2) weekOffset = 2
+            else if (_state.value.step > 2) weekOffset = 20
+
+            val dateInfo = DateUtil.getDateInfo(weekOffset)
+
+            if (dateInfo[1].toInt() > dateInfo[7].toInt()) { // 다음달로 넘어걸 때 월 +1
+                _state.update {
+                    it.copy(
+                        weekInfo = dateInfo.last(),
+                        dayInfo = "${
+                            dateInfo[0].split("월")[0].toInt()}.${dateInfo[1]}(월) ~ ${dateInfo[0].split("월")[0].toInt() + 1}.${dateInfo[7]}(일)"
+                    )
+                }
+            } else {
+                _state.update {
+                    it.copy(
+                        weekInfo = dateInfo.last(),
+                        dayInfo = "${dateInfo[0].split("월")[0].toInt()}.${dateInfo[1]}(월) ~ ${dateInfo[0].split("월")[0].toInt()}.${dateInfo[7]}(일)"
+                    )
+                }
             }
         }
     }
@@ -97,6 +127,7 @@ class WeekBudgetViewModel @Inject constructor(
 }
 
 data class WeekBudgetState(
+    var step: Int = 0,
     var weekInfo: String = "",
     var dayInfo: String = "",
     var isMyDataLinked: Boolean = false,
