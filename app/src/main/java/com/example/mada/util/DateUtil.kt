@@ -53,60 +53,7 @@ object DateUtil {
 
         return dateInfo
     }
-
-    fun getWeeksInMonth(year: Int, month: Int): Pair<List<String>, Int> {
-        val sdf = SimpleDateFormat("M월 d일", Locale.KOREA)
-        val weekList = mutableListOf<String>()
-
-        val cal = Calendar.getInstance()
-        cal.set(Calendar.YEAR, year)
-        cal.set(Calendar.MONTH, month - 1)
-        cal.set(Calendar.DAY_OF_MONTH, 1)
-
-        // 월요일 기준 주 시작
-        cal.firstDayOfWeek = Calendar.MONDAY
-        cal.minimalDaysInFirstWeek = 1
-
-        // 첫 주의 월요일로 이동 (필요하면 이전 달 포함)
-        val firstWeekMonday = cal.clone() as Calendar
-        firstWeekMonday.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
-        if (firstWeekMonday.after(cal)) {
-            // 1일이 월요일이면 안 움직이고, 아니면 이전 달로 이동
-            firstWeekMonday.add(Calendar.DATE, -7)
-        }
-
-        val currentWeekStart = firstWeekMonday.clone() as Calendar
-        val today = Calendar.getInstance().time
-        var currentIndex = -1
-        var index = 0
-
-        while (true) {
-            val weekStart = currentWeekStart.clone() as Calendar
-            val weekEnd = currentWeekStart.clone() as Calendar
-            weekEnd.add(Calendar.DATE, 6) // 일요일까지
-
-            val weekStr = "${sdf.format(weekStart.time)} ~ ${sdf.format(weekEnd.time)}"
-            weekList.add(weekStr)
-
-            // 오늘 날짜가 포함된 주면 인덱스 저장
-            if (today >= weekStart.time && today <= weekEnd.time) {
-                currentIndex = index
-            }
-
-            index++
-
-            // 다음 주로 이동
-            currentWeekStart.add(Calendar.DATE, 7)
-
-            // 종료 조건: 현재 주 월요일이 다음 달이면 종료
-            if (currentWeekStart.get(Calendar.MONTH) > month - 1 && currentWeekStart.get(Calendar.YEAR) >= year) {
-                break
-            }
-        }
-
-        return Pair(weekList, currentIndex)
-    }
-
+    
     fun getWeekRange(weekOffset: Int = 0): List<String> {
         val sdf = SimpleDateFormat("M월 d일", Locale.KOREA)
 

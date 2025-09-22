@@ -106,21 +106,9 @@ class BinderBudgetFragment : BaseFragment<FragmentBinderBudgetBinding, BinderBud
         else if (state.step == 2) weekOffset = 2
         else if (state.step > 2) weekOffset = 20
 
-        Log.d(TAG, "setDropDownMenu: ${DateUtil.getWeekRange(weekOffset)}")
-
         dropdownMenu.addAll(DateUtil.getWeekRange(weekOffset))
 
-//        for (i in 8..9) {
-//            dropdownMenu.addAll(DateUtil.getWeeksInMonth(2025, i).first)
-//            if (DateUtil.getWeeksInMonth(2025, i).second != -1) thisWeek =
-//                DateUtil.getWeeksInMonth(2025, i).first[DateUtil.getWeeksInMonth(2025, i).second]
-//        }
-
         thisWeek = dropdownMenu.last()
-
-//        for (i in dropdownMenu.indices) {
-//            if (thisWeek == dropdownMenu[i]) todayWeek = i
-//        }
 
         val adapter = ArrayAdapter(
             requireContext(),
