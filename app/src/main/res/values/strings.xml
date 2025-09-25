@@ -31,7 +31,15 @@
     <string name="home_share_image_comment">나의 모아하우스를 공유하시겠습니까?</string>
 
     <!-- 온보딩 -->
-    <string name="on_boarding_make_my_diary">내 다이어리 만들기</string>
+    <string name="on_boarding_next">좋아!</string>
+    <string name="on_boarding_alle">올리</string>
+    <string name="on_boarding_step_one">안녕 모아! 나는 올리야.\n나는 집을 지으려고 하는데 너의 도움이 필요해</string>
+    <string name="on_boarding_step_two">여기 있는 이 마법의\n머니 다이어리를 잘 채워준다면\n내가 집을 지을 수 있는 재료들이 생길거야!</string>
+    <string name="on_boarding_step_three">재료를 얻는 방법을 알려줄게</string>
+    <string name="on_boarding_step_four">첫 번째,\n한 주 간 쓸 돈을 요일별로 계획해줘\n계획이 어려울 땐 AI올리가 도와줄거야!</string>
+    <string name="on_boarding_step_five">두 번째,\n매일 내가 보내주는\n알림을 확인하며 계획 한 만큼만 소비해!</string>
+    <string name="on_boarding_step_six">세 번째,\n일요일 저녁 정해진 시간에 쓰고 남은 돈을\n확인하고 저축 다이어리에 저축해!</string>
+    <string name="on_boarding_step_seven">네 번째,\n하루 한 번 내가 만들고 있는 집과 예산을\n확인하면 보너스 점수!</string>
 
     <!-- 주간 예산 설정 -->
     <string name="week_budget_title">예산 설정</string>

@@ -1,5 +1,6 @@
 package com.example.mada.feature.on_boarding
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,6 +10,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -42,16 +44,17 @@ class OnBoardingViewModel @Inject constructor(
     }
 
     fun navigateAccountFragment() = viewModelScope.launch {
-        _action.emit(OnBoardingAction.NavigateAccountView)
-    }
+        _state.update {
+            it.copy(step = it.step.plus(1))
+        }
 
-    fun navigateHomeFragment() = viewModelScope.launch {
-        _action.emit(OnBoardingAction.NavigateHomeView)
+        if (_state.value.step >= 8) _action.emit(OnBoardingAction.NavigateAccountView)
     }
 }
 
 data class OnBoardingState(
-    val dataSomething: String = "",
+    var guideComment: String = "",
+    var step: Int = 1,
 )
 
 sealed interface OnBoardingAction {
