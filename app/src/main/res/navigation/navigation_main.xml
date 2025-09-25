@@ -34,7 +34,8 @@
             app:destination="@id/homeFragment" />
         <action
             android:id="@+id/action_onBoardingFragment_to_accountFragment"
-            app:destination="@id/accountFragment" />
+            app:destination="@id/accountFragment"
+            app:popUpTo="@id/allOneFragment"/>
     </fragment>
 
     <fragment
