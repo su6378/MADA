@@ -40,8 +40,20 @@
     <string name="on_boarding_step_five">두 번째,\n매일 내가 보내주는\n알림을 확인하며 계획 한 만큼만 소비해!</string>
     <string name="on_boarding_step_six">세 번째,\n일요일 저녁 정해진 시간에 쓰고 남은 돈을\n확인하고 저축 다이어리에 저축해!</string>
     <string name="on_boarding_step_seven">네 번째,\n하루 한 번 내가 만들고 있는 집과 예산을\n확인하면 보너스 점수!</string>
+    <string name="on_boarding_step_eight">머니 다이어리를 시작하려면\n계좌 연동이 필요해 연동 하러 갈까?</string>
+    <string name="on_boarding_navigate_home">우선 둘러 볼게</string>
+
+    <!-- 계좌 연동 -->
+    <string name="account_link_choose_account">머니다이어리에\n연결할 통장을 선택해 주세요</string>
+    <string name="account_link_choose_account_comment">작은 습관이 쌓여\n더 건강한 지출 패턴을 만들어요.</string>
+    <string name="account_link_navigate_account">+ 새로운 통장 만들기</string>
+    <string name="account_link_possible_account">머니다이어리 통장으로 변경 가능한 통장</string>
+    <string name="account_link_possible_account_count">1</string>
+    <string name="account_link_account">연동 가능한 계좌 개설</string>
+    <string name="account_link_account_comment">선택한 계좌로 연동할까요?</string>
 
     <!-- 계좌 개설 -->
+    <string name="create_account">입출금</string>
     <string name="create_account_money_diary">머니다이어리통장</string>
     <string name="create_account_money_diary_comment">작은 습관이 쌓여\n더 건강한 지출 패턴을 만들어요.</string>
     <string name="create_account_money_diary_product_title">상품특징</string>
