@@ -48,6 +48,12 @@
     <string name="create_account_money_diary_product_title_content">건강한 소비습관을 도와주는 머니다이어리\n전용 상품</string>
     <string name="create_account_comment">머니다이어리통장을 개설하시겠습니까?</string>
 
+    <!-- 카드 개설 -->
+    <string name="card_title">카드상세</string>
+    <string name="card_move_comment">NHPay 앱으로 이동하고 있어요!</string>
+    <string name="card_create">카드 신청</string>
+    <string name="card_create_comment">머니다이어리 체크카드를 신청하시겠습니까?</string>
+
     <!-- 주간 예산 설정 -->
     <string name="week_budget_title">예산 설정</string>
     <string name="week_budget_my_data_commnet">미이데이터 자산 정보를 불러오고 있어요!</string>

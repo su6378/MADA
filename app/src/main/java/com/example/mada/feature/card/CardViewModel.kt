@@ -29,7 +29,7 @@ class CardViewModel @Inject constructor(
     val state: StateFlow<CardState> get() = _state.asStateFlow()
 
     // 요청
-    private fun createCard() {
+    fun createCard() {
         viewModelScope.launch {
             runCatching {
                 _result.emit(Result.Loading)
@@ -44,7 +44,7 @@ class CardViewModel @Inject constructor(
     }
 
     fun navigateHomeFragment() = viewModelScope.launch {
-        createCard()
+        _action.emit(CardAction.ShowCreateCardAlert)
     }
 }
 
@@ -53,7 +53,7 @@ data class CardState(
 )
 
 sealed interface CardAction {
-    class ShowToast(val content: String) : CardAction
+    data object ShowCreateCardAlert: CardAction
     data object NavigateHomeView : CardAction
 }
 

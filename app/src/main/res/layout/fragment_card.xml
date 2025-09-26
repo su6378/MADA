@@ -22,7 +22,7 @@
             android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_back"
-            app:title="@string/money_diary"
+            app:title="@string/card_title"
             app:titleCentered="true"
             app:titleTextAppearance="@style/ToolbarTitleText"
             app:titleTextColor="@color/black" />

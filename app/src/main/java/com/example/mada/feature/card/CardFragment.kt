@@ -7,6 +7,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentCardBinding
+import com.example.mada.dialog.AlertDialog
+import com.example.mada.dialog.CardDialog
+import com.example.mada.dialog.LoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -18,7 +21,7 @@ class CardFragment : BaseFragment<FragmentCardBinding, CardViewModel>() {
 
     override fun initView() {
         with(binding) {
-
+            showLoading(dialog = CardDialog(mainActivity))
         }
     }
 
@@ -39,7 +42,15 @@ class CardFragment : BaseFragment<FragmentCardBinding, CardViewModel>() {
                 launch {
                     viewModel.action.collect { action ->
                         when (action) {
-                            is CardAction.ShowToast -> showToast(action.content)
+                            is CardAction.ShowCreateCardAlert -> showAlertDialog(
+                                dialog = AlertDialog(
+                                    mainActivity,
+                                    title = resources.getString(R.string.create_card),
+                                    content = resources.getString(R.string.card_create_comment)
+                                ) {
+                                    viewModel.createCard()
+                                }, viewLifecycleOwner
+                            )
                             is CardAction.NavigateHomeView -> navigate(CardFragmentDirections.actionCardFragmentToHomeFragment())
                         }
                     }
