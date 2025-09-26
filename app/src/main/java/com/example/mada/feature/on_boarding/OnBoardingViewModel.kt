@@ -28,27 +28,16 @@ class OnBoardingViewModel @Inject constructor(
     private val _state: MutableStateFlow<OnBoardingState> = MutableStateFlow(OnBoardingState())
     val state: StateFlow<OnBoardingState> get() = _state.asStateFlow()
 
-    // 요청
-    fun request() {
-        viewModelScope.launch {
-            _result.emit(Result.Loading)
-
-            runCatching {
-
-            }.onSuccess { // 응답 성공
-
-            }.onFailure { // 응답 실패
-
-            }
-        }
-    }
-
     fun navigateAccountFragment() = viewModelScope.launch {
         _state.update {
             it.copy(step = it.step.plus(1))
         }
 
-        if (_state.value.step >= 8) _action.emit(OnBoardingAction.NavigateAccountView)
+        if (_state.value.step >= 9) _action.emit(OnBoardingAction.NavigateAccountLinkView)
+    }
+
+    fun navigateHomeFragment() = viewModelScope.launch {
+        _action.emit(OnBoardingAction.NavigateHomeView)
     }
 }
 
@@ -60,7 +49,7 @@ data class OnBoardingState(
 sealed interface OnBoardingAction {
     class ShowToast(val content: String) : OnBoardingAction
     data object NavigateHomeView : OnBoardingAction
-    data object NavigateAccountView : OnBoardingAction
+    data object NavigateAccountLinkView : OnBoardingAction
 }
 
 sealed interface Result {

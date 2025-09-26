@@ -33,7 +33,7 @@
             android:id="@+id/iv_on_boarding_alle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="120dp"
             android:layout_marginEnd="60dp"
             android:adjustViewBounds="true"
             android:elevation="10dp"
@@ -126,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="40dp"
             android:alpha="1.0"
             android:backgroundTint="#24CB71"
@@ -141,6 +141,31 @@
             app:layout_constraintVertical_bias="0"
             app:onClick="@{() -> vm.navigateAccountFragment()}" />
 
+        <TextView
+            android:id="@+id/tv_on_boarding_initial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@string/on_boarding_navigate_home"
+            android:textSize="16sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:onClick="@{() -> vm.navigateHomeFragment()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_navigate_account"
+            app:layout_constraintVertical_bias="0" />
 
+        <View
+            android:id="@+id/line_on_boarding"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:visibility="invisible"
+            android:layout_marginHorizontal="-6dp"
+            app:layout_constraintStart_toStartOf="@id/tv_on_boarding_initial"
+            app:layout_constraintEnd_toEndOf="@id/tv_on_boarding_initial"
+            app:layout_constraintTop_toBottomOf="@id/tv_on_boarding_initial"
+            android:background="@color/black"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

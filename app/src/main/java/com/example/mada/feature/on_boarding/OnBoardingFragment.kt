@@ -33,13 +33,7 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding, OnBoardingVie
         binding.vm = viewModel
 
         binding.apply {
-            tvOnBoardingGuideComment.setOnAnimationChangeListener(object :
-                TypeWriterView.OnAnimationChangeListener {
-                override fun onAnimationEnd() {
-                    // 애니메이션 종료 시 호출
-                    Log.d("TypeWriter", "애니메이션 종료")
-                }
-            })
+
         }
 
     }
@@ -55,8 +49,8 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding, OnBoardingVie
                                 OnBoardingFragmentDirections.actionOnBoardingFragmentToHomeFragment()
                             )
 
-                            is OnBoardingAction.NavigateAccountView -> navigate(
-                                OnBoardingFragmentDirections.actionOnBoardingFragmentToAccountFragment()
+                            is OnBoardingAction.NavigateAccountLinkView -> navigate(
+                                OnBoardingFragmentDirections.actionOnBoardingFragmentToAccountLinkFragment()
                             )
                         }
                     }
@@ -142,6 +136,27 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding, OnBoardingVie
                                     tvOnBoardingGuideComment.animateText(resources.getString(R.string.on_boarding_step_seven))
                                     setNextButtonEnable()
                                 }
+                                else -> {
+                                    tvOnBoardingGuideComment.stopAnimation()
+                                    ivOnBoardingAlle.startAnimation(
+                                        android.view.animation.AnimationUtils.loadAnimation(
+                                            requireContext(),
+                                            R.anim.fade_in
+                                        )
+                                    )
+                                    ivOnBoardingAlle.visibility = View.VISIBLE
+
+                                    ivOnBoardingCard.startAnimation(
+                                        android.view.animation.AnimationUtils.loadAnimation(
+                                            requireContext(),
+                                            R.anim.fade_out
+                                        )
+                                    )
+                                    ivOnBoardingCard.visibility = View.INVISIBLE
+
+                                    tvOnBoardingGuideComment.animateText(resources.getString(R.string.on_boarding_step_eight))
+                                    setNextButtonEnable()
+                                }
                             }
                         }
                     }
@@ -159,6 +174,25 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding, OnBoardingVie
             tvOnBoardingGuideComment.setOnAnimationChangeListener {
                 btnNavigateAccount.isEnabled = true
                 btnNavigateAccount.isClickable = true
+
+                if (viewModel.state.value.step >= 8) {
+                    tvOnBoardingInitial.startAnimation(
+                        android.view.animation.AnimationUtils.loadAnimation(
+                            requireContext(),
+                            R.anim.fade_in
+                        )
+                    )
+                    tvOnBoardingInitial.visibility = View.VISIBLE
+
+
+                    lineOnBoarding.startAnimation(
+                        android.view.animation.AnimationUtils.loadAnimation(
+                            requireContext(),
+                            R.anim.fade_in
+                        )
+                    )
+                    lineOnBoarding.visibility = View.VISIBLE
+                }
             }
         }
     }
