@@ -41,6 +41,13 @@
     <string name="on_boarding_step_six">세 번째,\n일요일 저녁 정해진 시간에 쓰고 남은 돈을\n확인하고 저축 다이어리에 저축해!</string>
     <string name="on_boarding_step_seven">네 번째,\n하루 한 번 내가 만들고 있는 집과 예산을\n확인하면 보너스 점수!</string>
 
+    <!-- 계좌 개설 -->
+    <string name="create_account_money_diary">머니다이어리통장</string>
+    <string name="create_account_money_diary_comment">작은 습관이 쌓여\n더 건강한 지출 패턴을 만들어요.</string>
+    <string name="create_account_money_diary_product_title">상품특징</string>
+    <string name="create_account_money_diary_product_title_content">건강한 소비습관을 도와주는 머니다이어리\n전용 상품</string>
+    <string name="create_account_comment">머니다이어리통장을 개설하시겠습니까?</string>
+
     <!-- 주간 예산 설정 -->
     <string name="week_budget_title">예산 설정</string>
     <string name="week_budget_my_data_commnet">미이데이터 자산 정보를 불러오고 있어요!</string>

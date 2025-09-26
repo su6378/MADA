@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.example.mada.feature.account.AccountViewModel" />
@@ -27,6 +28,74 @@
             app:titleTextAppearance="@style/ToolbarTitleText"
             app:titleTextColor="@color/black" />
 
+        <View
+            android:id="@+id/base_view_create_account"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/all_one_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.45"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_account"
+            app:layout_constraintVertical_bias="0" />
+
+        <TextView
+            android:id="@+id/tv_create_account_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@string/create_account_money_diary"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_account" />
+
+        <TextView
+            android:id="@+id/tv_create_account_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:text="@string/create_account_money_diary_comment"
+            android:textColor="#767676"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_create_account_title" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_create_account_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_create_account_tab"
+            app:layout_constraintTop_toBottomOf="@id/base_view_create_account" />
+
+        <TextView
+            android:id="@+id/tv_create_account_product_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="@string/create_account_money_diary_product_title"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_create_account_tab" />
+
+        <TextView
+            android:id="@+id/tv_create_account_product_title_cotent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="#6B6B6B"
+            android:textSize="16sp"
+            android:text="@string/create_account_money_diary_product_title_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_create_account_product_title"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@id/tv_create_account_product_title" />
+
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_navigate_account"
@@ -34,16 +103,16 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="40dp"
+            android:alpha="1.0"
             android:backgroundTint="@color/nh_green"
+            android:elevation="10dp"
             android:fontFamily="@font/pretendard_bold"
             android:paddingVertical="14dp"
             android:text="@string/sign_up"
-            android:elevation="10dp"
-            android:alpha="1.0"
             android:textSize="20sp"
             app:cornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:onClick="@{() -> vm.createAccount()}" />
+            app:onClick="@{() -> vm.showCreateAccountAlert()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

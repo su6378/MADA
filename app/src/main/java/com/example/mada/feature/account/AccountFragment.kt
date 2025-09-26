@@ -4,9 +4,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.mada.MainActivity
 import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentAccountBinding
+import com.example.mada.dialog.AlertDialog
+import com.example.mada.feature.home.HomeFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -39,7 +42,17 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
                 launch {
                     viewModel.action.collect { action ->
                         when (action) {
-                            is AccountAction.ShowToast -> showToast(action.content)
+                            is AccountAction.ShowCreateAccountAlert -> {
+                                showAlertDialog(
+                                    dialog = AlertDialog(
+                                        mainActivity,
+                                        title = resources.getString(R.string.home_create_account),
+                                        content = resources.getString(R.string.create_account_comment)
+                                    ) {
+                                        viewModel.createAccount()
+                                    }, viewLifecycleOwner
+                                )
+                            }
                             is AccountAction.NavigateCardView -> navigate(AccountFragmentDirections.actionAccountFragmentToCardFragment())
                         }
                     }

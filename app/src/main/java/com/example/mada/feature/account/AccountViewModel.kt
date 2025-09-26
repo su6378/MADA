@@ -42,6 +42,10 @@ class AccountViewModel @Inject constructor(
             }
         }
     }
+
+    fun showCreateAccountAlert() = viewModelScope.launch {
+        _action.emit(AccountAction.ShowCreateAccountAlert)
+    }
 }
 
 data class AccountState(
@@ -49,7 +53,7 @@ data class AccountState(
 )
 
 sealed interface AccountAction {
-    class ShowToast(val content: String) : AccountAction
+    data object ShowCreateAccountAlert: AccountAction
     data object NavigateCardView : AccountAction
 }
 
