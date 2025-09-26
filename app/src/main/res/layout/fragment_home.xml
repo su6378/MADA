@@ -532,10 +532,12 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_home"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:adjustViewBounds="true"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    android:src="@drawable/bg_home_initial"
+                    android:layout_marginHorizontal="56dp"
+                    android:src="@drawable/image_home_initial"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cv_home_week_calendar" />
@@ -722,10 +724,6 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    app:layout_constraintTop_toBottomOf="@id/cv_home_week_left_money" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

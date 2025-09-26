@@ -278,13 +278,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                     ivHomeShare.visibility = View.INVISIBLE
                 }
                 1 -> { // 1주차
-                    ivHome.setImageResource(R.drawable.bg_home_one_week)
+                    ivHome.setImageResource(R.drawable.image_home_one_week)
                 }
                 2 -> { // 2주차
-                    ivHome.setImageResource(R.drawable.bg_home_two_week)
+                    ivHome.setImageResource(R.drawable.image_home_two_week)
                 }
                 else -> {
-                    ivHome.setImageResource(R.drawable.bg_home_last_week)
+                    ivHome.setImageResource(R.drawable.image_home_last_week)
 
                     val params = ivHomeShare.layoutParams as ViewGroup.MarginLayoutParams
                     params.marginEnd = 80
@@ -300,10 +300,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         var drawableId: Int = 0
 
         when(state.step) {
-            0 -> drawableId = R.drawable.bg_home_initial
-            1 -> drawableId = R.drawable.bg_home_one_week
-            2 -> drawableId = R.drawable.bg_home_two_week
-            else -> drawableId = R.drawable.bg_home_last_week
+            0 -> drawableId = R.drawable.image_home_initial
+            1 -> drawableId = R.drawable.image_home_one_week
+            2 -> drawableId = R.drawable.image_home_two_week
+            else -> drawableId = R.drawable.image_home_last_week
         }
 
         // Drawable → Bitmap 변환
