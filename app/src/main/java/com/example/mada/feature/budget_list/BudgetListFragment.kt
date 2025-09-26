@@ -30,14 +30,8 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
         get() = R.layout.fragment_budget_list
     override val viewModel: BudgetListViewModel by viewModels()
 
-    private lateinit var mainActivity: MainActivity
     private val images =
         listOf(CarouselItem(R.drawable.ic_budget_binder), CarouselItem(R.drawable.ic_save_binder))
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mainActivity = context as MainActivity
-    }
 
     override fun initView() {
         with(binding) {

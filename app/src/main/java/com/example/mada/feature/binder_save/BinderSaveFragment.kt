@@ -20,13 +20,6 @@ class BinderSaveFragment : BaseFragment<FragmentBinderSaveBinding, BinderSaveVie
         get() = R.layout.fragment_binder_save
     override val viewModel: BinderSaveViewModel by viewModels()
 
-    private lateinit var mainActivity: MainActivity
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mainActivity = context as MainActivity
-    }
-
     override fun initView() {
         with(binding) {
 

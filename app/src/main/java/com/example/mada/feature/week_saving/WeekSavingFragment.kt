@@ -25,13 +25,6 @@ class WeekSavingFragment : BaseFragment<FragmentWeekSavingBinding, WeekSavingVie
         get() = R.layout.fragment_week_saving
     override val viewModel: WeekSavingViewModel by viewModels()
 
-    private lateinit var mainActivity: MainActivity
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mainActivity = context as MainActivity
-    }
-
     override fun initView() {
         with(binding) {}
     }

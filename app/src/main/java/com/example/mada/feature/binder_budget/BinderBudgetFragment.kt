@@ -25,15 +25,8 @@ class BinderBudgetFragment : BaseFragment<FragmentBinderBudgetBinding, BinderBud
         get() = R.layout.fragment_binder_budget
     override val viewModel: BinderBudgetViewModel by viewModels()
 
-    private lateinit var mainActivity: MainActivity
-
     private val dropdownMenu = arrayListOf<String>()
     private var todayWeek: Int = 0
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mainActivity = context as MainActivity
-    }
 
     override fun initView() {
         with(binding) {

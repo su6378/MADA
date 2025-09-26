@@ -35,19 +35,11 @@ class CreateBinderSaveFragment :
         get() = R.layout.fragment_create_binder_save
     override val viewModel: CreateBinderSaveViewModel by viewModels()
 
-    private lateinit var mainActivity: MainActivity
-
     private var amount: Int = 0
     private var selectDate: Long = 0
     private var savingAmountPerMonth: Int = 0
     private var targetPeriod: String = ""
     private var ranges: List<String> = listOf()
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mainActivity = context as MainActivity
-    }
 
     override fun initView() {
         with(binding) {

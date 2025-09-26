@@ -29,13 +29,6 @@ class WeekBudgetFragment : BaseFragment<FragmentWeekBudgetBinding, WeekBudgetVie
         get() = R.layout.fragment_week_budget
     override val viewModel: WeekBudgetViewModel by viewModels()
 
-    private lateinit var mainActivity: MainActivity
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mainActivity = context as MainActivity
-    }
-
     override fun initView() {
         with(binding) {
 

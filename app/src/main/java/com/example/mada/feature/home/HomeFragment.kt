@@ -37,13 +37,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         get() = R.layout.fragment_home
     override val viewModel: HomeViewModel by viewModels()
 
-    private lateinit var mainActivity: MainActivity
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mainActivity = context as MainActivity
-    }
-
     override fun initView() {
         with(binding) {
 

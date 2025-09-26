@@ -1,7 +1,9 @@
 package com.example.mada.base
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +17,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation.findNavController
+import com.example.mada.MainActivity
 
+private const val TAG = "DX"
 abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
 
     // 사용하고자 하는 layoutId
@@ -27,7 +31,13 @@ abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
     private var _binding: T? = null
     val binding get() = requireNotNull(_binding)
 
-//    private val loadingDialog by lazy { LoadingTest() }
+    protected lateinit var mainActivity: MainActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.d(TAG, "onAttach: 앱 화면 이동")
+        mainActivity = context as MainActivity
+    }
 
     /**
      * View에 필요한 객체(adpater..)를 설정
