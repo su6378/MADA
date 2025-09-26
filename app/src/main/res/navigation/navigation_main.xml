@@ -61,10 +61,6 @@
             android:id="@+id/action_homeFragment_to_weekSavingFragment"
             app:destination="@id/weekSavingFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_accountFragment"
-            app:destination="@id/accountFragment"
-            app:popUpTo="@id/onBoardingFragment"/>
-        <action
             android:id="@+id/action_homeFragment_to_budgetListFragment"
             app:destination="@id/budgetListFragment" />
         <action
@@ -73,6 +69,13 @@
         <action
             android:id="@+id/action_homeFragment_to_createBinderSaveFragment"
             app:destination="@id/createBinderSaveFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_accountLinkFragment"
+            app:destination="@id/accountLinkFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment

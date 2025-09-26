@@ -63,11 +63,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                             is HomeAction.ShowToast -> showAlertDialog(
                                 dialog = AlertDialog(
                                     mainActivity,
-                                    title = resources.getString(R.string.home_create_account),
+                                    title = resources.getString(R.string.home_create_account_link),
                                     content = resources.getString(R.string.home_recommend_create_account)
                                 ) {
                                     navigate(
-                                        HomeFragmentDirections.actionHomeFragmentToAccountFragment()
+                                        HomeFragmentDirections.actionHomeFragmentToAccountLinkFragment()
                                     )
                                 }, viewLifecycleOwner
                             )
@@ -78,11 +78,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                         showAlertDialog(
                                             dialog = AlertDialog(
                                                 mainActivity,
-                                                title = resources.getString(R.string.home_create_account),
+                                                title = resources.getString(R.string.home_create_account_link),
                                                 content = resources.getString(R.string.home_recommend_create_account)
                                             ) {
                                                 navigate(
-                                                    HomeFragmentDirections.actionHomeFragmentToAccountFragment()
+                                                    HomeFragmentDirections.actionHomeFragmentToAccountLinkFragment()
                                                 )
                                             }, viewLifecycleOwner
                                         )
@@ -123,11 +123,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                     showAlertDialog(
                                         dialog = AlertDialog(
                                             mainActivity,
-                                            title = resources.getString(R.string.home_create_account),
+                                            title = resources.getString(R.string.home_create_account_link),
                                             content = resources.getString(R.string.home_recommend_create_account)
                                         ) {
                                             navigate(
-                                                HomeFragmentDirections.actionHomeFragmentToAccountFragment()
+                                                HomeFragmentDirections.actionHomeFragmentToAccountLinkFragment()
                                             )
                                         }, viewLifecycleOwner
                                     )
@@ -140,11 +140,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                         showAlertDialog(
                                             dialog = AlertDialog(
                                                 mainActivity,
-                                                title = resources.getString(R.string.home_create_account),
+                                                title = resources.getString(R.string.home_create_account_link),
                                                 content = resources.getString(R.string.home_recommend_create_account)
                                             ) {
                                                 navigate(
-                                                    HomeFragmentDirections.actionHomeFragmentToAccountFragment()
+                                                    HomeFragmentDirections.actionHomeFragmentToAccountLinkFragment()
                                                 )
                                             }, viewLifecycleOwner
                                         )
