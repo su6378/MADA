@@ -93,7 +93,6 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                 launch {
                     viewModel.action.collect { action ->
                         when (action) {
-                            is AllOneAction.ShowToast -> showToast(action.content)
                             is AllOneAction.NavigateOnBoardingView -> navigate(
                                 AllOneFragmentDirections.actionAllOneFragmentToOnBoardingFragment()
                             )
@@ -127,22 +126,24 @@ class AllOneFragment : BaseFragment<FragmentAllOneBinding, AllOneViewModel>() {
                                     resources.getString(R.string.all_one_mada_challenge)
                                 ivAllOneMadaAccount.visibility = View.VISIBLE
 
-                                if (state.isCreated) { // 카드 개설을 한 경우
-                                    if (state.isBudgetExist) { // 예산 설정을 한 경우
-                                        if (state.money < 0) tvAllOneMadaAccount.text =
-                                            resources.getString(R.string.all_one_mada_account_over_money)
-                                        else tvAllOneMadaAccount.text =
-                                            resources.getString(R.string.all_one_mada_account_possible_money)
+                                if (state.isBudgetExist) { // 예산 설정을 한 경우
+                                    if (state.money < 0) tvAllOneMadaAccount.text =
+                                        resources.getString(R.string.all_one_mada_account_over_money)
+                                    else tvAllOneMadaAccount.text =
+                                        resources.getString(R.string.all_one_mada_account_possible_money)
 
-                                        tvAllOneMadaAccountMoney.visibility = View.VISIBLE
-                                        binding.tvAllOneMadaAccountMoney.text = state.money.toWon()
-                                    } else {
-                                        tvAllOneMadaAccount.text =
-                                            resources.getString(R.string.all_one_mada_need_budget)
-                                        tvAllOneMadaAccountMoney.visibility = View.GONE
-                                    }
-                                } else tvAllOneMadaAccount.text =
-                                    resources.getString(R.string.all_one_mada_need_card)
+                                    tvAllOneMadaAccountMoney.visibility = View.VISIBLE
+                                    binding.tvAllOneMadaAccountMoney.text = state.money.toWon()
+                                } else {
+                                    tvAllOneMadaAccount.text =
+                                        resources.getString(R.string.all_one_mada_need_budget)
+                                    tvAllOneMadaAccountMoney.visibility = View.GONE
+                                }
+
+//                                if (state.isCreated) { // 카드 개설을 한 경우
+//
+//                                } else tvAllOneMadaAccount.text =
+//                                    resources.getString(R.string.all_one_mada_need_card)
                             }
                         } else {
                             binding.apply {

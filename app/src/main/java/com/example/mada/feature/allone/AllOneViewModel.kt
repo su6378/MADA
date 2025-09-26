@@ -63,7 +63,7 @@ class AllOneViewModel @Inject constructor(
             }.catch {
                 _result.emit(Result.Finish)
             }.collectLatest { result ->
-                _state.update { it.copy(isBudgetExist = true)
+                _state.update { it.copy(isBudgetExist = result)
 
                 }
             }
@@ -101,11 +101,13 @@ class AllOneViewModel @Inject constructor(
     }
 
     fun navigateNextFragment() = viewModelScope.launch {
-        if (_state.value.isCreated) _action.emit(AllOneAction.NavigateHomeView)
-        else {
-            if (_state.value.isSigned) _action.emit(AllOneAction.NavigationCardView)
-            else _action.emit(AllOneAction.NavigateOnBoardingView)
-        }
+//        if (_state.value.isCreated) _action.emit(AllOneAction.NavigateHomeView)
+//        else {
+//            if (_state.value.isSigned) _action.emit(AllOneAction.NavigationCardView)
+//            else _action.emit(AllOneAction.NavigateOnBoardingView)
+//        }
+        if (_state.value.isSigned) _action.emit(AllOneAction.NavigateHomeView)
+        else _action.emit(AllOneAction.NavigateOnBoardingView)
     }
 }
 
@@ -117,7 +119,6 @@ data class AllOneState(
 )
 
 sealed interface AllOneAction {
-    class ShowToast(val content: String) : AllOneAction
     data object NavigateOnBoardingView : AllOneAction
     data object NavigationCardView : AllOneAction
     data object NavigateHomeView : AllOneAction
