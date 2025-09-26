@@ -35,7 +35,6 @@ abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Log.d(TAG, "onAttach: 앱 화면 이동")
         mainActivity = context as MainActivity
     }
 
