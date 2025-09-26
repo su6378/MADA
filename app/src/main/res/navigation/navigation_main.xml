@@ -92,9 +92,13 @@
         android:label="AccountFragment"
         tools:layout="@layout/fragment_account">
         <action
-            android:id="@+id/action_accountFragment_to_cardFragment"
-            app:destination="@id/cardFragment"
-            app:popUpTo="@id/allOneFragment"/>
+            android:id="@+id/action_accountFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/allOneFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
     </fragment>
     <fragment
         android:id="@+id/cardFragment"

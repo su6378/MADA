@@ -53,7 +53,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
                                     }, viewLifecycleOwner
                                 )
                             }
-                            is AccountAction.NavigateCardView -> navigate(AccountFragmentDirections.actionAccountFragmentToCardFragment())
+                            is AccountAction.NavigateHomeView -> navigate(AccountFragmentDirections.actionAccountFragmentToHomeFragment())
                         }
                     }
                 }

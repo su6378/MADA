@@ -36,7 +36,7 @@ class AccountViewModel @Inject constructor(
                 dataStoreRepository.setAccount(true)
             }.onSuccess { // 응답 성공
                 _result.emit(Result.Finish)
-                _action.emit(AccountAction.NavigateCardView)
+                _action.emit(AccountAction.NavigateHomeView)
             }.onFailure { // 응답 실패
                 _result.emit(Result.Finish)
             }
@@ -54,7 +54,7 @@ data class AccountState(
 
 sealed interface AccountAction {
     data object ShowCreateAccountAlert: AccountAction
-    data object NavigateCardView : AccountAction
+    data object NavigateHomeView : AccountAction
 }
 
 sealed interface Result {
