@@ -59,16 +59,32 @@
             app:destination="@id/weekBudgetFragment" />
         <action
             android:id="@+id/action_homeFragment_to_weekSavingFragment"
-            app:destination="@id/weekSavingFragment" />
+            app:destination="@id/weekSavingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_homeFragment_to_budgetListFragment"
-            app:destination="@id/budgetListFragment" />
+            app:destination="@id/budgetListFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
         <action
             android:id="@+id/action_homeFragment_to_binderBudgetFragment"
-            app:destination="@id/binderBudgetFragment" />
+            app:destination="@id/binderBudgetFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_homeFragment_to_createBinderSaveFragment"
-            app:destination="@id/createBinderSaveFragment" />
+            app:destination="@id/createBinderSaveFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_homeFragment_to_accountLinkFragment"
             app:destination="@id/accountLinkFragment"

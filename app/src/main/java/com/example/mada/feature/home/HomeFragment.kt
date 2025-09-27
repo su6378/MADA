@@ -284,6 +284,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                     ivHome.setImageResource(R.drawable.image_home_two_week)
                 }
                 else -> {
+                    val homeParams = ivHome.layoutParams as ViewGroup.MarginLayoutParams
+                    homeParams.apply {
+                        marginStart = 0
+                        marginEnd = 0
+                    }
+
+                    ivHome.layoutParams = homeParams
                     ivHome.setImageResource(R.drawable.image_home_last_week)
 
                     val params = ivHomeShare.layoutParams as ViewGroup.MarginLayoutParams
