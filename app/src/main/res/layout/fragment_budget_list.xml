@@ -38,23 +38,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_binder_list" />
-        
+
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
             android:id="@+id/carousel_binder_list"
             android:layout_width="match_parent"
             android:layout_height="360dp"
             android:layout_marginTop="20dp"
-            app:autoWidthFixing="true"
-            app:carouselPaddingEnd="80dp"
-            app:carouselPaddingStart="30dp"
-            app:carouselGravity="CENTER"
-            app:carouselType="SHOWCASE"
-            app:imageScaleType="fitCenter"
+            app:carouselType="BLOCK"
+            app:imageScaleType="centerCrop"
             app:infiniteCarousel="false"
+            app:carouselGravity="START"
+            app:carouselPaddingEnd="70dp"
+            app:carouselPaddingStart="70dp"
+            android:paddingHorizontal="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_binder_list_type"
             app:scaleOnScroll="true"
+            android:overScrollMode="never"
             app:showBottomShadow="false"
             app:showNavigationButtons="false"
             app:showTopShadow="false" />
@@ -62,35 +63,47 @@
         <me.relex.circleindicator.CircleIndicator2
             android:id="@+id/indicator_binder_list"
             android:layout_width="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_height="20dp"
-            app:ci_width="6dp"
-            app:ci_height="6dp"
             app:ci_drawable="@drawable/ic_selected_dot"
             app:ci_drawable_unselected="@drawable/ic_unselected_dot"
+            app:ci_height="6dp"
+            app:ci_width="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/carousel_binder_list" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_binder_list_cloud"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:src="@drawable/ic_binder_cloud"
-            android:layout_marginStart="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_binder_list_heart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/indicator_binder_list"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintVertical_bias="0.3"
+            app:onClick="@{() -> vm.showBinderImageAlert(`cloud`)}" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_binder_list_heart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_binder_heart"
-            app:layout_constraintEnd_toStartOf="@id/iv_binder_list_alle"
+            app:layout_constraintEnd_toStartOf="@id/iv_binder_list_green"
             app:layout_constraintStart_toEndOf="@id/iv_binder_list_cloud"
-            app:layout_constraintTop_toTopOf="@id/iv_binder_list_cloud" />
+            app:layout_constraintTop_toTopOf="@id/iv_binder_list_cloud"
+            app:onClick="@{() -> vm.showBinderImageAlert(`heart`)}" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_binder_list_green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_binder_green"
+            app:layout_constraintEnd_toStartOf="@id/iv_binder_list_alle"
+            app:layout_constraintStart_toEndOf="@id/iv_binder_list_heart"
+            app:layout_constraintTop_toTopOf="@id/iv_binder_list_cloud"
+            app:onClick="@{() -> vm.showBinderImageAlert(`green`)}" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_binder_list_alle"
@@ -98,27 +111,31 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_binder_alle"
             app:layout_constraintEnd_toStartOf="@id/iv_binder_list_onee"
-            app:layout_constraintStart_toEndOf="@id/iv_binder_list_heart"
-            app:layout_constraintTop_toTopOf="@id/iv_binder_list_cloud" />
+            app:layout_constraintStart_toEndOf="@id/iv_binder_list_green"
+            app:layout_constraintTop_toTopOf="@id/iv_binder_list_cloud"
+            app:onClick="@{() -> vm.showBinderImageAlert(`alle`)}" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_binder_list_onee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_binder_onee"
-            app:layout_constraintEnd_toStartOf="@id/iv_binder_list_green"
+            app:layout_constraintEnd_toStartOf="@id/iv_binder_list_ribbon"
             app:layout_constraintStart_toEndOf="@id/iv_binder_list_alle"
-            app:layout_constraintTop_toTopOf="@id/iv_binder_list_cloud" />
+            app:layout_constraintTop_toTopOf="@id/iv_binder_list_cloud"
+            app:onClick="@{() -> vm.showBinderImageAlert(`onee`)}" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_binder_list_green"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_binder_green"
+            android:id="@+id/iv_binder_list_ribbon"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="40dp"
+            android:src="@drawable/ic_binder_ribbon"
+            app:layout_constraintBottom_toBottomOf="@id/iv_binder_list_cloud"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="60dp"
             app:layout_constraintStart_toEndOf="@id/iv_binder_list_onee"
-            app:layout_constraintTop_toTopOf="@id/iv_binder_list_cloud" />
+            app:layout_constraintTop_toTopOf="@id/iv_binder_list_cloud"
+            app:onClick="@{() -> vm.showBinderImageAlert(`ribbon`)}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.mada.feature.budget_list
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mada.feature.account.AccountAction
 import com.example.mada.repository.DataStoreRepository
 import com.example.mada.util.BudgetUtil
 import com.example.mada.util.DateUtil
@@ -40,6 +41,8 @@ class BudgetListViewModel @Inject constructor(
     init {
         getBudgetInfo()
         getSaveBinder()
+        getBudgetBinderImage()
+        getSaveBinderImage()
     }
 
     // 예산 정보 받기
@@ -63,15 +66,66 @@ class BudgetListViewModel @Inject constructor(
             if (result.isNotEmpty()) _state.update { it.copy(isSaveBinderExist = true) }
         }
     }
+
+    // 예산 바인더 이미지 받기
+    private fun getBudgetBinderImage() = viewModelScope.launch {
+        dataStoreRepository.getBudgetBinderImage().onStart {
+            _result.emit(Result.Loading)
+        }.catch {
+            _result.emit(Result.Finish)
+        }.collectLatest { result ->
+            _result.emit(Result.Finish)
+            _state.update { it.copy(budgetBinderImage = result) }
+        }
+    }
+
+
+    // 바인더 이미지 받기
+    private fun getSaveBinderImage() = viewModelScope.launch {
+        dataStoreRepository.getSaveBinderImage().onStart {
+            _result.emit(Result.Loading)
+        }.catch {
+            _result.emit(Result.Finish)
+        }.collectLatest { result ->
+            _result.emit(Result.Finish)
+            _state.update { it.copy(saveBinderImage = result) }
+        }
+    }
+
+    fun showBinderImageAlert(image: String) = viewModelScope.launch {
+        _action.emit(BudgetListAction.ShowSetBinderImageAlert(image))
+    }
+
+    fun setBinderImage(position: Int, image: Int) = viewModelScope.launch {
+        viewModelScope.launch {
+            runCatching {
+                _result.emit(Result.Loading)
+                when(position) {
+                    0 -> dataStoreRepository.setBudgetBinderImage(image)
+                    1 -> dataStoreRepository.setSaveBinderImage(image)
+                }
+            }.onSuccess { // 응답 성공
+                _result.emit(Result.Finish)
+                _action.emit(BudgetListAction.SetBinderImage(image))
+                _state.update { it.copy(isImageChanged = true) }
+            }.onFailure { // 응답 실패
+                _result.emit(Result.Finish)
+            }
+        }
+    }
 }
 
 data class BudgetListState(
     var isBudgetExist: Boolean = false,
-    var isSaveBinderExist: Boolean = false
+    var isSaveBinderExist: Boolean = false,
+    var budgetBinderImage: Int = 0,
+    var saveBinderImage: Int = 0,
+    var isImageChanged: Boolean = false
 )
 
 sealed interface BudgetListAction {
-    class ShowToast(val content: String) : BudgetListAction
+    class ShowSetBinderImageAlert(val image: String) : BudgetListAction
+    class SetBinderImage(val image: Int) : BudgetListAction
 }
 
 sealed interface Result {
