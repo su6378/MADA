@@ -207,7 +207,7 @@ class DataStore(
                 }
             }
             .map { prefs ->
-                prefs[budgetBinderImagePreference] ?: 0
+                prefs[budgetBinderImagePreference] ?: 2131165494
             }
     }
 
@@ -230,7 +230,7 @@ class DataStore(
                 }
             }
             .map { prefs ->
-                prefs[saveBinderImagePreference] ?: 0
+                prefs[saveBinderImagePreference] ?: 2131165495
             }
     }
 }
