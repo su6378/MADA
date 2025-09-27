@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -29,8 +30,8 @@ class DataStore(
     private val saveBinderPreference = stringSetPreferencesKey("SAVE")
     private val stepPreference = intPreferencesKey("STEP")
     private val budgetExistPreference = booleanPreferencesKey("EXIST")
-    private val budgetBinderImagePreference = intPreferencesKey("BUDGET_IMAGE")
-    private val saveBinderImagePreference = intPreferencesKey("SAVE_IMAGE")
+    private val budgetBinderImagePreference = stringPreferencesKey("BUDGET_IMAGE")
+    private val saveBinderImagePreference = stringPreferencesKey("SAVE_IMAGE")
 
     private val oneBudgetPreference = stringSetPreferencesKey("ONE")
 
@@ -189,14 +190,14 @@ class DataStore(
     }
 
     suspend fun setBudgetBinderImage(
-        budgetBinderImage: Int
+        budgetBinderImage: String
     ) {
         context.dataStore.edit { preference ->
             preference[budgetBinderImagePreference] = budgetBinderImage
         }
     }
 
-    suspend fun getBudgetBinderImage(): Flow<Int> {
+    suspend fun getBudgetBinderImage(): Flow<String> {
         return context.dataStore.data
             .catch { exception ->
                 if (exception is IOException) {
@@ -207,19 +208,19 @@ class DataStore(
                 }
             }
             .map { prefs ->
-                prefs[budgetBinderImagePreference] ?: 2131165494
+                prefs[budgetBinderImagePreference] ?: ""
             }
     }
 
     suspend fun setSaveBinderImage(
-        saveBinderImage: Int
+        saveBinderImage: String
     ) {
         context.dataStore.edit { preference ->
             preference[saveBinderImagePreference] = saveBinderImage
         }
     }
 
-    suspend fun getSaveBinderImage(): Flow<Int> {
+    suspend fun getSaveBinderImage(): Flow<String> {
         return context.dataStore.data
             .catch { exception ->
                 if (exception is IOException) {
@@ -230,7 +231,7 @@ class DataStore(
                 }
             }
             .map { prefs ->
-                prefs[saveBinderImagePreference] ?: 2131165495
+                prefs[saveBinderImagePreference] ?: ""
             }
     }
 }
