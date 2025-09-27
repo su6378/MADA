@@ -144,6 +144,7 @@ class DataStore(
     suspend fun setSaveBinder(
         name: String,
         targetAmount: String,
+        startPeriod: String,
         targetPeriod: String
     ) {
         context.dataStore.edit { preference ->

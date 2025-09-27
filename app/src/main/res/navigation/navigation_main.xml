@@ -175,7 +175,7 @@
         tools:layout="@layout/fragment_binder_save"/>
     <fragment
         android:id="@+id/createBinderSaveFragment"
-        android:name="com.example.mada.feature.create_CreateBinder_save.CreateBinderSaveFragment"
+        android:name="com.example.mada.feature.create_binder_save.CreateBinderSaveFragment"
         android:label="CreateBinderSaveFragment"
         tools:layout="@layout/fragment_create_binder_save">
         <action

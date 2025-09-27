@@ -1,30 +1,26 @@
-package com.example.mada.feature.create_CreateBinder_save
+package com.example.mada.feature.create_binder_save
 
-import android.content.Context
-import android.text.Editable
-import android.util.Log
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.ArrayAdapter
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.mada.MainActivity
 import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentCreateBinderSaveBinding
 import com.example.mada.dialog.AlertDialog
-import com.example.mada.feature.budget_list.BudgetListFragmentDirections
 import com.example.mada.util.DateUtil
-import com.example.mada.util.TextUtil.setColoredSubstrings
+import com.example.mada.util.ImageUtil.changeImageWithFade
+import com.example.mada.util.TextUtil.setSizedSubstringsSp
 import com.example.mada.util.TextUtil.toWon
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.DateValidatorPointForward
-import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 private const val TAG = "DX"
 
@@ -36,14 +32,12 @@ class CreateBinderSaveFragment :
     override val viewModel: CreateBinderSaveViewModel by viewModels()
 
     private var amount: Int = 0
-    private var selectDate: Long = 0
-    private var savingAmountPerMonth: Int = 0
-    private var targetPeriod: String = ""
+    private var month: Int = 12
     private var ranges: List<String> = listOf()
 
     override fun initView() {
         with(binding) {
-
+            mainActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         }
     }
 
@@ -58,10 +52,6 @@ class CreateBinderSaveFragment :
             etCreateBinderSaveTargetAmount.doOnTextChanged { text, start, before, count ->
                 setTargetAmount(text)
             }
-
-            etCreateBinderSaveTargetPeriod.setOnClickListener {
-                setDatePicker()
-            }
         }
     }
 
@@ -70,59 +60,77 @@ class CreateBinderSaveFragment :
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.action.collect { action ->
-                        when (action) {
-                            is CreateBinderSaveAction.ShowToast -> showToast(action.content)
-                            is CreateBinderSaveAction.ShowCreateSaveBinderDialog -> {
-                                binding.apply {
-                                    if (etCreateBinderSaveName.text.isNullOrEmpty() || etCreateBinderSaveTargetAmount.text.isNullOrEmpty() || etCreateBinderSaveTargetPeriod.text.isNullOrEmpty()) {
-                                        showToast("모든 정보를 입력해 주세요!")
-                                    } else {
-                                        showAlertDialog(
-                                            dialog = AlertDialog(
-                                                mainActivity,
-                                                title = resources.getString(R.string.binder_budget_create_binder_create_binder),
-                                                content = resources.getString(R.string.binder_budget_create_binder_create_binder_comment)
-                                            ) {
-                                                viewModel.createSaveBinder(
-                                                    name = etCreateBinderSaveName.text.toString(),
-                                                    targetAmount = amount.toWon(),
-                                                    targetPeriod = targetPeriod
-                                                )
+                        binding.apply {
+                            when (action) {
+                                is CreateBinderSaveAction.ShowCreateSaveBinderDialog -> {
+                                    binding.apply {
+                                        if (etCreateBinderSaveName.text.isNullOrEmpty()) {
+                                            showToast("모든 정보를 입력해 주세요!")
+                                        } else {
+                                            showAlertDialog(
+                                                dialog = AlertDialog(
+                                                    mainActivity,
+                                                    title = resources.getString(R.string.binder_budget_create_binder_create_binder),
+                                                    content = resources.getString(R.string.binder_budget_create_binder_create_binder_comment)
+                                                ) {
+                                                    val dayInfo = DateUtil.getTodayAndFutureDate(month)
+                                                    viewModel.createSaveBinder(
+                                                        name = etCreateBinderSaveName.text.toString(),
+                                                        targetAmount = amount.toWon(),
+                                                        startPeriod =  dayInfo.first,
+                                                        targetPeriod = dayInfo.second
+                                                    )
 
-                                            }, viewLifecycleOwner
-                                        )
+                                                }, viewLifecycleOwner
+                                            )
+                                        }
                                     }
                                 }
-                            }
 
-                            is CreateBinderSaveAction.NavigateBinderSaveView -> {
-                                showToast("저축 바인더를 생성했어요!")
-                                navigate(
-                                    CreateBinderSaveFragmentDirections.actionCreateBinderSaveFragmentToBinderSaveFragment()
+                                is CreateBinderSaveAction.NavigateBinderSaveView -> {
+                                    showToast("저축 바인더를 생성했어요!")
+                                    navigate(
+                                        CreateBinderSaveFragmentDirections.actionCreateBinderSaveFragmentToBinderSaveFragment()
+                                    )
+                                }
+
+                                is CreateBinderSaveAction.SetSaveBinderImage -> viewModel.setBinderImage(
+                                    action.image
                                 )
+
+                                CreateBinderSaveAction.ShowNumberPicker -> showDateDialog()
                             }
                         }
                     }
                 }
 
                 launch {
-                    viewModel.result.collect { result ->
-                        when (result) {
-                            Result.Finish -> {
-                            }
-
-                            Result.Loading -> {
-                            }
-
-                            Result.Process -> {
+                    viewModel.state.collectLatest { state ->
+                        binding.apply {
+                            when (state.saveBinderImage) {
+                                "cloud" -> ivCreateBinderSave.changeImageWithFade(R.drawable.binder_cloud)
+                                "heart" -> ivCreateBinderSave.changeImageWithFade(R.drawable.binder_heart)
+                                "green" -> ivCreateBinderSave.changeImageWithFade(R.drawable.binder_green)
+                                "alle" -> ivCreateBinderSave.changeImageWithFade(R.drawable.binder_alle)
+                                "onee" -> ivCreateBinderSave.changeImageWithFade(R.drawable.binder_onee)
+                                "ribbon" -> ivCreateBinderSave.changeImageWithFade(R.drawable.binder_ribbon)
                             }
                         }
                     }
                 }
+            }
 
-                launch {
-                    viewModel.state.collect { state ->
+            launch {
+                viewModel.result.collect { result ->
+                    when (result) {
+                        Result.Finish -> {
+                        }
 
+                        Result.Loading -> {
+                        }
+
+                        Result.Process -> {
+                        }
                     }
                 }
             }
@@ -131,73 +139,57 @@ class CreateBinderSaveFragment :
 
     private fun setTargetAmount(targetAmount: CharSequence?) {
         binding.apply {
-            amount =
-                if (targetAmount.isNullOrEmpty()) 0 else targetAmount.toString().toInt()
+            amount = if (targetAmount.isNullOrEmpty()) 0 else targetAmount.toString().toInt()
 
-            savingAmountPerMonth = DateUtil.getSavingAmountPerMonth(amount, selectDate)
+            tvCreateBinderSaveWon.visibility = View.VISIBLE
 
-            ranges = listOf(
-                etCreateBinderSaveTargetPeriod.text.toString(),
-                ("월"),
-                savingAmountPerMonth.toWon()
+            val info = DateUtil.getSavingPlan(amount, month)
+
+            ranges = listOf(info.second)
+
+            tvCreateBinderSaveTargetComment.setSizedSubstringsSp(
+                info.first, ranges, 24, colorRes = R.color.nh_green
             )
-
-            if (selectDate != 0L) {
-                tvCreateBinderSaveTargetComment.setColoredSubstrings(
-                    "${etCreateBinderSaveTargetPeriod.text.toString()}까지\n 월 ${
-                        savingAmountPerMonth.toWon()
-                    } 저축이 필요해요.", ranges, colorRes = R.color.nh_green
-                )
-            }
         }
     }
 
-    private fun setDatePicker() {
-        val constraintsBuilder = CalendarConstraints.Builder()
-            .setValidator(DateValidatorPointForward.now()) // 오늘 이후만 선택 가능
-            .build()
+    private fun showDateDialog() {
+        val options = (1..24).map { "${it}개월" }
 
-        val picker = MaterialDatePicker.Builder.datePicker()
-            .setTitleText("목표 기간 선택")
-            .setTheme(R.style.CustomDatePickerTheme)
-            .setCalendarConstraints(constraintsBuilder)
-            .build()
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setTitle("적금기간")
+            .setAdapter(
+                ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, options)
+            ) { dialogInterface, which ->
+                val selected = options[which]
+                month = which + 1
+                binding.tvCreateBinderPeriod.text = selected
+                setSavingComment(which + 1)
+            }
+            .create()
 
-        picker.show(parentFragmentManager, picker.toString())
+        dialog.show()
 
-        setSavingComment(picker, binding.etCreateBinderSaveTargetAmount.text)
+        // 다이얼로그 크기 제한 (예: 높이를 500dp 정도로)
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            (500 * resources.displayMetrics.density).toInt()
+        )
     }
 
-    private fun setSavingComment(picker: MaterialDatePicker<Long>, targetAmount: Editable?) {
+    private fun setSavingComment(month: Int) {
         binding.apply {
-            picker.addOnPositiveButtonClickListener { selection ->
-                val date = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA).format(
-                    Date(
-                        selection
-                    )
-                )
-                etCreateBinderSaveTargetPeriod.setText(date)
-                targetPeriod = date
+            amount =
+                if (etCreateBinderSaveTargetAmount.text.isNullOrEmpty()) 0 else etCreateBinderSaveTargetAmount.text.toString()
+                    .toInt()
 
-                amount =
-                    if (targetAmount.isNullOrEmpty()) 0 else etCreateBinderSaveTargetAmount.text.toString()
-                        .toInt()
-                selectDate = selection
+            val info = DateUtil.getSavingPlan(amount, month)
 
-                savingAmountPerMonth = DateUtil.getSavingAmountPerMonth(amount, selectDate)
+            ranges = listOf(info.second)
 
-                ranges = listOf(
-                    etCreateBinderSaveTargetPeriod.text.toString(),
-                    ("월"),
-                    savingAmountPerMonth.toWon()
-                )
-
-                tvCreateBinderSaveTargetComment.setColoredSubstrings(
-                    "${etCreateBinderSaveTargetPeriod.text.toString()}까지\n 월 ${
-                        savingAmountPerMonth.toWon()
-                    } 저축이 필요해요.", ranges, colorRes = R.color.nh_green
-                )
-            }
+            tvCreateBinderSaveTargetComment.setSizedSubstringsSp(
+                info.first, ranges, 24, colorRes = R.color.nh_green
+            )
         }
     }
 }

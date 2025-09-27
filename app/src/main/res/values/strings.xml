@@ -93,6 +93,7 @@
     <string name="binder_list_navigate_budget_comment">예산을 설정해 주세요.\n예산 설정 화면으로 이동하시겠습니까?</string>
     <string name="binder_list_set_image">바인더 선택</string>
     <string name="binder_list_set_image_comment">선택하신 바인더로 변경할까요?</string>
+    <string name="binder_list_select_theme">바인더 테마 선택</string>
 
     <!-- 예산 바인더 상세-->
     <string name="binder_budget">이번주 예산 바인더</string>
@@ -105,13 +106,14 @@
     <string name="binder_budget_create_binder_create_binder_comment">해당 정보로 저축 바인더를 생성하시겠습니까?</string>
 
     <!-- 저축 바인더 생성 -->
-    <string name="create_binder_save">저축 바인더 설정하기</string>
+    <string name="create_binder_save">저축 바인더 만들기</string>
     <string name="create_binder_save_name">목표명</string>
+    <string name="create_binder_save_name_hint">바인더 이름(목표명)을 입력해 주세요</string>
     <string name="create_binder_save_target_amount">목표 금액</string>
-    <string name="create_binder_save_target_period">목표 기간</string>
-    <string name="create_binder_save_name_hint">목표명을 입력해 주세요</string>
     <string name="create_binder_save_target_amount_hint">목표 금액을 입력해 주세요</string>
-    <string name="create_binder_save_target_period_hint">목표 기간을 입력해 주세요</string>
+    <string name="create_binder_save_target_won">원</string>
+    <string name="create_binder_save_target_period">적금기간</string>
+    <string name="create_binder_save_target_period_hint">12개월</string>
 
     <!-- 저축 바인더 상세 -->
     <string name="binder_save">저축 바인더</string>

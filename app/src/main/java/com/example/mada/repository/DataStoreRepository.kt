@@ -33,8 +33,8 @@ class DataStoreRepository @Inject constructor(
 
     suspend fun getBudget() = dataStore.getBudget()
 
-    suspend fun setSaveBinder(name: String, targetAmount: String, targetPeriod: String) =
-        dataStore.setSaveBinder(name, targetAmount, targetPeriod)
+    suspend fun setSaveBinder(name: String, targetAmount: String, startPeriod: String, targetPeriod: String) =
+        dataStore.setSaveBinder(name, targetAmount, startPeriod, targetPeriod)
 
     suspend fun getSaveBinder() = dataStore.getSaveBinder()
 

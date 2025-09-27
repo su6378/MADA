@@ -136,4 +136,24 @@ object DateUtil {
 
         return Pair("${targetDate}까지\n주 ${formattedAmount}원\n저축이 필요해요.","주 ${formattedAmount}원")
     }
+
+    /**
+     * 오늘 날짜와 month개월 뒤 날짜를 Pair로 반환
+     * 예: Pair("2025.09.27", "2025.10.27")
+     */
+    fun getTodayAndFutureDate(months: Int): Pair<String, String> {
+        val calendar = Calendar.getInstance()
+        val today = calendar.time
+
+        // n개월 뒤
+        calendar.add(Calendar.MONTH, months)
+        val futureDate = calendar.time
+
+        // 날짜 포맷
+        val formatter = SimpleDateFormat("yyyy.MM.dd", Locale.KOREA)
+        val todayStr = formatter.format(today)
+        val futureStr = formatter.format(futureDate)
+
+        return Pair(todayStr, futureStr)
+    }
 }
