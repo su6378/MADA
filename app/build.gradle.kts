@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.typewriter.android)
     implementation(libs.bundles.android.carousel)
     implementation(libs.circle.image.android)
+    implementation(libs.androidx.material3)
     kapt(libs.hilt.android.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
