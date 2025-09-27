@@ -41,4 +41,12 @@ class DataStoreRepository @Inject constructor(
     suspend fun setStep(step: Int) = dataStore.setStep(step)
 
     suspend fun getStep() = dataStore.getStep()
+
+    suspend fun setBudgetBinderImage(budgetBinderImage: Int) = dataStore.setBudgetBinderImage(budgetBinderImage)
+
+    suspend fun getBudgetBinderImage() = dataStore.getBudgetBinderImage()
+
+    suspend fun setSaveBinderImage(saveBinderImage: Int) = dataStore.setSaveBinderImage(saveBinderImage)
+
+    suspend fun getSaveBinderImage() = dataStore.getSaveBinderImage()
 }

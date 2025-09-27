@@ -29,6 +29,9 @@ class DataStore(
     private val saveBinderPreference = stringSetPreferencesKey("SAVE")
     private val stepPreference = intPreferencesKey("STEP")
     private val budgetExistPreference = booleanPreferencesKey("EXIST")
+    private val budgetBinderImagePreference = intPreferencesKey("BUDGET_IMAGE")
+    private val saveBinderImagePreference = intPreferencesKey("SAVE_IMAGE")
+
     private val oneBudgetPreference = stringSetPreferencesKey("ONE")
 
     suspend fun setAccount(account: Boolean) {
@@ -182,6 +185,52 @@ class DataStore(
             }
             .map { prefs ->
                 prefs[stepPreference] ?: 0
+            }
+    }
+
+    suspend fun setBudgetBinderImage(
+        budgetBinderImage: Int
+    ) {
+        context.dataStore.edit { preference ->
+            preference[budgetBinderImagePreference] = budgetBinderImage
+        }
+    }
+
+    suspend fun getBudgetBinderImage(): Flow<Int> {
+        return context.dataStore.data
+            .catch { exception ->
+                if (exception is IOException) {
+                    exception.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw exception
+                }
+            }
+            .map { prefs ->
+                prefs[budgetBinderImagePreference] ?: 0
+            }
+    }
+
+    suspend fun setSaveBinderImage(
+        saveBinderImage: Int
+    ) {
+        context.dataStore.edit { preference ->
+            preference[saveBinderImagePreference] = saveBinderImage
+        }
+    }
+
+    suspend fun getSaveBinderImage(): Flow<Int> {
+        return context.dataStore.data
+            .catch { exception ->
+                if (exception is IOException) {
+                    exception.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw exception
+                }
+            }
+            .map { prefs ->
+                prefs[saveBinderImagePreference] ?: 0
             }
     }
 }
