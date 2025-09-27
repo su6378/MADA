@@ -9,6 +9,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentOnBoardingBinding
+import com.example.mada.util.ImageUtil
+import com.example.mada.util.ImageUtil.changeImageWithFade
 import com.nitish.typewriterview.TypeWriterView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -118,21 +120,21 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding, OnBoardingVie
 
                                 5 -> {
                                     tvOnBoardingGuideComment.stopAnimation()
-                                    changeImageWithFade(R.drawable.image_on_boarding_alarm)
+                                    ivOnBoardingCard.changeImageWithFade(R.drawable.image_on_boarding_alarm)
                                     tvOnBoardingGuideComment.animateText(resources.getString(R.string.on_boarding_step_five))
                                     setNextButtonEnable()
                                 }
 
                                 6 -> {
                                     tvOnBoardingGuideComment.stopAnimation()
-                                    changeImageWithFade(R.drawable.image_on_boarding_save)
+                                    ivOnBoardingCard.changeImageWithFade(R.drawable.image_on_boarding_save)
                                     tvOnBoardingGuideComment.animateText(resources.getString(R.string.on_boarding_step_six))
                                     setNextButtonEnable()
                                 }
 
                                 7 -> {
                                     tvOnBoardingGuideComment.stopAnimation()
-                                    changeImageWithFade(R.drawable.image_on_boarding_reward)
+                                    ivOnBoardingCard.changeImageWithFade(R.drawable.image_on_boarding_reward)
                                     tvOnBoardingGuideComment.animateText(resources.getString(R.string.on_boarding_step_seven))
                                     setNextButtonEnable()
                                 }
@@ -195,24 +197,5 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding, OnBoardingVie
                 }
             }
         }
-    }
-
-    // 이미지 변경시 애니메이션 효과
-    private  // 이미지 변경 함수
-    fun changeImageWithFade(newImageRes: Int, duration: Long = 500) {
-        binding.ivOnBoardingCard.animate()
-            .alpha(0f)
-            .setDuration(duration)
-            .withEndAction {
-                // 2️⃣ 이미지 교체
-                binding.ivOnBoardingCard.setImageResource(newImageRes)
-
-                // 3️⃣ fade in
-                binding.ivOnBoardingCard.animate()
-                    .alpha(1f)
-                    .setDuration(duration)
-                    .start()
-            }
-            .start()
     }
 }
