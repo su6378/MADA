@@ -16,6 +16,7 @@ import com.example.mada.util.TextUtil.setColoredSubstrings
 import com.example.mada.util.TextUtil.toWon
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 private const val TAG = "DX"
 
@@ -56,6 +57,7 @@ class WeekSavingFragment : BaseFragment<FragmentWeekSavingBinding, WeekSavingVie
                                     }, viewLifecycleOwner
                                 )
                             }
+
                             WeekSavingAction.NavigateHomeView -> {
                                 showToast("이번주 예산을 저축했습니다 \uD83D\uDE03")
                                 backNavigate()
@@ -89,10 +91,17 @@ class WeekSavingFragment : BaseFragment<FragmentWeekSavingBinding, WeekSavingVie
                         binding.apply {
                             val budgetValue = vm!!.budget.value
                             val comment = "이번주 예산 " + budgetValue.sum()
-                                .toWon() + " 중에 " + (budgetValue.sum() - BudgetUtil.expenditure.sum()).toWon()+ "이 남았어요!"
-                            val ranges = listOf(budgetValue.sum().toWon(), (budgetValue.sum() - BudgetUtil.expenditure.sum()).toWon())
+                                .toWon() + " 중에 " + (budgetValue.sum() - BudgetUtil.expenditure.sum()).toWon() + "이 남았어요!"
+                            val ranges = listOf(
+                                budgetValue.sum().toWon(),
+                                (budgetValue.sum() - BudgetUtil.expenditure.sum()).toWon()
+                            )
 
-                            tvWeekSavingComment.setColoredSubstrings(comment, ranges, colorRes = R.color.nh_green)
+                            tvWeekSavingComment.setColoredSubstrings(
+                                comment,
+                                ranges,
+                                colorRes = R.color.nh_green
+                            )
 
                             setWeekSavingMoney(budgetValue, BudgetUtil.expenditure)
 
@@ -108,14 +117,22 @@ class WeekSavingFragment : BaseFragment<FragmentWeekSavingBinding, WeekSavingVie
 
     private fun setWeekSavingMoney(budget: List<Int>, expenditure: IntArray) {
         binding.apply {
-            tvWeekSavingMondayMoney.text = (budget[0] - expenditure[0]).toWon()
-            tvWeekSavingTuesdayMoney.text = (budget[1] - expenditure[1]).toWon()
-            tvWeekSavingWednesdayMoney.text = (budget[2] - expenditure[2]).toWon()
-            tvWeekSavingThursdayMoney.text = (budget[3] - expenditure[3]).toWon()
-            tvWeekSavingFridayMoney.text = (budget[4] - expenditure[4]).toWon()
-            tvWeekSavingSaturdayMoney.text = (budget[5] - expenditure[5]).toWon()
-            tvWeekSavingSundayMoney.text = (budget[6] - expenditure[6]).toWon()
-            tvWeekSavingWeekMoney.text = (budget.sum() - expenditure.sum()).toWon()
+            tvWeekSavingMondayMoney.text =
+                if (budget[0] - expenditure[0] > 0) (budget[0] - expenditure[0]).toWon() else 0.toWon()
+            tvWeekSavingTuesdayMoney.text =
+                if (budget[1] - expenditure[1] > 0) (budget[1] - expenditure[1]).toWon() else 0.toWon()
+            tvWeekSavingWednesdayMoney.text =
+                if (budget[2] - expenditure[2] > 0) (budget[2] - expenditure[2]).toWon() else 0.toWon()
+            tvWeekSavingThursdayMoney.text =
+                if (budget[3] - expenditure[3] > 0) (budget[3] - expenditure[3]).toWon() else 0.toWon()
+            tvWeekSavingFridayMoney.text =
+                if (budget[4] - expenditure[4] > 0) (budget[4] - expenditure[4]).toWon() else 0.toWon()
+            tvWeekSavingSaturdayMoney.text =
+                if (budget[5] - expenditure[5] > 0) (budget[5] - expenditure[5]).toWon() else 0.toWon()
+            tvWeekSavingSundayMoney.text =
+                if (budget[6] - expenditure[6] > 0) (budget[6] - expenditure[6]).toWon() else 0.toWon()
+            tvWeekSavingWeekMoney.text =
+                if (budget.sum() - expenditure.sum() > 0) (budget.sum() - expenditure.sum()).toWon() else 0.toWon()
         }
     }
 
@@ -123,17 +140,33 @@ class WeekSavingFragment : BaseFragment<FragmentWeekSavingBinding, WeekSavingVie
     private fun setWeekSavingMoneyImage(budget: List<Int>, expenditure: IntArray) {
         binding.apply {
             if (budget[0] - expenditure[0] > 0) ivWeekSavingMonday.setImageResource(R.drawable.ic_small_money)
+            else ivWeekSavingMonday.setImageResource(R.drawable.ic_no_money)
             if (budget[1] - expenditure[1] > 0) ivWeekSavingTuesday.setImageResource(R.drawable.ic_small_money)
+            else ivWeekSavingTuesday.setImageResource(R.drawable.ic_no_money)
             if (budget[2] - expenditure[2] > 0) ivWeekSavingWednesday.setImageResource(R.drawable.ic_small_money)
+            else ivWeekSavingWednesday.setImageResource(R.drawable.ic_no_money)
             if (budget[3] - expenditure[3] > 0) ivWeekSavingThursday.setImageResource(R.drawable.ic_small_money)
+            else ivWeekSavingThursday.setImageResource(R.drawable.ic_no_money)
             if (budget[4] - expenditure[4] > 0) ivWeekSavingFriday.setImageResource(R.drawable.ic_small_money)
+            else ivWeekSavingFriday.setImageResource(R.drawable.ic_no_money)
             if (budget[5] - expenditure[5] > 0) ivWeekSavingSaturday.setImageResource(R.drawable.ic_small_money)
+            else ivWeekSavingSaturday.setImageResource(R.drawable.ic_no_money)
             if (budget[6] - expenditure[6] > 0) ivWeekSavingSunday.setImageResource(R.drawable.ic_small_money)
-            if (budget.sum() - expenditure.sum() > 0) {
-                ivWeekSavingWeek.setImageResource(R.drawable.ic_big_money)
-                ivBlinker.setImageResource(R.drawable.ic_blinker_green)
-            }
+            else ivWeekSavingSunday.setImageResource(R.drawable.ic_no_money)
 
+            val percent = (((budget.sum() - expenditure.sum()).toDouble() / budget.sum()
+                .toDouble()) * 100).roundToInt()
+
+            if (percent >= 50) {
+                ivBlinker.setImageResource(R.drawable.ic_blinker_green)
+                ivWeekSavingWeek.setImageResource(R.drawable.ic_big_money)
+            } else if (percent > 0) {
+                ivWeekSavingWeek.setImageResource(R.drawable.ic_big_money)
+                ivBlinker.setImageResource(R.drawable.ic_blinker_yellow)
+            } else {
+                ivWeekSavingWeek.setImageResource(R.drawable.ic_no_money)
+                ivBlinker.setImageResource(R.drawable.ic_blinker)
+            }
         }
     }
 }

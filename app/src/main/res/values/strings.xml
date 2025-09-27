@@ -118,7 +118,7 @@
     <string name="binder_save_save_money_no_history">아직 저축을 하지 않았어요!</string>
 
     <!-- 이번주 저축 가능한 금액-->
-    <string name="week_saving">이번주 저축가능 금액</string>
+    <string name="week_saving">저축하기</string>
     <string name="week_saving_navigate">저축하러 가기</string>
     <string name="week_saving_week_money">이번주 저금할 돈</string>
 

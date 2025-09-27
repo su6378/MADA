@@ -513,6 +513,7 @@
                 android:fontFamily="@font/pretendard_medium"
                 android:text="@string/week_saving_week_money"
                 android:textSize="16sp"
+                android:textColor="@color/nh_green"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cv_week_saving_sunday"
                 app:layout_constraintTop_toTopOf="@id/tv_week_saving_sunday" />
@@ -530,7 +531,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cv_week_saving_sunday"
                 app:layout_constraintTop_toTopOf="@id/cv_week_saving_sunday"
-                app:strokeColor="#EBEBEB"
+                app:strokeColor="@color/nh_green"
                 app:strokeWidth="1dp">
 
             </com.google.android.material.card.MaterialCardView>
@@ -551,7 +552,7 @@
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:elevation="4dp"
-                android:src="@drawable/card_radius"
+                android:src="@drawable/card_radius_green"
                 app:layout_constraintBottom_toBottomOf="@id/cv_week_saving_week"
                 app:layout_constraintEnd_toEndOf="@id/cv_week_saving_week"
                 app:layout_constraintStart_toStartOf="@id/cv_week_saving_week" />
@@ -561,7 +562,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:elevation="4dp"
-                android:fontFamily="@font/pretendard_medium"
+                android:textColor="@color/nh_green"
+                android:fontFamily="@font/pretendard_semibold"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_week_saving_week_card"
