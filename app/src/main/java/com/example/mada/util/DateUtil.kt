@@ -1,10 +1,12 @@
 package com.example.mada.util
 
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.Calendar
 import java.util.Locale
 import kotlin.math.ceil
+import kotlin.math.roundToInt
 
 private const val TAG = "DX"
 object DateUtil {
@@ -107,5 +109,31 @@ object DateUtil {
         val weekOfMonth = calendar.get(Calendar.WEEK_OF_MONTH)
 
         return "${month}월 ${weekOfMonth}주차"
+    }
+
+    fun getSavingPlan(amount: Int, months: Int): Pair<String,String> {
+        val calendar = Calendar.getInstance()
+        val startDate = calendar.time
+
+        // 종료일 = 현재 날짜 + n개월
+        calendar.add(Calendar.MONTH, months)
+        val endDate = calendar.time
+
+        // 주차 수 계산
+        val diffMillis = endDate.time - startDate.time
+        val diffDays = (diffMillis / (1000 * 60 * 60 * 24)).toInt()
+        val weeks = (diffDays / 7.0).roundToInt().coerceAtLeast(1) // 최소 1주 보장
+
+        // 주 단위 금액 계산 (반올림)
+        val weeklyAmount = (amount.toDouble() / weeks).roundToInt()
+
+        // 금액 천 단위 포맷
+        val formattedAmount = NumberFormat.getNumberInstance(Locale.KOREA).format(weeklyAmount)
+
+        // 종료일 포맷
+        val formatter = SimpleDateFormat("yyyy.M.d", Locale.KOREA)
+        val targetDate = formatter.format(endDate)
+
+        return Pair("${targetDate}까지\n주 ${formattedAmount}원\n저축이 필요해요.","주 ${formattedAmount}원")
     }
 }

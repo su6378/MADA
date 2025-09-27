@@ -54,6 +54,40 @@ object TextUtil {
         text = spannable
     }
 
+    // 확장 함수: 특정 키워드를 찾아서 글자 크기를 sp 단위로 변경
+    fun TextView.setSizedSubstringsSp(
+        fullText: CharSequence,
+        keywords: List<String>,
+        sizeInSp: Int, // sp 단위
+        @androidx.annotation.ColorRes colorRes: Int,
+        ignoreCase: Boolean = true
+    ) {
+        val color = androidx.core.content.ContextCompat.getColor(context, colorRes)
+        val spannable = android.text.SpannableString(fullText)
+
+        keywords.filter { it.isNotEmpty() }.forEach { key ->
+            var start = fullText.indexOf(key, startIndex = 0, ignoreCase = ignoreCase)
+            while (start >= 0) {
+                val end = start + key.length
+                spannable.setSpan(
+                    android.text.style.AbsoluteSizeSpan(sizeInSp, true), // true → sp 단위
+                    start,
+                    end,
+                    android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+
+                spannable.setSpan(
+                    android.text.style.ForegroundColorSpan(color),
+                    start,
+                    end,
+                    android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                start = fullText.indexOf(key, startIndex = end, ignoreCase = ignoreCase)
+            }
+        }
+        text = spannable
+    }
+
     fun Int.toWon(): String  = String.format(Locale.KOREA, "%,d원", this)
 
     fun getEditTextValueAsInt(editText: TextInputEditText): Int {
