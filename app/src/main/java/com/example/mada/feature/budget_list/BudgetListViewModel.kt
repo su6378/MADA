@@ -106,7 +106,6 @@ class BudgetListViewModel @Inject constructor(
             }.onSuccess { // 응답 성공
                 _result.emit(Result.Finish)
                 _action.emit(BudgetListAction.SetBinderImage(image))
-                _state.update { it.copy(isImageChanged = true) }
             }.onFailure { // 응답 실패
                 _result.emit(Result.Finish)
             }
@@ -119,7 +118,6 @@ data class BudgetListState(
     var isSaveBinderExist: Boolean = false,
     var budgetBinderImage: Int = 0,
     var saveBinderImage: Int = 0,
-    var isImageChanged: Boolean = false
 )
 
 sealed interface BudgetListAction {
