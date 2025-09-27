@@ -72,25 +72,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/carousel_binder_list" />
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:fontFamily="@font/pretendard_semibold"
+            app:layout_constraintTop_toBottomOf="@id/indicator_binder_list"
+            app:layout_constraintBottom_toTopOf="@id/iv_binder_list_cloud"
+            android:text="@string/binder_list_select_theme"
+            app:layout_constraintStart_toStartOf="@id/iv_binder_list_cloud"/>
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_binder_list_cloud"
             android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginStart="40dp"
-            android:adjustViewBounds="true"
             android:src="@drawable/ic_binder_cloud"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_binder_list_heart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/indicator_binder_list"
-            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintVertical_bias="0.4"
             app:onClick="@{() -> vm.showBinderImageAlert(`cloud`)}" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_binder_list_heart"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:adjustViewBounds="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_binder_heart"
             app:layout_constraintBottom_toBottomOf="@id/iv_binder_list_cloud"
             app:layout_constraintEnd_toStartOf="@id/iv_binder_list_green"
@@ -100,9 +109,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_binder_list_green"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:adjustViewBounds="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_binder_green"
             app:layout_constraintBottom_toBottomOf="@id/iv_binder_list_cloud"
             app:layout_constraintEnd_toStartOf="@id/iv_binder_list_alle"
@@ -112,9 +120,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_binder_list_alle"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:adjustViewBounds="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_binder_alle"
             app:layout_constraintBottom_toBottomOf="@id/iv_binder_list_cloud"
             app:layout_constraintEnd_toStartOf="@id/iv_binder_list_onee"
@@ -124,9 +131,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_binder_list_onee"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:adjustViewBounds="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_binder_onee"
             app:layout_constraintBottom_toBottomOf="@id/iv_binder_list_cloud"
             app:layout_constraintEnd_toStartOf="@id/iv_binder_list_ribbon"
@@ -137,7 +143,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_binder_list_ribbon"
             android:layout_width="40dp"
-            android:layout_height="0dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="40dp"
             android:src="@drawable/ic_binder_ribbon"
             app:layout_constraintBottom_toBottomOf="@id/iv_binder_list_cloud"
@@ -145,6 +151,7 @@
             app:layout_constraintStart_toEndOf="@id/iv_binder_list_onee"
             app:layout_constraintTop_toTopOf="@id/iv_binder_list_cloud"
             app:onClick="@{() -> vm.showBinderImageAlert(`ribbon`)}" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
