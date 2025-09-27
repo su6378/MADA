@@ -1,30 +1,22 @@
 package com.example.mada.feature.budget_list
 
-import android.content.Context
 import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.constraintlayout.helper.widget.Carousel
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mada.MainActivity
 import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentBudgetListBinding
 import com.example.mada.dialog.AlertDialog
 import com.example.mada.util.ImageUtil.changeItemWithFade
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
-import org.imaginativeworld.whynotimagecarousel.utils.dpToPx
-import org.imaginativeworld.whynotimagecarousel.utils.pxToDp
-import kotlin.math.log
 
 private const val TAG = "DX"
 
@@ -36,18 +28,37 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
 
     private var images = mutableListOf<CarouselItem>()
     private var currentPosition = 0
-    private var isImageChanged: Boolean = false
 
     override fun initView() {
         with(binding) {
-            carouselBinderList.setIndicator(indicatorBinderList)
-            carouselBinderList.registerLifecycle(viewLifecycleOwner)
+            val budgetBinderImage =
+                when (viewModel.state.value.budgetBinderImage) {
+                    "cloud" -> R.drawable.binder_cloud
+                    "heart" -> R.drawable.binder_heart
+                    "green" -> R.drawable.binder_green
+                    "onee" ->  R.drawable.binder_onee
+                    "ribbon" -> R.drawable.binder_ribbon
+                    else -> R.drawable.binder_alle
+                }
+
+            val saveBinderImage =
+                when (viewModel.state.value.saveBinderImage) {
+                    "cloud" -> R.drawable.binder_cloud
+                    "heart" -> R.drawable.binder_heart
+                    "green" -> R.drawable.binder_green
+                    "alle" -> R.drawable.binder_alle
+                    "ribbon" -> R.drawable.binder_ribbon
+                    else ->  R.drawable.binder_onee
+                }
 
             images = mutableListOf(
-                CarouselItem(viewModel.state.value.budgetBinderImage),
-                CarouselItem(viewModel.state.value.saveBinderImage)
+                CarouselItem(budgetBinderImage),
+                CarouselItem(saveBinderImage)
             )
+
             carouselBinderList.setData(images)
+            carouselBinderList.setIndicator(indicatorBinderList)
+            carouselBinderList.registerLifecycle(viewLifecycleOwner)
         }
     }
 
@@ -67,7 +78,7 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
                     carouselItem: CarouselItem?
                 ) {
                     super.onScrollStateChanged(recyclerView, newState, position, carouselItem)
-                    currentPosition = position
+                    binding.indicatorBinderList.animatePageSelected(currentPosition)
                 }
 
                 override fun onScrolled(
@@ -79,16 +90,15 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
                 ) {
                     super.onScrolled(recyclerView, dx, dy, position, carouselItem)
                     setBiderType(position)
+                    currentPosition = position
                 }
             }
 
             carouselBinderList.carouselListener = object : CarouselListener {
                 override fun onClick(position: Int, carouselItem: CarouselItem) {
                     navigateBinderDetailFragment(position)
-                    isImageChanged = false
                 }
             }
-
         }
     }
 
@@ -96,7 +106,7 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    viewModel.action.collect { action ->
+                    viewModel.action.collectLatest { action ->
                         when (action) {
                             is BudgetListAction.ShowSetBinderImageAlert -> showAlertDialog(
                                 dialog = AlertDialog(
@@ -104,49 +114,51 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
                                     title = resources.getString(R.string.binder_list_set_image),
                                     content = resources.getString(R.string.binder_list_set_image_comment)
                                 ) {
-                                    when (action.image) {
-                                        "cloud" -> viewModel.setBinderImage(
-                                            currentPosition,
-                                            R.drawable.binder_cloud
-                                        )
-
-                                        "heart" -> viewModel.setBinderImage(
-                                            currentPosition,
-                                            R.drawable.binder_heart
-                                        )
-
-                                        "green" -> viewModel.setBinderImage(
-                                            currentPosition,
-                                            R.drawable.binder_green
-                                        )
-
-                                        "alle" -> viewModel.setBinderImage(
-                                            currentPosition,
-                                            R.drawable.binder_alle
-                                        )
-
-                                        "onee" -> viewModel.setBinderImage(
-                                            currentPosition,
-                                            R.drawable.binder_onee
-                                        )
-
-                                        "ribbon" -> viewModel.setBinderImage(
-                                            currentPosition,
-                                            R.drawable.binder_ribbon
-                                        )
-                                    }
+                                    Log.d(TAG, "initObserving: $currentPosition")
+                                    viewModel.setBinderImage(currentPosition, action.image)
                                 }, viewLifecycleOwner
                             )
 
                             is BudgetListAction.SetBinderImage -> {
                                 binding.apply {
-                                    carouselBinderList.changeItemWithFade(
-                                        images,
-                                        currentPosition,
-                                        action.image
-                                    )
-                                }
+                                    when (action.image) {
+                                        "cloud" -> carouselBinderList.changeItemWithFade(
+                                            images,
+                                            currentPosition,
+                                            R.drawable.binder_cloud
+                                        )
 
+                                        "heart" -> carouselBinderList.changeItemWithFade(
+                                            images,
+                                            currentPosition,
+                                            R.drawable.binder_heart
+                                        )
+
+                                        "green" -> carouselBinderList.changeItemWithFade(
+                                            images,
+                                            currentPosition,
+                                            R.drawable.binder_green
+                                        )
+
+                                        "alle" -> carouselBinderList.changeItemWithFade(
+                                            images,
+                                            currentPosition,
+                                            R.drawable.binder_alle
+                                        )
+
+                                        "onee" -> carouselBinderList.changeItemWithFade(
+                                            images,
+                                            currentPosition,
+                                            R.drawable.binder_onee
+                                        )
+
+                                        "ribbon" -> carouselBinderList.changeItemWithFade(
+                                            images,
+                                            currentPosition,
+                                            R.drawable.binder_ribbon
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
@@ -168,7 +180,7 @@ class BudgetListFragment : BaseFragment<FragmentBudgetListBinding, BudgetListVie
                 }
 
                 launch {
-                    viewModel.state.collect { state ->
+                    viewModel.state.collectLatest { state ->
 
                     }
                 }

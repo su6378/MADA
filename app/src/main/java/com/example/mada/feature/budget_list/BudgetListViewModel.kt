@@ -75,7 +75,8 @@ class BudgetListViewModel @Inject constructor(
             _result.emit(Result.Finish)
         }.collectLatest { result ->
             _result.emit(Result.Finish)
-            _state.update { it.copy(budgetBinderImage = result) }
+            if (result.isEmpty()) _state.update { it.copy(budgetBinderImage = "alle") }
+            else _state.update { it.copy(budgetBinderImage = result) }
         }
     }
 
@@ -87,7 +88,8 @@ class BudgetListViewModel @Inject constructor(
             _result.emit(Result.Finish)
         }.collectLatest { result ->
             _result.emit(Result.Finish)
-            _state.update { it.copy(saveBinderImage = result) }
+            if (result.isEmpty()) _state.update { it.copy(saveBinderImage = "onee") }
+            else _state.update { it.copy(saveBinderImage = result) }
         }
     }
 
@@ -95,7 +97,7 @@ class BudgetListViewModel @Inject constructor(
         _action.emit(BudgetListAction.ShowSetBinderImageAlert(image))
     }
 
-    fun setBinderImage(position: Int, image: Int) = viewModelScope.launch {
+    fun setBinderImage(position: Int, image: String) = viewModelScope.launch {
         viewModelScope.launch {
             runCatching {
                 _result.emit(Result.Loading)
@@ -116,13 +118,13 @@ class BudgetListViewModel @Inject constructor(
 data class BudgetListState(
     var isBudgetExist: Boolean = false,
     var isSaveBinderExist: Boolean = false,
-    var budgetBinderImage: Int = 0,
-    var saveBinderImage: Int = 0,
+    var budgetBinderImage: String = "",
+    var saveBinderImage: String = "",
 )
 
 sealed interface BudgetListAction {
     class ShowSetBinderImageAlert(val image: String) : BudgetListAction
-    class SetBinderImage(val image: Int) : BudgetListAction
+    class SetBinderImage(val image: String) : BudgetListAction
 }
 
 sealed interface Result {
