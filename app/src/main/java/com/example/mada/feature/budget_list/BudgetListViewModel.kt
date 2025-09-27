@@ -79,8 +79,7 @@ class BudgetListViewModel @Inject constructor(
         }
     }
 
-
-    // 바인더 이미지 받기
+    // 저축 바인더 이미지 받기
     private fun getSaveBinderImage() = viewModelScope.launch {
         dataStoreRepository.getSaveBinderImage().onStart {
             _result.emit(Result.Loading)
