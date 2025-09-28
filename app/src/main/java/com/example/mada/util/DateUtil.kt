@@ -99,16 +99,31 @@ object DateUtil {
         return ceil(goalAmount.toDouble() / months).toInt()
     }
 
-    fun getCurrentWeekInfo(): String {
-        val calendar = Calendar.getInstance(Locale.KOREA)
+    fun getWeekInfoList(startDate: String, n: Int): List<String> {
+        val result = mutableListOf<String>()
 
-        // 주 시작 요일을 월요일로 설정
-        calendar.firstDayOfWeek = Calendar.MONDAY
+        // 입력된 문자열을 Date로 변환
+        val sdf = SimpleDateFormat("yyyy.MM.dd", Locale.KOREA)
+        val date = sdf.parse(startDate) ?: return emptyList()
 
-        val month = calendar.get(Calendar.MONTH) + 1 // Calendar.MONTH는 0부터 시작
-        val weekOfMonth = calendar.get(Calendar.WEEK_OF_MONTH)
+        val calendar = Calendar.getInstance(Locale.KOREA).apply {
+            time = date
+            firstDayOfWeek = Calendar.MONDAY
+        }
 
-        return "${month}월 ${weekOfMonth}주차"
+        // n주 뒤까지 반복
+        for (i in 0..n) {
+            // i주 뒤 날짜 구하기
+            val tempCal = calendar.clone() as Calendar
+            tempCal.add(Calendar.WEEK_OF_YEAR, i)
+
+            val month = tempCal.get(Calendar.MONTH) + 1
+            val weekOfMonth = tempCal.get(Calendar.WEEK_OF_MONTH)
+
+            result.add("${month}월 ${weekOfMonth}주차")
+        }
+
+        return result
     }
 
     fun getSavingPlan(amount: Int, months: Int): Pair<String,String> {

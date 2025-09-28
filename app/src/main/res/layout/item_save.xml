@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="model"
+            type="com.example.mada.feature.binder_save.SaveHistory" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="20dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_week_saving_monday"
+            android:layout_width="wrap_content"
+            android:layout_height="148dp"
+            android:layout_marginEnd="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="#EBEBEB"
+            app:strokeWidth="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_monney"
+                    android:layout_width="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:elevation="10dp"
+                    android:src="@drawable/ic_bill"
+                    app:layout_constraintBottom_toTopOf="@id/iv_monday_card"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_monday_card"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:elevation="4dp"
+                    android:src="@drawable/card_radius"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_money"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:elevation="4dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:text="@{model.money}"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_monday_card"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/iv_monday_card" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tv_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="@{model.week}"
+            android:fontFamily="@font/pretendard_semibold"
+            app:layout_constraintStart_toStartOf="@id/cv_week_saving_monday"
+            app:layout_constraintEnd_toEndOf="@id/cv_week_saving_monday"
+            app:layout_constraintTop_toBottomOf="@id/cv_week_saving_monday"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0"
+            android:layout_marginTop="20dp"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

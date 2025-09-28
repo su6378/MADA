@@ -1,5 +1,6 @@
 package com.example.mada.feature.binder_save
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mada.repository.DataStoreRepository
@@ -37,9 +38,23 @@ class BinderSaveViewModel @Inject constructor(
     val state: StateFlow<BinderSaveState> get() = _state.asStateFlow()
 
     init {
+        getSaveBinderImage()
         getSaveBinderInfo()
         getStepInfo()
         getBudgetInfo()
+    }
+
+    // 저축 바인더 이미지 받기
+    private fun getSaveBinderImage() = viewModelScope.launch {
+        dataStoreRepository.getSaveBinderImage().onStart {
+            _result.emit(Result.Loading)
+        }.catch {
+            _result.emit(Result.Finish)
+        }.collectLatest { result ->
+            _result.emit(Result.Finish)
+            if (result.isEmpty()) _state.update { it.copy(saveBinderImage = "onee") }
+            else _state.update { it.copy(saveBinderImage = result) }
+        }
     }
 
     private fun getSaveBinderInfo() = viewModelScope.launch {
@@ -54,7 +69,8 @@ class BinderSaveViewModel @Inject constructor(
                 it.copy(
                     targetName = info[0],
                     targetAmount = info[1],
-                    targetPeriod = info[2]
+                    startPeriod = info[2],
+                    targetPeriod = "${info[3]} 만기"
                 )
             }
         }
@@ -69,6 +85,39 @@ class BinderSaveViewModel @Inject constructor(
             _state.update {
                 it.copy(step = result)
             }
+
+            Log.d(TAG, "getStepInfo: $result")
+            
+            when (result) {
+                0 -> _state.update { it.copy(saveWeek = "0회차 납임") }
+                1 -> _state.update {
+                    it.copy(
+                        saveWeek = "1회차 납임",
+                        weekList = DateUtil.getWeekInfoList(_state.value.startPeriod, 0)
+                    )
+                }
+
+                2 -> _state.update {
+                    it.copy(
+                        saveWeek = "2회차 납임",
+                        weekList = DateUtil.getWeekInfoList(_state.value.startPeriod, 1)
+                    )
+                }
+
+                3 -> _state.update {
+                    it.copy(
+                        saveWeek = "20회차 납임",
+                        weekList = DateUtil.getWeekInfoList(_state.value.startPeriod, 19)
+                    )
+                }
+
+                else -> _state.update {
+                    it.copy(
+                        saveWeek = "21회차 납임",
+                        weekList = DateUtil.getWeekInfoList(_state.value.startPeriod, 20)
+                    )
+                }
+            }
         }
     }
 
@@ -78,36 +127,81 @@ class BinderSaveViewModel @Inject constructor(
             _result.emit(Result.Loading)
         }.catch {
             _result.emit(Result.Finish)
-        }.collectLatest { result ->
+        }.collect { result ->
             if (result.sum() > 0) {
-                if (_state.value.step > 1)
+                if (_state.value.step > 0)
                     _state.update {
                         it.copy(
                             saveMoney = (result.sum() - BudgetUtil.expenditure.sum()).toWon(),
-                            budgetProgress = ((result.sum() - BudgetUtil.expenditure.sum()).toDouble() / result.sum().toDouble() * 100).roundToInt(),
-                            budgetProgressText ="${((result.sum() - BudgetUtil.expenditure.sum()).toDouble() / result.sum().toDouble() * 100).roundToInt()}% 달성중",
-                            saveWeek = DateUtil.getCurrentWeekInfo(),
-                            saveWeekMoney = (result.sum() - BudgetUtil.expenditure.sum()).toWon()
+                            budgetProgress = ((result.sum() - BudgetUtil.expenditure.sum()).toDouble() / result.sum()
+                                .toDouble() * 100).roundToInt(),
+                            budgetProgressText = "${
+                                ((result.sum() - BudgetUtil.expenditure.sum()).toDouble() / result.sum()
+                                    .toDouble() * 100).roundToInt()
+                            }% 달성중",
+                            saveWeekMoney = (result.sum() - BudgetUtil.expenditure.sum()).toWon(),
                         )
                     }
                 else _state.update { it.copy(saveMoney = 0.toWon()) }
-            } else {
-                _state.update { it.copy(saveMoney = 0.toWon()) }
+
+                Log.d(TAG, "getBudgetInfo: $result ${_state.value.step}")
+                
+                when (_state.value.step) {
+                    1 -> _state.update {
+                        it.copy(
+                            saveHistoryList = listOf(
+                                SaveHistory(
+                                    0,
+                                    (result.sum() - BudgetUtil.expenditure.sum()).toWon(),
+                                    _state.value.weekList[0]
+                                )
+                            )
+                        )
+                    }
+
+                    2 -> _state.update {
+                        it.copy(
+                            saveHistoryList = listOf
+                                (
+                                SaveHistory(0, 30000.toWon(), _state.value.weekList[0]),
+                                SaveHistory(
+                                    1,
+                                    (result.sum() - BudgetUtil.expenditure.sum()).toWon(),
+                                    _state.value.weekList[1]
+                                )
+                            )
+                        )
+                    }
+
+                    3 -> _state.update {
+                        val saveHistoryList = arrayListOf<SaveHistory>()
+
+                        for (i in 0 until 20) {
+                            saveHistoryList.add(SaveHistory(i, 150000.toWon(),_state.value.weekList[i]))
+                        }
+
+                        it.copy(saveHistoryList = saveHistoryList)
+                    }
+                }
             }
         }
     }
 }
 
 data class BinderSaveState(
+    var saveBinderImage: String = "",
     var targetName: String = "",
     var targetAmount: String = "",
+    var startPeriod: String = "",
     var targetPeriod: String = "",
     var step: Int = 0,
     var saveMoney: String = "",
     var budgetProgress: Int = 0,
     var budgetProgressText: String = "0% 달성중",
-    var saveWeek: String = "아직 저축을 하지 않았어요!",
+    var saveWeek: String = "",
     var saveWeekMoney: String = "",
+    var saveHistoryList: List<SaveHistory> = listOf(),
+    var weekList: List<String> = listOf(),
 )
 
 sealed interface BinderSaveAction {
@@ -119,3 +213,5 @@ sealed interface Result {
     data object Process : Result
     data object Finish : Result
 }
+
+

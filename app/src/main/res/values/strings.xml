@@ -117,8 +117,9 @@
 
     <!-- 저축 바인더 생성 -->
     <string name="create_binder_save">저축 바인더 만들기</string>
-    <string name="create_binder_save_name">목표명</string>
+    <string name="create_binder_save_product">NH올원머니다이어리 적금</string>
     <string name="create_binder_save_name_hint">바인더 이름(목표명)을 입력해 주세요</string>
+    <string name="create_binder_save_amount">저축 금액</string>
     <string name="create_binder_save_target_amount">목표 금액</string>
     <string name="create_binder_save_target_amount_hint">목표 금액을 입력해 주세요</string>
     <string name="create_binder_save_target_won">원</string>

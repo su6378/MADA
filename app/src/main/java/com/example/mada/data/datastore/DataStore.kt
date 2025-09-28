@@ -148,7 +148,7 @@ class DataStore(
         targetPeriod: String
     ) {
         context.dataStore.edit { preference ->
-            preference[saveBinderPreference] = setOf(name, targetAmount, targetPeriod)
+            preference[saveBinderPreference] = setOf(name, targetAmount, startPeriod, targetPeriod)
         }
     }
 
