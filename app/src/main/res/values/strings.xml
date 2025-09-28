@@ -74,6 +74,9 @@
     <string name="home_save_image_comment">나의 모아하우스를 저장하시겠습니까?</string>
     <string name="home_save_image_complete">나의 모아하우스를 갤러리에 저장했습니다!</string>
 
+    <!-- 집 공유 -->
+    <string name="home_detail">모아하우스</string>
+
     <!-- 주간 예산 설정 -->
     <string name="week_budget_title">예산 설정</string>
     <string name="week_budget_my_data_commnet">미이데이터 자산 정보를 불러오고 있어요!</string>

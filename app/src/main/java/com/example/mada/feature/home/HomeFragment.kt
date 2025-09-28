@@ -86,7 +86,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                                 )
                                             }, viewLifecycleOwner
                                         )
-                                    }else {
+                                    } else {
                                         if (viewModel.state.value.isBudgetExist) {
                                             if (!binding.vm!!.state.value.isSaveAble) showToast(
                                                 resources.getString(
@@ -102,8 +102,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                                 }, viewLifecycleOwner
                                             )
                                             else navigate(HomeFragmentDirections.actionHomeFragmentToWeekSavingFragment())
-                                        }
-                                        else showAlertDialog(
+                                        } else showAlertDialog(
                                             dialog = AlertDialog(
                                                 mainActivity,
                                                 title = resources.getString(R.string.home_set_budget),
@@ -148,11 +147,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                                 )
                                             }, viewLifecycleOwner
                                         )
-                                    }else {
+                                    } else {
                                         if (viewModel.state.value.isBudgetExist) {
                                             navigate(HomeFragmentDirections.actionHomeFragmentToBinderBudgetFragment())
-                                        }
-                                        else showAlertDialog(
+                                        } else showAlertDialog(
                                             dialog = AlertDialog(
                                                 mainActivity,
                                                 title = resources.getString(R.string.home_set_budget),
@@ -166,27 +164,33 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                     }
                                 }
                             }
-                            is HomeAction.NavigateHomeDetailFragment -> navigate(HomeFragmentDirections.actionHomeFragmentToHomeShareFragment())
-//                            {
-//                                when(viewModel.state.value.step) {
-//                                    0 -> {
-//                                        if (!binding.vm!!.state.value.isSigned) {
-//                                            showAlertDialog(
-//                                                dialog = AlertDialog(
-//                                                    mainActivity,
-//                                                    title = resources.getString(R.string.home_create_account_link),
-//                                                    content = resources.getString(R.string.home_recommend_create_account)
-//                                                ) {
-//                                                    navigate(
-//                                                        HomeFragmentDirections.actionHomeFragmentToAccountLinkFragment()
-//                                                    )
-//                                                }, viewLifecycleOwner
-//                                            )
-//                                        } else showToast("한 주 챌린지 완료후 이동할 수 있어요 \uD83D\uDE03")
-//                                    }
-//                                    else -> navigate(HomeFragmentDirections.actionHomeFragmentToHomeDetailFragment())
-//                                }
-//                            }
+
+                            is HomeAction.NavigateHomeShareFragment -> navigate(
+                                HomeFragmentDirections.actionHomeFragmentToHomeShareFragment()
+                            )
+
+                            is HomeAction.NavigateHomeDetailFragment -> {
+                                when (viewModel.state.value.step) {
+                                    0 -> {
+                                        if (!binding.vm!!.state.value.isSigned) {
+                                            showAlertDialog(
+                                                dialog = AlertDialog(
+                                                    mainActivity,
+                                                    title = resources.getString(R.string.home_create_account_link),
+                                                    content = resources.getString(R.string.home_recommend_create_account)
+                                                ) {
+                                                    navigate(
+                                                        HomeFragmentDirections.actionHomeFragmentToAccountLinkFragment()
+                                                    )
+                                                }, viewLifecycleOwner
+                                            )
+                                        } else showToast("한 주 챌린지 완료후 이동할 수 있어요 \uD83D\uDE03")
+                                    }
+
+                                    else -> navigate(HomeFragmentDirections.actionHomeFragmentToHomeDetailFragment())
+                                }
+                            }
+
                         }
                     }
                 }
@@ -287,12 +291,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                     if (!state.isBudgetExist) ivHomeCreateBudget.visibility = View.VISIBLE
                     ivHomeShare.visibility = View.INVISIBLE
                 }
+
                 1 -> { // 1주차
                     ivHome.setImageResource(R.drawable.image_home_one_week)
                 }
+
                 2 -> { // 2주차
                     ivHome.setImageResource(R.drawable.image_home_two_week)
                 }
+
                 else -> {
                     val homeParams = ivHome.layoutParams as ViewGroup.MarginLayoutParams
                     homeParams.apply {

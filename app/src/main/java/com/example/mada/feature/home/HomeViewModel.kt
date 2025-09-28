@@ -1,5 +1,6 @@
 package com.example.mada.feature.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mada.repository.DataStoreRepository
@@ -175,7 +176,12 @@ class HomeViewModel @Inject constructor(
         _action.emit(HomeAction.ShowCreateBudgetDialog)
     }
 
+    fun navigateShareFragment() = viewModelScope.launch {
+        _action.emit(HomeAction.NavigateHomeShareFragment)
+    }
+
     fun navigateHomeDetailFragment() = viewModelScope.launch {
+        Log.d(TAG, "navigateHomeDetailFragment: 클릭함")
         _action.emit(HomeAction.NavigateHomeDetailFragment)
     }
 }
@@ -202,7 +208,7 @@ sealed interface HomeAction {
     data object NavigateWeekSavingView : HomeAction
     data object NavigateBinderListView : HomeAction
     data object ShowCreateBudgetDialog : HomeAction
-    data object NavigateHome
+    data object NavigateHomeShareFragment: HomeAction
     data object NavigateHomeDetailFragment : HomeAction
 }
 
