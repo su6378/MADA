@@ -1,7 +1,5 @@
 package com.example.mada.feature.home
 
-import android.content.res.Resources
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mada.repository.DataStoreRepository
@@ -204,6 +202,7 @@ sealed interface HomeAction {
     data object NavigateWeekSavingView : HomeAction
     data object NavigateBinderListView : HomeAction
     data object ShowCreateBudgetDialog : HomeAction
+    data object NavigateHome
     data object NavigateHomeDetailFragment : HomeAction
 }
 

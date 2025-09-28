@@ -1,4 +1,4 @@
-package com.example.mada.feature.home_detail
+package com.example.mada.feature.home_share
 
 import android.content.ContentValues
 import android.content.Context
@@ -16,7 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.mada.R
 import com.example.mada.base.BaseFragment
-import com.example.mada.databinding.FragmentHomeDetailBinding
+import com.example.mada.databinding.FragmentHomeShareBinding
 import com.example.mada.dialog.AlertDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -24,10 +24,10 @@ import java.io.File
 import java.io.FileOutputStream
 
 @AndroidEntryPoint
-class HomeDetailFragment : BaseFragment<FragmentHomeDetailBinding, HomeDetailViewModel>() {
+class HomeShareFragment : BaseFragment<FragmentHomeShareBinding, HomeShareViewModel>() {
     override val layoutResourceId: Int
-        get() = R.layout.fragment_home_detail
-    override val viewModel: HomeDetailViewModel by viewModels()
+        get() = R.layout.fragment_home_share
+    override val viewModel: HomeShareViewModel by viewModels()
 
     override fun initView() {
         with(binding) {
@@ -40,11 +40,11 @@ class HomeDetailFragment : BaseFragment<FragmentHomeDetailBinding, HomeDetailVie
                 interpolator = android.view.animation.AccelerateDecelerateInterpolator()
             }
 
-            btnHomeDetailSave.startAnimation(anim)
-            btnHomeDetailSave.visibility = View.VISIBLE
+            btnHomeShareSave.startAnimation(anim)
+            btnHomeShareSave.visibility = View.VISIBLE
 
-            btnHomeDetailShare.startAnimation(anim)
-            btnHomeDetailShare.visibility = View.VISIBLE
+            btnHomeShareShare.startAnimation(anim)
+            btnHomeShareShare.visibility = View.VISIBLE
         }
     }
 
@@ -52,7 +52,7 @@ class HomeDetailFragment : BaseFragment<FragmentHomeDetailBinding, HomeDetailVie
         binding.vm = viewModel
 
         binding.apply {
-            toolbarHomeDetail.setNavigationOnClickListener {
+            toolbarHomeShare.setNavigationOnClickListener {
                 backNavigate()
             }
         }
@@ -65,7 +65,7 @@ class HomeDetailFragment : BaseFragment<FragmentHomeDetailBinding, HomeDetailVie
                 launch {
                     viewModel.action.collect { action ->
                         when (action) {
-                            is HomeDetailAction.ShareHomeImage -> showAlertDialog(
+                            is HomeShareAction.ShareHomeImage -> showAlertDialog(
                                 dialog = AlertDialog(
                                     mainActivity,
                                     title = resources.getString(R.string.home_share_image),
@@ -75,13 +75,13 @@ class HomeDetailFragment : BaseFragment<FragmentHomeDetailBinding, HomeDetailVie
                                 }, viewLifecycleOwner
                             )
 
-                            is HomeDetailAction.SaveHomeImage -> showAlertDialog(
+                            is HomeShareAction.SaveHomeImage -> showAlertDialog(
                                 dialog = AlertDialog(
                                     mainActivity,
                                     title = resources.getString(R.string.home_save_image),
                                     content = resources.getString(R.string.home_save_image_comment)
                                 ) {
-                                    saveDrawableToGallery(requireContext(), R.drawable.image_home_detail,"김모아의 모아하우스")
+                                    saveDrawableToGallery(requireContext(), R.drawable.image_home_share,"김모아의 모아하우스")
                                 }, viewLifecycleOwner
                             )
                         }
@@ -139,8 +139,8 @@ class HomeDetailFragment : BaseFragment<FragmentHomeDetailBinding, HomeDetailVie
     }
 
     // 집 이미지 공유
-    private fun shareDrawableImage(context: Context, state: HomeDetailAction) {
-        var drawableId: Int = R.drawable.image_home_detail
+    private fun shareDrawableImage(context: Context, state: HomeShareAction) {
+        var drawableId: Int = R.drawable.image_home_share
 
 //        when(state.step) {
 //            0 -> drawableId = R.drawable.image_home_initial

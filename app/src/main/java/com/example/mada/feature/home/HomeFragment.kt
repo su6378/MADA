@@ -166,7 +166,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                     }
                                 }
                             }
-                            is HomeAction.NavigateHomeDetailFragment -> navigate(HomeFragmentDirections.actionHomeFragmentToHomeDetailFragment())
+                            is HomeAction.NavigateHomeDetailFragment -> navigate(HomeFragmentDirections.actionHomeFragmentToHomeShareFragment())
 //                            {
 //                                when(viewModel.state.value.step) {
 //                                    0 -> {

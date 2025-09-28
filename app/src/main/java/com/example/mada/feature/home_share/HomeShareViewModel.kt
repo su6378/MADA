@@ -1,4 +1,4 @@
-package com.example.mada.feature.home_detail
+package com.example.mada.feature.home_share
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,34 +16,34 @@ import javax.inject.Inject
 private const val TAG = "DX"
 
 @HiltViewModel
-class HomeDetailViewModel @Inject constructor(
+class HomeShareViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
-    private val _action: MutableSharedFlow<HomeDetailAction> = MutableSharedFlow()
-    val action: SharedFlow<HomeDetailAction> get() = _action.asSharedFlow()
+    private val _action: MutableSharedFlow<HomeShareAction> = MutableSharedFlow()
+    val action: SharedFlow<HomeShareAction> get() = _action.asSharedFlow()
 
     private val _result: MutableSharedFlow<Result> = MutableSharedFlow()
     val result: SharedFlow<Result> get() = _result.asSharedFlow()
 
-    private val _state: MutableStateFlow<HomeDetailState> = MutableStateFlow(HomeDetailState())
-    val state: StateFlow<HomeDetailState> get() = _state.asStateFlow()
+    private val _state: MutableStateFlow<HomeShareState> = MutableStateFlow(HomeShareState())
+    val state: StateFlow<HomeShareState> get() = _state.asStateFlow()
 
     fun saveHomeImage() = viewModelScope.launch {
-        _action.emit(HomeDetailAction.SaveHomeImage)
+        _action.emit(HomeShareAction.SaveHomeImage)
     }
 
     fun shareHomeImage() = viewModelScope.launch {
-        _action.emit(HomeDetailAction.ShareHomeImage)
+        _action.emit(HomeShareAction.ShareHomeImage)
     }
 }
 
-data class HomeDetailState(
+data class HomeShareState(
     val dataSomething: String = "",
 )
 
-sealed interface HomeDetailAction {
-    data object ShareHomeImage : HomeDetailAction
-    data object SaveHomeImage: HomeDetailAction
+sealed interface HomeShareAction {
+    data object ShareHomeImage : HomeShareAction
+    data object SaveHomeImage: HomeShareAction
 }
 
 sealed interface Result {

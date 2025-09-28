@@ -93,8 +93,8 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_homeFragment_to_homeDetailFragment"
-            app:destination="@id/homeDetailFragment"
+            android:id="@+id/action_homeFragment_to_homeShareFragment"
+            app:destination="@id/homeShareFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
@@ -212,8 +212,9 @@
             app:popExitAnim="@anim/fade_out"/>
     </fragment>
     <fragment
-        android:id="@+id/homeDetailFragment"
-        android:name="com.example.mada.feature.home_detail.HomeDetailFragment"
-        android:label="HomeDetailFragment" />
+        android:id="@+id/homeShareFragment"
+        android:name="com.example.mada.feature.home_share.HomeShareFragment"
+        android:label="HomeDetailFragment"
+        tools:layout="@layout/fragment_home_share"/>
 
 </navigation>
