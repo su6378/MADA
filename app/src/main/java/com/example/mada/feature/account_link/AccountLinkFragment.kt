@@ -8,7 +8,6 @@ import com.example.mada.R
 import com.example.mada.base.BaseFragment
 import com.example.mada.databinding.FragmentAccountLinkBinding
 import com.example.mada.dialog.AlertDialog
-import com.example.mada.feature.account.AccountFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
