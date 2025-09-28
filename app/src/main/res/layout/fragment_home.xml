@@ -537,6 +537,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:layout_marginHorizontal="56dp"
+                    app:onClick="@{() -> vm.navigateHomeDetailFragment()}"
                     android:src="@drawable/image_home_initial"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

@@ -177,6 +177,10 @@ class HomeViewModel @Inject constructor(
         _action.emit(HomeAction.ShowCreateBudgetDialog)
     }
 
+    fun navigateHomeDetailFragment() = viewModelScope.launch {
+        _action.emit(HomeAction.NavigateHomeDetailFragment)
+    }
+
     fun shareHomeImage() = viewModelScope.launch {
         _action.emit(HomeAction.ShareHomeImage)
     }
@@ -205,6 +209,7 @@ sealed interface HomeAction {
     data object NavigateBinderListView : HomeAction
     data object ShowCreateBudgetDialog : HomeAction
     data object ShareHomeImage : HomeAction
+    data object NavigateHomeDetailFragment : HomeAction
 }
 
 sealed interface Result {

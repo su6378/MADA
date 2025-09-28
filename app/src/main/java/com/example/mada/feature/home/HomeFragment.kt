@@ -177,6 +177,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                     }, viewLifecycleOwner
                                 )
                             }
+
+                            is HomeAction.NavigateHomeDetailFragment -> {
+                                when(viewModel.state.value.step) {
+                                    0 -> {
+                                        if (!binding.vm!!.state.value.isSigned) {
+                                            showAlertDialog(
+                                                dialog = AlertDialog(
+                                                    mainActivity,
+                                                    title = resources.getString(R.string.home_create_account_link),
+                                                    content = resources.getString(R.string.home_recommend_create_account)
+                                                ) {
+                                                    navigate(
+                                                        HomeFragmentDirections.actionHomeFragmentToAccountLinkFragment()
+                                                    )
+                                                }, viewLifecycleOwner
+                                            )
+                                        } else showToast("한 주 챌린지 완료후 이동할 수 있어요 \uD83D\uDE03")
+                                    }
+                                    else -> navigate(HomeFragmentDirections.actionHomeFragmentToHomeDetailFragment())
+                                }
+                            }
                         }
                     }
                 }
