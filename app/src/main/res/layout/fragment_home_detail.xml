@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.mada.feature.home_detail.HomeDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".feature.home_detail.HomeDetailFragment">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_home_detail"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/home_detail"
+            app:titleCentered="true"
+            app:titleTextAppearance="@style/ToolbarTitleText"
+            app:titleTextColor="@color/black" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:alpha="0.3"
+            android:background="@drawable/bg_home"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_home_detail" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_home_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/image_home_detail"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_home_detail" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_home_detail_save"
+            android:layout_width="0dp"
+            android:layout_height="66dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="2dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/button_save"
+            app:onClick="@{() -> vm.saveHomeImage()}"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_home_detail_share"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_home_detail" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_home_detail_share"
+            android:layout_width="0dp"
+            android:layout_height="66dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="20dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/button_share"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_home_detail_save"
+            app:layout_constraintTop_toBottomOf="@id/iv_home_detail"
+            app:onClick="@{() -> vm.shareHomeImage()}" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

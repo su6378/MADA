@@ -14,23 +14,6 @@
     <string name="all_one_mada_need_card">카드를 개설해 주세요 😃</string>
     <string name="all_one_mada_diary_home">다이어리 홈</string>
 
-    <!--홈 화면 -->
-    <string name="money_diary">머니 다이어리</string>
-    <string name="money_diary_build_comment_initial">계좌를 개설해 주세요 🥲</string>
-    <string name="home_create_account">계좌 개설</string>
-    <string name="home_create_account_link">계좌 연동 알림</string>
-    <string name="home_recommend_create_account">머니 다이어리 계좌 연동 후 사용 할  수 있어요.\n계좌 연동으로 이동할까요?</string>
-    <string name="money_diary_build_comment">n주째 집 짓는중</string>
-    <string name="money_diary_build_comment_before_challenge">한 주 챌린지 완료 후 열려요</string>
-    <string name="home_today_left_title">오늘 쓸 수 있는 돈</string>
-    <string name="home_today_budget">오늘 예산</string>
-    <string name="home_week_left_title">이번주 남는 돈</string>
-    <string name="home_save_available">예산 저축은 이번주 일요일에 가능 합니다 😃</string>
-    <string name="home_set_budget">예산 설정</string>
-    <string name="home_set_budget_comment">예산이 설정되지 않았어요.\n에산 설정 화면으로 이동하시겠습니까?</string>
-    <string name="home_share_image">모아하우스 공유</string>
-    <string name="home_share_image_comment">나의 모아하우스를 공유하시겠습니까?</string>
-
     <!-- 온보딩 -->
     <string name="on_boarding_next">좋아!</string>
     <string name="on_boarding_alle">올리</string>
@@ -66,6 +49,29 @@
     <string name="card_move_comment">NHPay 앱으로 이동하고 있어요!</string>
     <string name="card_create">카드 신청</string>
     <string name="card_create_comment">머니다이어리 체크카드를 신청하시겠습니까?</string>
+
+    <!--홈 화면 -->
+    <string name="money_diary">머니 다이어리</string>
+    <string name="money_diary_build_comment_initial">계좌를 개설해 주세요 🥲</string>
+    <string name="home_create_account">계좌 개설</string>
+    <string name="home_create_account_link">계좌 연동 알림</string>
+    <string name="home_recommend_create_account">머니 다이어리 계좌 연동 후 사용 할  수 있어요.\n계좌 연동으로 이동할까요?</string>
+    <string name="money_diary_build_comment">n주째 집 짓는중</string>
+    <string name="money_diary_build_comment_before_challenge">한 주 챌린지 완료 후 열려요</string>
+    <string name="home_today_left_title">오늘 쓸 수 있는 돈</string>
+    <string name="home_today_budget">오늘 예산</string>
+    <string name="home_week_left_title">이번주 남는 돈</string>
+    <string name="home_save_available">예산 저축은 이번주 일요일에 가능 합니다 😃</string>
+    <string name="home_set_budget">예산 설정</string>
+    <string name="home_set_budget_comment">예산이 설정되지 않았어요.\n에산 설정 화면으로 이동하시겠습니까?</string>
+    <string name="home_share_image">모아하우스 공유</string>
+    <string name="home_share_image_comment">나의 모아하우스를 공유하시겠습니까?</string>
+    <string name="home_save_image">나의 모아하우스 저장</string>
+    <string name="home_save_image_comment">나의 모아하우스를 저장하시겠습니까?</string>
+    <string name="home_save_image_complete">나의 모아하우스를 갤러리에 저장했습니다!</string>
+
+    <!-- 집 상세 -->
+    <string name="home_detail">집 상세</string>
 
     <!-- 주간 예산 설정 -->
     <string name="week_budget_title">예산 설정</string>
