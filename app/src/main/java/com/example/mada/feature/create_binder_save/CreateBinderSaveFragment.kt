@@ -52,6 +52,14 @@ class CreateBinderSaveFragment :
             etCreateBinderSaveTargetAmount.doOnTextChanged { text, start, before, count ->
                 setTargetAmount(text)
             }
+
+            val info = DateUtil.getSavingPlan(amount, month)
+
+            ranges = listOf(info.second)
+
+            tvCreateBinderSaveTargetComment.setSizedSubstringsSp(
+                info.first, ranges, 24, colorRes = R.color.nh_green
+            )
         }
     }
 
