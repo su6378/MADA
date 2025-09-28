@@ -166,38 +166,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                                     }
                                 }
                             }
-                            is HomeAction.ShareHomeImage -> {
-                                showAlertDialog(
-                                    dialog = AlertDialog(
-                                        mainActivity,
-                                        title = resources.getString(R.string.home_share_image),
-                                        content = resources.getString(R.string.home_share_image_comment)
-                                    ) {
-                                        shareDrawableImage(requireContext(), viewModel.state.value)
-                                    }, viewLifecycleOwner
-                                )
-                            }
-
-                            is HomeAction.NavigateHomeDetailFragment -> {
-                                when(viewModel.state.value.step) {
-                                    0 -> {
-                                        if (!binding.vm!!.state.value.isSigned) {
-                                            showAlertDialog(
-                                                dialog = AlertDialog(
-                                                    mainActivity,
-                                                    title = resources.getString(R.string.home_create_account_link),
-                                                    content = resources.getString(R.string.home_recommend_create_account)
-                                                ) {
-                                                    navigate(
-                                                        HomeFragmentDirections.actionHomeFragmentToAccountLinkFragment()
-                                                    )
-                                                }, viewLifecycleOwner
-                                            )
-                                        } else showToast("한 주 챌린지 완료후 이동할 수 있어요 \uD83D\uDE03")
-                                    }
-                                    else -> navigate(HomeFragmentDirections.actionHomeFragmentToHomeDetailFragment())
-                                }
-                            }
+                            is HomeAction.NavigateHomeDetailFragment -> navigate(HomeFragmentDirections.actionHomeFragmentToHomeDetailFragment())
+//                            {
+//                                when(viewModel.state.value.step) {
+//                                    0 -> {
+//                                        if (!binding.vm!!.state.value.isSigned) {
+//                                            showAlertDialog(
+//                                                dialog = AlertDialog(
+//                                                    mainActivity,
+//                                                    title = resources.getString(R.string.home_create_account_link),
+//                                                    content = resources.getString(R.string.home_recommend_create_account)
+//                                                ) {
+//                                                    navigate(
+//                                                        HomeFragmentDirections.actionHomeFragmentToAccountLinkFragment()
+//                                                    )
+//                                                }, viewLifecycleOwner
+//                                            )
+//                                        } else showToast("한 주 챌린지 완료후 이동할 수 있어요 \uD83D\uDE03")
+//                                    }
+//                                    else -> navigate(HomeFragmentDirections.actionHomeFragmentToHomeDetailFragment())
+//                                }
+//                            }
                         }
                     }
                 }
@@ -321,43 +310,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 }
             }
         }
-    }
-
-    // 집 이미지 공유
-    private fun shareDrawableImage(context: Context, state: HomeState) {
-        var drawableId: Int = 0
-
-        when(state.step) {
-            0 -> drawableId = R.drawable.image_home_initial
-            1 -> drawableId = R.drawable.image_home_one_week
-            2 -> drawableId = R.drawable.image_home_two_week
-            else -> drawableId = R.drawable.image_home_last_week
-        }
-
-        // Drawable → Bitmap 변환
-        val drawable = ContextCompat.getDrawable(context, drawableId)!!
-        val bitmap = (drawable as BitmapDrawable).bitmap
-
-        // Bitmap → File 변환 (캐시 폴더 저장)
-        val file = File(context.cacheDir, "shared_image.png")
-        FileOutputStream(file).use { out ->
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
-        }
-
-        // FileProvider 로 URI 발급
-        val uri: Uri = FileProvider.getUriForFile(
-            context,
-            "${context.packageName}.provider",
-            file
-        )
-
-        // 공유 Intent
-        val shareIntent = Intent(Intent.ACTION_SEND).apply {
-            type = "image/png"
-            putExtra(Intent.EXTRA_STREAM, uri)
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        }
-
-        context.startActivity(Intent.createChooser(shareIntent, "이미지 공유"))
     }
 }

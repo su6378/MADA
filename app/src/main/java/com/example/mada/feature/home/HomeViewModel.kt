@@ -180,10 +180,6 @@ class HomeViewModel @Inject constructor(
     fun navigateHomeDetailFragment() = viewModelScope.launch {
         _action.emit(HomeAction.NavigateHomeDetailFragment)
     }
-
-    fun shareHomeImage() = viewModelScope.launch {
-        _action.emit(HomeAction.ShareHomeImage)
-    }
 }
 
 data class HomeState(
@@ -208,7 +204,6 @@ sealed interface HomeAction {
     data object NavigateWeekSavingView : HomeAction
     data object NavigateBinderListView : HomeAction
     data object ShowCreateBudgetDialog : HomeAction
-    data object ShareHomeImage : HomeAction
     data object NavigateHomeDetailFragment : HomeAction
 }
 
